@@ -1,0 +1,393 @@
+body,ul,li{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+
+a{
+    color: white;
+    text-decoration:none;
+}
+
+.flex {
+    display:flex;
+}
+
+.flex-ai-c {
+    align-items: center;
+}
+
+.h100{
+    height:100%;
+}
+
+.page-1{
+    background-image: url(https://images.pexels.com/photos/372098/pexels-photo-372098.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+img {
+    height: 100px;
+    
+}
+
+.top-bar > .logo {
+    padding: 0px 30px;
+}
+
+.top-bar {
+    width: 100%;
+    transition:background-color.9s;
+    position: fixed;
+    height:100px;
+}
+
+.flex2 {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+}
+
+.top-bar:hover > .logo > .flex2 {
+    display: block;
+    opacity: 1;
+}
+
+.top-bar:hover > .menu-1 a , .top-bar:hover > .icon > a > i{
+    color: black;
+}
+
+
+.top-bar:hover {
+    background-color: white;
+}
+
+.top-bar > div:not(:nth-child(1)){
+    flex: 1 0 0;
+}
+
+.flex-ai-c{
+    align-items: center;
+}
+
+.menu-1 a{
+    font-size: 1.2rem;
+    padding: 0px 60px;
+}
+
+.flex-jus-end{
+    width: 100%;
+    justify-content: flex-start;
+}
+.icon > a i{
+    font-size: 2.5rem;
+    padding: 0px 40px;
+}
+
+.menu-1 ul ul {
+    transition: opacity.2s;
+    display:none;
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    height: 100%;
+}
+
+.menu-1 > ul > li ul li > a {
+    font-size: 3rem;
+}
+
+.menu-1 > ul > li {
+    position: relative;
+}
+
+.menu-1 > ul> .SNS1:hover ul{
+  display:inline-block;
+}
+
+
+.top-bar .btn-toggle-pc-side-bar {
+  width:30px;
+  height: 30px;
+  position: relative;
+  margin-top: 35px;
+  margin-right: 40px;
+}
+
+.top-bar .btn-toggle-pc-side-bar > div {
+  position: absolute;
+  width:100%;
+  height: 20%;
+  background-color:white;
+  top:0;
+  left:30px;
+  transition: top .4s .4s, transform .4s 0s, visibility 0s .4s;
+}
+
+.top-bar .btn-toggle-pc-side-bar.active > div {
+  transition: top .4s 0s, transform .4s .4s, visibility 0s;
+}
+
+.top-bar .btn-toggle-pc-side-bar > div:nth-child(2) {
+  top:40%;
+}
+
+.top-bar .btn-toggle-pc-side-bar > div:nth-child(3) {
+  top:80%;
+}
+
+.top-bar .btn-toggle-pc-side-bar.active > div {
+  top:40%;
+}
+
+.top-bar .btn-toggle-pc-side-bar.active > div:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.top-bar .btn-toggle-pc-side-bar.active > div:nth-child(2) {
+  visibility: hidden;
+}
+
+.top-bar .btn-toggle-pc-side-bar.active > div:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.top-bar:hover .btn-toggle-pc-side-bar >div{
+    background-color: black;
+}
+
+.top-bar .btn-toggle-pc-side-bar > div {
+  position: absolute;
+  width:100%;
+  height: 20%;
+  background-color:white;
+  top:0;
+  left:0;
+  transition: top .2s .2s, transform .2s 0s, visibility 0s .2s;
+}
+
+/*PC 사이드바 시작*/
+.pc-side-bar{
+    position: fixed;
+    right: 100px;
+    top: 130px;
+    visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.5s, opacity 0.5s;
+}
+.pc-side-bar.active {
+  visibility: visible;
+  opacity: 1;
+}
+.pc-side-bar ul{
+    width: 300px;
+    height: 300px;
+}
+.pc-side-bar ul li {
+    width: 300px;
+    height: 100px;
+}
+.pc-side-bar a {
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    color: black;
+    font-size: 1.5rem;
+}
+
+.title {
+	color:black;
+}
+
+/*pc 탑바 종료*/
+
+@media( max-width:799px ) {
+    .visible-on-md-up {
+        display: none !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*모바일 탑바 시작*/
+
+
+@media( min-width:800px ) {
+    .visible-on-sm-down {
+        display: none !important;
+    }
+}
+
+
+
+.M-top-bar {
+    border:0.2px solid white;
+    width: 100%;
+    transition:background-color.9s;
+    position: fixed;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.M-flex2 {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+}
+
+.M-top-bar:hover{
+    background-color: white;
+}
+
+.M-top-bar:hover > .btn-toggle-mobile-side-bar>div{
+    background-color: black;
+}
+
+
+
+.M-top-bar:hover > .M-logo > a > .M-flex2 {
+    display: block;
+    opacity: 1;
+}
+
+
+.M-menu-1 > a > i {
+    font-size: 2.5rem;
+    padding: 0px 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.M-page-1 {
+    background-image: url(http://www.metanettplatform.com/images/main-visual-1.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;   
+}
+
+h1{
+    font-size: 2.5rem;
+    color: white;
+}
+.text2{
+    font-weight: 900;
+    font-size: 4.5rem;
+    opacity: 0.6;
+    color: whitesmoke;
+    width: 100%;
+    justify-content: center;
+    margin-top: -30px;
+}
+
+.w100{
+    width: 100%;
+}
+
+
+
+/*모바일 사이드바*/
+
+
+.M-top-bar .btn-toggle-mobile-side-bar {
+  width:30px;
+  height: 30px;
+  position: relative;
+}
+
+.M-top-bar .btn-toggle-mobile-side-bar > div {
+  position: absolute;
+  width:100%;
+  height: 20%;
+  background-color:white;
+  top:0;
+  left:30px;
+  transition: top .4s .4s, transform .4s 0s, visibility 0s .4s;
+}
+
+.M-top-bar .btn-toggle-mobile-side-bar.active > div {
+  transition: top .4s 0s, transform .4s .4s, visibility 0s;
+}
+
+.M-top-bar .btn-toggle-mobile-side-bar > div:nth-child(2) {
+  top:40%;
+}
+
+.M-top-bar .btn-toggle-mobile-side-bar > div:nth-child(3) {
+  top:80%;
+}
+
+.M-top-bar .btn-toggle-mobile-side-bar.active > div {
+  top:40%;
+}
+
+.M-top-bar .btn-toggle-mobile-side-bar.active > div:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.M-top-bar .btn-toggle-mobile-side-bar.active > div:nth-child(2) {
+  visibility: hidden;
+}
+
+.M-top-bar .btn-toggle-mobile-side-bar.active > div:nth-child(3) {
+  transform: rotate(-45deg);
+}
+

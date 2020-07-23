@@ -1,0 +1,105 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Document</title>
+<link rel="stylesheet" href="/blog/resource/css/detail.css" />
+<link rel="stylesheet" href="/blog/resource/css/home/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Notable&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Notable&family=Roboto&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/3b1f8c6d21.js" crossorigin="anonymous"></script>
+<srcipt src="/blog/resource/js/common.js"></srcipt>
+<srcipt src="/blog/resource/js/home/main.js"></srcipt>
+
+</head>
+	
+<body>
+	
+	<div class="top-bar visible-on-md-up  flex">
+		<a href="/blog/jsp/home/main.jsp" class="logo" > <img
+			src="/blog/resource/css/home/logo2.png" alt="/blog/jsp/home/main.jsp"> <img
+			class="flex2" src="/blog/resource/css/home/logo1.png " alt="/blog/jsp/home/main.jsp">
+		</a>
+		<div class="menu-1 flex">
+			<ul class="flex h100 flex-jus-end">
+				<li class="flex flex-ai-c  h100"><a
+					class="flex flex-ai-c  h100" href="/blog/jsp/home/main.jsp" >Home</a></li>
+				<li class="flex  flex-ai-c  h100"><a
+					class="flex flex-ai-c  h100" href="/blog/s/article/list?cateItemId=1&page=1">Article</a></li>
+				<li class="flex  flex-ai-c  h100"><a
+					class="flex flex-ai-c  h100" href="/blog/jsp/home/about.jsp">About</a></li>
+				<li class="SNS1 flex  flex-ai-c  h100"><a
+					class="flex flex-ai-c  h100" href="#">SNS</a>
+					<ul class="flex flex-ai-c  h100">
+						<li class="flex flex-ai-c  h100"><a
+							class="flex flex-ai-c  h100"
+							href="https://www.youtube.com/channel/UC2S_vz17N1SbHHrddi7PwAg?view_as=subscriber"  target="_blank">
+								<i class="fab fa-youtube"></i>
+						</a></li>
+						<li class="flex flex-ai-c  h100"><a
+							class="flex flex-ai-c  h100" href="https://github.com/dureotkd/"  target="_blank">
+								<i class="fab fa-github"></i>
+						</a></li>
+						<li class="flex flex-ai-c  h100"><a
+							class="flex flex-ai-c  bor-insta h100"
+							href="https://www.instagram.com/?hl=ko"  target="_blank"> <i
+								class="fab fa-instagram"></i>
+						</a>
+						</li>
+					</ul>
+					</li>
+			</ul>
+		</div>
+
+		<a href="#" class="btn-toggle-pc-side-bar ">
+			<div></div>
+			<div></div>
+			<div></div>
+		</a>
+
+
+		<div class="pc-side-bar">
+			<nav class="menu-2">
+				<ul>
+					<li><a href="">Login</a></li>
+					<li><a href="">Logout</a></li>
+					<li><a href="">Join</a></li>
+					<li><a href="">SNS</a></li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+
+	
+
+
+
+	<!--    모바일 탑바 시작-->
+
+
+	<div class="M-top-bar flex visible-on-sm-down">
+
+		<a href="#" class="btn-toggle-mobile-side-bar ">
+			<div></div>
+			<div></div>
+			<div></div>
+		</a>
+
+		<div class="M-logo visible-on-md-down">
+			<a href="#"> <img src="/blog/resource/css/home/logo2.png" alt="">
+				<img class="M-flex2" src="/blog/resource/css/home/logo1.png " alt="">
+			</a>
+		</div>
+
+	</div>
+
+
+
+	
+</body>
+</html>
+<!-- 메인 -->

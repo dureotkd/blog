@@ -1,0 +1,503 @@
+<%@ page import="java.util.List"%>
+<%@ page import="com.sbs.java.blog.dto.CateItem"%>
+<%@ page import="com.sbs.java.blog.dto.Article"%>
+<%@ page import="com.sbs.java.blog.dto.Member"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
+int loginedMemberId = (int) request.getAttribute("loginedMemberId");
+Member loginedMember = (Member) request.getAttribute("loginedMember");
+boolean isLogined = (boolean) request.getAttribute("isLogined");
+int cateArticle = (int) request.getAttribute("cateArticle");
+%>
+
+
+<head>
+<html lang="ko">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CodeMountain</title>
+<link rel="stylesheet" href="/blog/resource/css/common.css" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Archivo:wght@500&display=swap"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+	rel="stylesheet">
+<script src="https://kit.fontawesome.com/3b1f8c6d21.js"
+	crossorigin="anonymous"></script>
+
+<script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
+<style>
+* {
+	font-family: 'Archivo', sans-serif;
+}
+
+.top-bar2 {
+	justify-content: center;
+	height: 80px;
+}
+
+.w100 {
+	width: 100%;
+	height: 100%;
+}
+
+.flex-d-c {
+	flex-direction: column;
+}
+
+.h100 {
+	height: 100%;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex-jus-c {
+	justify-content: center;
+}
+
+.flex-ai-c {
+	align-its: center;
+}
+
+.jus-c-spa {
+	justify-content: space-between;
+}
+
+.po-absol {
+	position: absolute;
+}
+
+.t100 {
+	top: 100%;
+}
+
+.font-1.3r {
+	font-size: 1.3rem;
+}
+
+.h20px {
+	height: 20px;
+}
+
+.m-SNS ul {
+	display: none;
+}
+
+.m-SNS:hover ul {
+	display: flex;
+}
+
+.m-icon {
+	background-color: white;
+}
+
+.m-top-bar2 {
+	height: 55px;
+	background-color: black;
+	border-bottom: 1px solid silver;
+}
+
+@media ( min-width :800px ) {
+	.m-search-box {
+		display: flex;
+	}
+}
+
+@media ( max-width :799px ) {
+	.m-top-bar-z {
+		height: 100px;
+	}
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+.mode-s {
+	display: flex;
+	align-items: center;
+}
+
+.fa-sun, .fa-moon {
+	font-size: 1.5rem;
+}
+
+.top-bar {
+	justify-content: space-between;
+	box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.75);
+}
+
+.right-menu>a>i, .login-nickname, .visit {
+	padding: 30px;
+	font-size: 1.5rem;
+}
+
+.right-menu>a {
+	position: relative;
+}
+
+.right-menu>a:hover i {
+	color: red;
+}
+
+.right-menu>a:hover .menu-sub {
+	opacity: 1;
+}
+
+.menu-sub {
+	left: 25px;
+	top: 56px;
+	position: absolute;
+	opacity: 0;
+}
+
+.login-nickname {
+	padding: 40px;
+}
+
+.login-nickname>a:hover {
+	color: red;
+}
+
+.left-menu-1 {
+	margin-right: 4%;
+	padding: 30px;
+}
+
+.fa-bars {
+	font-size: 2rem;
+}
+
+.left-item {
+	height: 100vh;
+	position: absolute;
+	background-color: white;
+	width: 340px;
+	top:80;
+	left: -400px;
+	z-index: 400;
+	transition: left.6s;
+	overflow: auto;
+}
+
+.left-item.active {
+	left: 0px;
+}
+
+.world-wrap {
+	position: fixed;
+	z-index: 1000;
+}
+
+.world-wrap.active {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 300;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.43);
+}
+
+.content-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+}
+
+.contentbtn {
+	border-bottom: 1px solid #ccc;
+	padding: 20px;
+}
+
+.contentbtn:hover {
+	color: #388e3c;
+}
+
+.id-box {
+	disply: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 60%;
+	background: linear-gradient(to left, #91EAE4, #86A8E7, #7F7FD5);
+	opacity: 0.7;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-item {
+	width: 100%;
+	height: 50%;
+}
+
+.login-item>a {
+	border-top: 1px solid #ccc;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color:black;
+}
+
+.id-box>a {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: white;
+}
+
+.work-item {
+	display: flex;
+	align-items: flex-start;
+	height: 100%;
+	justify-content: center;
+	text-align: center;
+	font-size: 1.1rem;
+	padding:15px;
+}
+
+.work-item>a:hover {
+	color: #388e3c;
+}
+
+.work-item>a>i {
+	padding: 35px;
+	font-size: 1.4rem;
+}
+
+#back-to-top {
+	display: inline-block;
+	background-color: black;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	border-radius: 100px;
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	transition: background-color .3s, opacity .5s, visibility .5s;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 1000;
+}
+
+#back-to-top::after {
+	content: "\f077";
+	font-family: FontAwesome;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 2em;
+	line-height: 50px;
+	color: #fff;
+}
+
+#back-to-top:hover {
+	cursor: pointer;
+	background-color: #333;
+}
+
+#back-to-top:active {
+	background-color: #555;
+}
+
+#back-to-top.show {
+	opacity: 1;
+	visibility: visible;
+}
+
+.search-box>i {
+	font-size: 30px;
+	padding: 25px;
+	cursor: pointer;
+	margin-right:10px;
+}
+
+.m-search-box {
+	position: absolute;
+	right: 100px;
+	top: 25px;
+	opacity: 0;
+	transition: opacity.4s;
+}
+
+.m-search-box.active {
+	opacity: 1;
+}
+
+.search-text {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	outline: none;
+	border-bottom: 3px solid black;
+	width:322px;
+}
+
+.search-btn {
+	outline: none;
+	border: none;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+	font-size: 1.3rem;
+	margin-right: 20px;
+}
+
+.search-text {
+	font-size:1.4rem;
+}
+.logo {
+	margin-right:2%;
+}
+
+
+</style>
+
+</head>
+
+<body>
+	<script>
+		var loginedMemberId = parseInt("${loginedMemberId}");
+		var isLogined = "${isLogined}" == "true";
+		var loginedMember = null;
+
+		var onBeforeUnloadSetted = false;
+		var onBeforeUnload = function(e) {
+		  return '떠나시겠습니까?';
+		};
+
+		function applyOnBeforeUnload() {
+		  if ( onBeforeUnloadSetted ) return;
+		  $(window).bind('beforeunload', onBeforeUnload);
+		  onBeforeUnloadSetted = true;
+		}
+
+		function removeOnBeforeUnload() {
+		  $(window).unbind('beforeunload', onBeforeUnload);
+		  onBeforeUnloadSetted = false;
+		}
+	</script>
+	<%
+		if (isLogined) {
+	%>
+	<script>
+		loginedMember = {};
+		loginedMember["id"] = parseInt("${loginedMember.id}");
+		loginedMember["regDate"] = "${loginedMember.regDate}";
+		loginedMember["loginId"] = "${loginedMember.loginId}";
+		loginedMember["name"] = "${loginedMember.name}";
+		loginedMember["nickname"] = "${loginedMember.nickname}";
+		loginedMember["email"] = "${loginedMember.email}";
+	</script>
+	<%
+		}
+	%>
+	<div class="world-wrap">
+		<div class="top-bar   flex">
+			<div class="left-menu-1">
+				<a href="#" class="btn-toggle-pc-side-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+				</a>
+				<div class="left-item">
+					<ul class="content-box">
+						<div class="id-box">
+							<%
+								if (loginedMember != null) {
+							%>
+							<div class="login-nickname">
+								<a href="/blog/s/member/info"
+									style="padding: 12px; font-size: 1.1rem;"><%=loginedMember.getNickname()%>님의
+									블로그</a>
+							</div>
+							<%
+								}
+							%>
+							<%
+								if (loginedMember == null) {
+							%>
+							<a href="#"><div class="visit">나그네님의 블로그</div></a>
+							<%
+								}
+							%>
+							<%
+								if (loginedMember == null) {
+							%>
+							<div class="login-item">
+								<a href="${pageContext.request.contextPath}/s/member/login">로그인</a>
+							</div>
+						</div>
+						<%
+							}
+						%>
+						<%
+							if (loginedMember != null) {
+						%>
+						<div class="login-item">
+							<a href="${pageContext.request.contextPath}/s/member/logOut">로그아웃</a>
+						</div>
+				</div>
+				<a class="contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=">전체 (${cateArticle})</a>
+				<%
+					}
+				%>
+				<%
+					for (CateItem cateItem : cateItems) {
+				%>
+				<a class="contentbtn"
+					href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItem.getId()%>"><%=cateItem.getName()%></a>
+				<%
+					}
+				%>
+
+				<div class="work-item">
+					<a
+						href="${pageContext.request.contextPath}/s/article/write?cateItemId=1"><i
+						class="fas fa-feather-alt"></i>글쓰기</a> <a
+						href="${pageContext.request.contextPath}/s/article/allList"><i
+						class="far fa-calendar-check"></i>활동내역</a> <a href="#"><i
+						class="fas fa-cog"></i>환경설정</a> 
+				</div>
+				</ul>
+			</div>
+		</div>
+
+		<a href="/blog/s/home/main" class="logo"> <img class="P-image"
+			src="/blog/resource/css/home/logo1.png" alt="/blog/jsp/home/main.jsp">
+		</a>
+		<div class="m-search-box ">
+			<form action="${pageContext.request.contextPath}/s/article/list">
+				<input type="hidden" name="page" value="1" /> <input type="hidden"
+					name="cateItemId" value="${param.cateItemId}" /> <input
+					type="hidden" name="searchKeywordType" value="title" /> <input
+					type="text" name="searchKeyword" value="${param.searchKeyword}"
+					class="search-text" placeholder="검색어를 입력해주세요." />
+				<button type="submit" class="search-btn">검색</button>
+			</form>
+		</div>
+		<div class="search-box">
+			<i class="fas fa-search "></i>
+		</div>
+
+	</div>
+	</div>
+	<div class="top-bar2 visible-on-sm-up"></div>
+
+	<a id="back-to-top"></a>
+
+
+	<!--    모바일 탑바 시작-->
+	<div class="m-top-bar-z"></div>
