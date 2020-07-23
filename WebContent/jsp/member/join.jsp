@@ -152,21 +152,19 @@ label {
 	<p class="left-p">가입할 계정을 입력해주세요</p>
 	<p class="left-p2">로그인도 간편해요</p>
 	</div>
-
+	
 
 	<form action="doJoin" class="join-form" method="post" onsubmit="submitJoinForm(this); return false;">
 	 <input type="hidden" name="loginPwReal" />
 		<div class="join-box">
-			
 			<input type="text" name="name" class="join-name" placeholder="User name" /> 
 			<input type="text" name="nickname" class="join-nickname" placeholder="User nickname" />
-			<input type="email" name="email" class="join-email" placeholder="User Email" />
+			<input type="email" name="email" class="join-email" placeholder="User Email"/>
 			<input type="text" name="loginId" class="join-id" placeholder="User Id" />
 			<input type="password" name="loginPw" class="join-pw" placeholder="Password" /> 
 			<input type="password" name="loginPwConfirm" class="join-Pwconfirm" placeholder="Password 확인" />
-			<input class="submit" type="submit" value="회원가입"></input>
+			<input class="submit" type="submit" value="회원가입">
 		</div>
-			
 	</form>
 </nav>
 

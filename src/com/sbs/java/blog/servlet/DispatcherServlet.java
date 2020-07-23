@@ -10,13 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.app.App;
 
-@WebServlet("/s/*")
 public class DispatcherServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//들어오는 데이터를 이걸로 해석!..
 		req.setCharacterEncoding("UTF-8");
-		new App(req, resp).start();
+		
+		String mailId = getServletConfig().getInitParameter("gmailId");
+		String mailPw = getServletConfig().getInitParameter("gmailPw");
+	
+		new App(req, resp,mailId,mailPw).start();
 	}
+	
+	
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);

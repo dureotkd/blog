@@ -13,8 +13,8 @@ public class MemberService extends Service {
 	public MemberService(Connection dbConn) {
 		memberDao = new MemberDao(dbConn);
 	}
-	public int doActionDojoin(String name,String nickname,String loginId,String loginPw, String email) {
-		return memberDao.doActionDojoin(name,nickname,loginId,loginPw,email);
+	public int doActionDojoin(String name,String nickname,String loginId,String loginPw, String email,String a) {
+		return memberDao.doActionDojoin(name,nickname,loginId,loginPw,email,a);
 	}
 	public boolean isLoginIdJoinable(String loginId) {
 		return memberDao.isLoginIdJoinable(loginId);
@@ -45,6 +45,15 @@ public class MemberService extends Service {
 	}
 	public Member getRightMember(String name,String loginId,String toEmail) {
 		return memberDao.getRightMember(name,loginId,toEmail);
+	}
+	public boolean getMemberCode(String code, String loginId) {
+		return memberDao.getMemberCode(code,loginId);
+	}
+	public int doActionUpdateCode(String loginId) {
+		return memberDao.doActionUpdateCode(loginId);
+	}
+	public boolean getMemberCode2(String loginId) {
+		return memberDao.getMemberCode2(loginId);
 	}
 
 }

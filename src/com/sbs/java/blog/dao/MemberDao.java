@@ -14,10 +14,10 @@ public class MemberDao {
 		this.dbConn = dbConn;
 	}
 
-	public int doActionDojoin(String name,String nickname,String loginId,String loginPw,String email) {
+	public int doActionDojoin(String name,String nickname,String loginId,String loginPw,String email,String a) {
 
 		SecSql secSql = new SecSql();
-		// 모르겟음.
+
 		secSql.append("INSERT INTO member ");
 		secSql.append("SET regDate = NOW() ");
 		secSql.append(", name = ? ", name);
@@ -25,6 +25,8 @@ public class MemberDao {
 		secSql.append(", loginId = ? ",loginId);
 		secSql.append(", loginPw = ? ",loginPw);
 		secSql.append(", email = ? ",email);
+		secSql.append(", code = ? ",a);
+		secSql.append(", mailStatus = 0 ");
 		
 		return DBUtil.insert(dbConn, secSql);
 	}
@@ -136,5 +138,34 @@ public class MemberDao {
 		secSql.append("WHERE id = ?", id);
 		
 		return DBUtil.update(dbConn, secSql);
+	}
+
+	public boolean getMemberCode(String code, String loginId) {
+		SecSql secSql = new SecSql();
+		secSql.append("SELECT COUNT(*) from member ");
+		secSql.append("WHERE code = ? ",code);
+		secSql.append("AND loginId = ? ",loginId);
+		
+		return DBUtil.selectRowIntValue(dbConn, secSql) == 1;
+	}
+
+	public int doActionUpdateCode(String loginId) {
+		SecSql secSql = new SecSql();
+		
+		secSql.append("UPDATE member");
+		secSql.append("SET mailStatus = 1");
+		secSql.append("WHERE loginId = ?", loginId);
+		
+		
+		return DBUtil.update(dbConn, secSql);
+	}
+
+	public boolean getMemberCode2(String loginId) {
+		SecSql secSql = new SecSql();
+		secSql.append("SELECT COUNT(*) from member ");
+		secSql.append("WHERE loginId = ? ",loginId);
+		secSql.append("AND mailStatus = 0");
+		
+		return DBUtil.selectRowIntValue(dbConn, secSql) == 0;
 	}
 }

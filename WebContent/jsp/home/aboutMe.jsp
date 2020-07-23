@@ -204,6 +204,7 @@ img {
 	width:100%;
 	height:500px;
 	margin:0 auto;
+	font-size:3rem;
 }
 
 .right-box {
@@ -213,7 +214,9 @@ img {
 }
 .right-text-box {
 	width:100%;
-	height:500px;
+	height:18%;
+	display:flex;
+	justify-content:center;
 	}
 
 .head-1 {
