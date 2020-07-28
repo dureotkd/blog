@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.dto.Member;
+import com.sbs.java.blog.service.MailService;
 import com.sbs.java.blog.util.Util;
 import java.sql.Connection;
 import java.util.Date;
@@ -30,13 +31,18 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
 public class HomeController extends Controller {
+	private String mailId;
+	private String mailPw;
+
 	public String getControllerName() {
 		return "home";
 	}
 	
 	public HomeController(Connection dbConn, String actionMethodName, HttpServletRequest req,
-			HttpServletResponse resp) {
+			HttpServletResponse resp,String mailId,String mailPw) {
 		super(dbConn, actionMethodName, req, resp);
+		this.mailId = mailId;
+		this.mailPw = mailPw;
 	}
 
 	@Override
@@ -46,93 +52,58 @@ public class HomeController extends Controller {
 			return doActionMain(req, resp);
 		case "aboutMe":
 			return doActionAboutMe(req, resp);
+		case "aboutMe2":
+			return doActionAboutMe2(req,resp);
 		case "email":
 			return doActionEmail(req,resp);
 		case "doEmail":
 			return doActionDoEmail(req,resp);
+		case "mywork":
+			return doActionMyWork(req,resp);
+		case "mywork2":
+			return doActionMyWork2(req,resp);
+		case "mywork3":
+			return doActionMyWork3(req,resp);
+		case "mywork4":
+			return doActionmyWork4(req,resp);
+	
 		}
 
 		return "";
 	}
 
+	private String doActionAboutMe2(HttpServletRequest req, HttpServletResponse resp) {
+		return "home/aboutMe2.jsp";
+	}
+
+	private String doActionmyWork4(HttpServletRequest req, HttpServletResponse resp) {
+		return "home/mywork4.jsp";
+	}
+
+	private String doActionMyWork3(HttpServletRequest req, HttpServletResponse resp) {
+		return "home/mywork3.jsp";
+	}
+
+	private String doActionMyWork2(HttpServletRequest req, HttpServletResponse resp) {
+		return "home/mywork2.jsp";
+	}
+
+	private String doActionMyWork(HttpServletRequest req, HttpServletResponse resp) {
+		return "home/mywork.jsp";
+	}
+
 	private String doActionDoEmail(HttpServletRequest req, HttpServletResponse resp) {
 		
-	
-		    // 메일 인코딩
-		    final String bodyEncoding = "UTF-8"; //콘텐츠 인코딩
-		    
-		    String subject = req.getParameter("subject");
-		    String content = req.getParameter("content");
-		    String fromEmail = req.getParameter("fromEmail");
-		    String fromUsername = req.getParameter("fromUsername");
-		    String toEmail = "dureotkd123@naver.com";// 콤마(,)로 여러개 나열
-		    
-		    final String username = "slqhswmf@gmail.com";
-		    final String password = "vplphwieoveypxts";
-		    
-		    // 메일에 출력할 텍스트
-		    StringBuffer sb = new StringBuffer();
-		    sb.append(content);
-		    String html = sb.toString();
-		    
-		    // 메일 옵션 설정
-		    Properties props = new Properties();    
-		    props.put("mail.transport.protocol", "smtp");
-		    props.put("mail.smtp.host", "smtp.gmail.com");
-		    props.put("mail.smtp.port", "465");
-		    props.put("mail.smtp.auth", "true");
-		 
-		    props.put("mail.smtp.quitwait", "false");
-		    props.put("mail.smtp.socketFactory.port", "465");
-		    props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		    props.put("mail.smtp.socketFactory.fallback", "false");
-		    
-		    try {
-		      // 메일 서버  인증 계정 설정
-		      Authenticator auth = new Authenticator() {
-		        protected PasswordAuthentication getPasswordAuthentication() {
-		          return new PasswordAuthentication(username, password);
-		        }
-		      };
-		      
-		      // 메일 세션 생성
-		      Session session = Session.getInstance(props, auth);
-		      
-		      // 메일 송/수신 옵션 설정
-		      Message message = new MimeMessage(session);
-		      message.setFrom(new InternetAddress(fromEmail, fromUsername));
-		      message.setRecipients(RecipientType.TO, InternetAddress.parse(toEmail, false));
-		      message.setSubject(subject);
-		      message.setSentDate(new Date());
-		      
-		      // 메일 콘텐츠 설정
-		      Multipart mParts = new MimeMultipart();
-		      MimeBodyPart mTextPart = new MimeBodyPart();
-		      MimeBodyPart mFilePart = null;
-		 
-		      // 메일 콘텐츠 - 내용
-		      mTextPart.setText(html, bodyEncoding, "html");
-		      mParts.addBodyPart(mTextPart);
-		            
-		      // 메일 콘텐츠 설정
-		      message.setContent(mParts);
-		      
-		      // MIME 타입 설정
-		      MailcapCommandMap MailcapCmdMap = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
-		      MailcapCmdMap.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
-		      MailcapCmdMap.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");
-		      MailcapCmdMap.addMailcap("text/plain;; x-java-content-handler=com.sun.mail.handlers.text_plain");
-		      MailcapCmdMap.addMailcap("multipart/*;; x-java-content-handler=com.sun.mail.handlers.multipart_mixed");
-		      MailcapCmdMap.addMailcap("message/rfc822;; x-java-content-handler=com.sun.mail.handlers.message_rfc822");
-		      CommandMap.setDefaultCommandMap(MailcapCmdMap);
-		 
-		      // 메일 발송
-		      Transport.send( message );
-		      
-		    } catch ( Exception e ) {
-		      e.printStackTrace();
-		      
-		    }
+		
+		String subject = req.getParameter("subject");
+		String content = req.getParameter("content");
+		String fromEmail = req.getParameter("fromEmail");
+		String toEmail = "dureotkd123@naver.com";// 콤마(,)로 여러개 나열
+		
+		MailService mailSend = new MailService(mailId,mailPw);
+		
+		mailSend.sendEmail(subject,content,fromEmail,toEmail);
+		
 			return "html:<script> alert('이메일이 전송되엇습니다.' );   location.href = document.referrer\r\n" +"</script>";
 	}
 

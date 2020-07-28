@@ -22,14 +22,6 @@ public class Member extends Dto {
 		this.nickname = (String) row.get("nickname");
 	}
 	
-	public Member(String loginId, String loginPw, String name, String nickname, String email) {
-		this.loginId = loginId;
-		this.loginPw = loginPw;
-		this.name = name;
-		this.nickname = nickname;	
-		this.email = email;
-	}
-	
 	@Override
 	public String toString() {
 		return "Member [loginId=" + loginId + ", loginPw=" + loginPw + ", name=" + name

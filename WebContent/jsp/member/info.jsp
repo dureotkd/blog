@@ -56,14 +56,14 @@ h2{
 
 <div class="info-box">
 <div class="info-item">
-<p>가입날짜 : <%= loginedMember.getRegDate() %></p>    
-<p>이름 : <%= loginedMember.getName() %></p>
-<p>이메일 : <%= loginedMember.getEmail() %></p>
-<p>닉네임 : <%= loginedMember.getNickname() %></p>
-<p>아이디 : <%= loginedMember.getLoginId() %></p>
+<p>가입날짜 : ${loginedMember.regDate}</p>    
+<p>이름 : ${loginedMember.name}</p>
+<p>이메일 : ${loginedMember.email}</p>
+<p>닉네임 : ${loginedMember.nickname}</p>
+<p>아이디 : ${loginedMember.loginId}</p>
 <p class="pw">비밀번호 : ****</p>
 <form action="doModifyMember" method="post" onsubmit="submitModifyFrom(this); return false;">
-<input type="hidden" name="id" value="<%=loginedMember.getId()%>" />
+<input type="hidden" name="id" value="${loginedMember.id}" />
 <input type="text" name="loginPw"placeholder="loginPw"/>
 <input type="submit" class="modify-btn"/>
 </form>

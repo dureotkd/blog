@@ -7,13 +7,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 	
-<%
-int totalCount = (int) request.getAttribute("totalCount");
-List<Article> articles = (List<Article>) request.getAttribute("articles");
-int totalPage = (int) request.getAttribute("totalPage");
-int paramPage = (int) request.getAttribute("page");
-String cateItemName = (String)request.getAttribute("cateItemName");
-%>
 <link rel="stylesheet" href="/blog/resource/css/common.css" />
 <link rel="stylesheet" href="/blog/resource/css/home/main.css" />
 <style>
@@ -396,38 +389,29 @@ position:relative;
 	</div>
 	
 	
-	<div class="con visible-on-sm-up table-box">	
-			<%
-				for (Article article : articles) {
-			%>
+	<div class="con visible-on-sm-up table-box">
+		<c:forEach items="${articles}" var="article">	
 			<div class="list-box">
 			<span class="tag-Id">
-			
-			<%=article.getId()%>
-			<%=cateItemName %>
-			<%=article.getExtra().get("writer") %>
+			${article.id}			
+			${cateItemName}
+			${article.extra.writer}	
 			</span>
 			
-			<a class="tag-title" href="./detail?cateItemId=${param.cateItemId}&id=<%=article.getId()%>"><%=article.getTitle() %></a>
+			<a class="tag-title" href="./detail?cateItemId=${param.cateItemId}&id=${article.id}">${article.title}</a>
 			<span class="tag-sub">
-			<%=article.getRegDateFormat1() %>
-			&nbsp;&nbsp;&nbsp;<i class="far fa-eye"></i> : <%=article.getHit()%>
+			${article.regDateFormat1}
+			&nbsp;&nbsp;&nbsp;<i class="far fa-eye"></i> : ${article.hit}
 			</span>
 			</div>
-			<%
-				}
-			%>
+			</c:forEach>
 					
 		<div class="con page-box">
 		<ul class="page-ul flex flex-jc-c">
-		<%
-			for (int i = 1; i <= totalPage; i++) {
-		%>
-		<li class="<%=i == paramPage ? "current" : ""%>"><a  class= "page-btn"
-			href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=<%=i%>" class="block"><%=i%></a></li>
-		<%
-			}
-		%>
+		<c:forEach var="i" begin="1" end="${totalPage}" step="1">
+		<li class="${i == paramPage ? "current" : ""}"><a  class= "page-btn"
+			href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=${i}" class="block">${i}</a></li>
+		</c:forEach>
 	</ul>
 </div>
 		</div>
@@ -438,15 +422,15 @@ position:relative;
 		<!-- 모바일 테이블부분  --> 
 		<nav class="m-top-table visible-on-sm-down">
 			<div class="m-title">
-			<div class="m-title-text"><%= cateItemName %>(${totalCount})</div>
+			<div class="m-title-text">${cateItemName}(${totalCount})</div>
 			<div class="m-icon-box">
 			<i class="m-board-change fas fa-angle-down"></i>
 			<i class="m-board-change2 fas fa-angle-up"></i>
 			</div>
 			<div class="m-board-menu">
-			<% for(CateItem cateItem : cateItems) { %>
-				<a class = "m-contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItem.getId()%>"><%=cateItem.getName()%></a>
-			<% } %>
+			<c:forEach items="${cateItems}" var="cateItem">
+				<a class = "m-contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">${cateItem.name}</a>
+			</c:forEach>
 			</div>
 			 </div>
 			
@@ -454,32 +438,23 @@ position:relative;
 		</nav>
 		
 		<section class="article-table visible-on-sm-down">
-					<%
-				
-				for (Article article : articles) {
-					%>
-				<%=article.getExtra().get("writer") %>
+				<c:forEach items="${articles}" var="article">
+				${article.extra.writer}
 				<div class = "m-article-title text-align-left">
-				<a class="m-tag-title" href="./detail?cateItemId=${param.cateItemId}&id=<%= article.getId()%>"><%=article.getTitle() %></a>
+				<a class="m-tag-title" href="./detail?cateItemId=${param.cateItemId}&id=${article.id}">${article.title}</a>
 				<div class="m-sub">
-				<%=article.getId()%>	
+				${article.id}	
 				신성민
 				조회 : 1
 				</div>
 				</div>
-				<%
-					}
-				%>
+				</c:forEach>
 				<div class="m-page-box">
 		<ul class="m-page flex flex-jc-c">
-		<%
-			for (int i = 1; i <= totalPage; i++) {
-		%>
-		<li class="<%=i == paramPage ? "current" : ""%>"><a class = "m-a"
-			href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=<%=i%>" class="block"><%=i%></a></li>
-		<%
-			}
-		%>
+		<c:forEach var="i" begin="1" end="${totalPage}" step="1">
+		<li class="${i == paramPage ? "current" : ""}"><a class = "m-a"
+			href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=${i}" class="block">${i}</a></li>
+		</c:forEach>
 		</ul>
 		</div>
 		</section>

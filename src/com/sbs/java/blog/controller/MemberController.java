@@ -98,8 +98,13 @@ public class MemberController extends Controller {
 
 
 	private String doActionDelete(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		int id = Util.getInt(req, "id");
+		String loginPw = req.getParameter("loginPw");
+		
+		memberService.doDeleteMember(id,loginPw);
+		
+		return  "html:<script> alert('회원님 삭제가 완료되었습니다 감사합니다.' ); location.replace('../home/main')</script>";
 	}
 
 	private String doActionModify(HttpServletRequest req, HttpServletResponse resp) {
@@ -232,7 +237,7 @@ public class MemberController extends Controller {
 	
 		session.removeAttribute("loginedMemberId");
 		// 로그아웃 removeAttribute
-		return "html:<script> alert('로그아웃 되었습니다.'); location.replace('login'); </script>";
+		return "html:<script> alert('로그아웃 되었습니다.'); location.href = document.referrer\r\n;" + " </script>";
 	}
 
 	private String doActionLogin(HttpServletRequest req, HttpServletResponse resp) {
@@ -274,7 +279,7 @@ public class MemberController extends Controller {
 		String nickname = req.getParameter("nickname");
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
-
+		String email = req.getParameter("email");
 		
 	
 		boolean isNameJoinable = memberService.isNameJoinable(nickname);
@@ -312,12 +317,11 @@ public class MemberController extends Controller {
 		
 		
 		String a = temp.toString();
-		String email ="dureotkd123@naver.com";
 		String title = "안녕하세요 코드마운틴입니다.";
 		int rm = memberService.doActionDojoin(name, nickname, loginId, loginPw, email,a);
 		MailService ms = new MailService(mailId,mailPw);
 		
-		String msg = "<html><body><a href=" + "localhost:8081/blog/s/member/doAuthMail?code=" + a + "&loginId="+loginId+">인증하기</a></body></html>";
+		String msg = "<html><body><a href=" + "https://dureotkd.my.iu.gy/blog/s/member/doAuthMail?code=" + a + "&loginId="+loginId+">인증하기</a></body></html>";
 		String body = "회원가입 감사합니다." + msg;
 		
 		ms.sendWelcomeMail(email, title, body);

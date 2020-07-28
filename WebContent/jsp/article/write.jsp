@@ -37,13 +37,13 @@
 	
 	<div class="cateItem-area">
 	<select name="cateItemId" class="cateId">
-		<% for ( CateItem cateItem : cateItems ) { %>
-		<option value="<%=cateItem.getId()%>"><%=cateItem.getName()%></option>	
-		<% } %>
+		<c:forEach items="${cateItems}" var="cateItem">
+		<option value="${cateItem.id}">${cateItem.name}</option>	
+		</c:forEach>
 	</select>
 	</div>
 	<!--  여기다가 loginedMemberId값을 넣어줘야겟네?-->
-	<input type="hidden" name="memberId" value="<%=loginedMemberId%>" />
+	<input type="hidden" name="memberId" value="${loginedMemberId}" />
 	
 	<div class="m-write-con ">
 		<input type="text" maxlength="50" id="subject" class="form-control"

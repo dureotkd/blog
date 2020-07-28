@@ -6,15 +6,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-<%
-	Article articleFirstId = (Article) request.getAttribute("articleFirstId");
-	Article articleLastId = (Article) request.getAttribute("articleLastId");
-	int totalCount = (int) request.getAttribute("totalCount");
-	Article article = (Article) request.getAttribute("article");
-	String cateItemName = (String) request.getAttribute("cateItemName");
-	List<ArticleReply> articleReplys = (List<ArticleReply>) request.getAttribute("articleReplys");
-%>
-
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
@@ -50,8 +41,6 @@
 <!-- 토스트 UI 에디터, CSS 코어 -->
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
-
-
 
 <style>
 .tui-editor-contents :not(table){
@@ -222,7 +211,7 @@
 /*============================= mobile 화면 시작 ===================== */
 .m-board-bar {
 	z-index:200;
-	height: 8%;
+	height:50px;
 	border-bottom: 1px solid silver;
 	position: relative;
 }
@@ -462,42 +451,36 @@
   color:white;
 }
 
-
-.next:hover {
-	
-}
-
-
 </style>
 
 	
 
 	<div class="head2 flex visible-on-sm-up">
 		<div class="boardName">
-			<%=cateItemName%>
+			${cateItemName}
 		</div>
 		<div class="slogun">코드마운틴에서 소중한 일상을 공유하세요.</div>
 	</div>
 
 	<nav class="table-box visible-on-sm-up">
 		<div class="table-1">
-			<div class="title"><%=article.getTitle()%></div>
+			<div class="title">${article.title}</div>
 			<div class="subitem">
-				<%=article.getRegDate()%>
-				writer : <%=article.getExtra().get("writer") %> &nbsp;&nbsp;&nbsp; 조회수 : <%=article.getHit()%> 
+				${article.regDate}
+				writer : ${article.extra.writer} &nbsp;&nbsp;&nbsp; 조회수 : ${article.hit} 
 				&nbsp;&nbsp;&nbsp;
-				<% if ( loginedMemberId == article.getMemberId()) { %>
-				<a href="${pageContext.request.contextPath}/s/article/modify?id=<%= article.getId()%>"><i class="fas fa-wrench"></i></a>
-				<% } %>
+				<c:if test="${loginedMemberId == article.memberId}">
+				<a href="${pageContext.request.contextPath}/s/article/modify?id=${article.id}" class="modify-btn"><i class="fas fa-wrench"></i></a>
+				</c:if>
 				&nbsp;
-				<% if ( loginedMemberId == article.getMemberId()) { %>
-				<a href="${pageContext.request.contextPath}/s/article/doDelete?id=<%= article.getId()%>"><i class="far fa-trash-alt"></i></a>	
-				<% } %>
+				<c:if test="${loginedMemberId == article.memberId}">
+				<a href="${pageContext.request.contextPath}/s/article/doDelete?id=${article.id}" class="delete-btn"><i class="far fa-trash-alt"></i></a>	
+				</c:if>
 			
 			</div>
 			<div class="line"></div>
 			<div class="body-box">
-			<script type="text/x-template" id="origin1" style="display: none;"><%=article.getBodyForXTemplate()%></script>
+			<script type="text/x-template" id="origin1" style="display: none;">${article.bodyForXTemplate}</script>
 			</div>
 			<div id="viewer1"></div>
 		</div>
@@ -511,108 +494,101 @@
 	<!--   ================================= mobile 화면 시작 ================================= -->
 
 	<div class="m-board-bar visible-on-sm-down">
-		<a class="m-board-name"> <%=cateItemName%> 
+		<a class="m-board-name">${cateItemName}
 		<div class="m-icon-box">
 		<i class="m-board-change fas fa-angle-down"></i> 
 		<i class="m-board-change2 fas fa-angle-up"></i>
 		</div>
 		</a>
 		<div class="m-board-menu">
-			<%
-			
-			
-				for (CateItem cateItem : cateItems) {
-			%>
+			<c:forEach items="${cateItems}" var="cateItem">
 			<a class="m-contentbtn"
-				href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItem.getId()%>"><%=cateItem.getName()%></a>
-			<%
-				}
-			%>
+				href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">${cateItem.name}</a>
+			</c:forEach>
 		</div>
 	</div>
 
 	<nav class="m-table-box visible-on-sm-down">
 		<div class="m-table-1">
-			<div class="m-title"><%=article.getTitle()%></div>
+			<div class="m-title"> ${article.title}</div>
 			<div class="m-subitem flex">
-				writer : 신성민 &nbsp;&nbsp; 조회수 : 1
+				writer :  ${article.extra.writer} &nbsp;&nbsp; 조회수 :  ${article.hit}
 				<div class="m-
-"><%=article.getRegDate()%></div>
+"> ${article.regDate}</div>
 			</div>
 			<div class="m-line"></div>
 			<script type="text/x-template"  id="m-origin1" style="display: none;">
-				<%="\n" + article.getBody().trim() + "\n"%>
+				  ${article.bodyForXTemplate}
 			</script>
 			<div id="m-viewer1"></div>
 		</div>
 	</nav>
-	<% if ( article.getId() > articleFirstId.getId()  ) { %>
-	<a class="prev" href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=<%=article.getId()-1%>">&#10094;</a>
-	<% } %>
-	<% if ( article.getId() < articleLastId.getId()) { %>
-	<a class="next" href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=<%=article.getId()+1%>">&#10095;</a>
-	<% }  %>
+	
+	<c:if test="${article.id > articleFirstId.id }">
+	<a class="prev visible-on-sm-up" href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id-1}">&#10094;</a>
+	</c:if>
+	<c:if test="${article.id < articleLastId.id }">
+	<a class="next visible-on-sm-up" href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id+1}">&#10095;</a>
+	</c:if>
 	
 	 <div class="reply-box">
       <h2 class="Co">Comment (${totalCount})</h2>
-      <% for (ArticleReply articleReply : articleReplys) {%>
+     <c:forEach items="${articleReplys}" var="articleReply">
          <div class="reply-item">
          <div class="reply-boxi">
          <div class="reply-nick">
-         <p class="reply-writer"><%= articleReply.getExtra().get("writer") %></p>
+         <p class="reply-writer"> ${articleReply.extra.writer}</p>
          </div>
          <div class="reply-bodyitem">
-         <p><%= articleReply.getBody() %></p>
-         <div class="reply-regDate"><%= articleReply.getRegDate() %>
-         <% if ( loginedMemberId == articleReply.getMemberId()) { %>
-         <a class="delete-item" href="${pageContext.request.contextPath}/s/article/replyDelete?id=<%=articleReply.getId()%>">삭제</a>
-               <p class="modify-item">수정   </p>
-               <% } %>
+         <p> ${articleReply.body}</p>
+         <div class="reply-regDate">${articleReply.regDate}
+         <c:if test="${loginedMemberId == articleReply.memberId}">
+         <a class="delete-item" href="${pageContext.request.contextPath}/s/article/replyDelete?id=${articleReply.id}">삭제</a>
+               <p class="modify-item">수정  </p>
+               </c:if>
                </div>
-               </div>
+               </div>	
                </div>
                </div>   
-            <%
-               }
-            %>
+            </c:forEach>
          
-      <% for ( ArticleReply articleReply : articleReplys ) { %>   
-            <% if ( loginedMemberId == articleReply.getMemberId()) { %>
+      <c:forEach items="${articleReplys}" var="articleReply">   
+            <c:if test="${loginedMemberId == articleReply.memberId}">
                <div class="reply-subitem">
                <form action="replyModify" class="pc-form" method="post">
-               <input type="hidden" name="id" value="<%=articleReply.getId() %>" />
+               <input type="hidden" name="id" value="${articleReply.id}" />
                <div class="modiy-body-box">
                <textarea name="body" class="modify-body-item" cols="30" rows="4"  placeholder="선정적, 극단적인 비속어는 통보없이 삭제 및 차단 될 수 있습니다"></textarea>
                <input class="submit" type="submit" value="수정" ></input>
                </div>
                </form>
                </div>
-               <% } %>
-      <%  } %>
-      
-               <% if ( loginedMemberId != -1 ) {%>
+              </c:if>
+     </c:forEach>
+     
+      			<c:if test="${loginedMemberId != -1 }"> 
       <form action="reply" class="reply-form">
       <div class="reply-con">
-      <input type="hidden" name ="id" value="<%=article.getId()%>"/>
-      <input type="hidden" name ="memberId" value="<%=loginedMemberId%>"/>
+      <input type="hidden" name ="id" value="${article.id}"/>
+      <input type="hidden" name ="memberId" value="${loginedMemberId}"/>
       <textarea name="body" class="reply-body" cols="30" rows="4"  placeholder="선정적, 극단적인 비속어는 통보없이 삭제 및 차단 될 수 있습니다"></textarea>
       <input class="submit" type="submit" value="작성"></input>
       </div>   
    </form>
-    <% } %>
+    </c:if>
             
       
       
-       <% if ( loginedMemberId == -1 ) {%>
+       <c:if test="${loginedMemberId == -1 }"> 
       <form action="reply" class="reply-form">
       <div class="reply-con">
-      <input type="hidden" name ="id" value="<%=article.getId()%>"/>
-      <input type="hidden" name ="memberId" value="<%=loginedMemberId%>"/>
+      <input type="hidden" name ="id" value="${article.id}"/>
+      <input type="hidden" name ="memberId" value="${loginedMemberId}"/>
       <textarea name="body" class="reply-body" cols="30" rows="4"  placeholder="로그인 후 이용해주세요."></textarea>
       <input class="submit" type="submit" value="작성"></input>
       </div>   
    </form>
-   <% } %>
+  </c:if>
    
    <div class="back-btn-con ">
 	<input class="list-back-btn" type="button" value="목록으로 돌아가기" onclick="location='list'"/>
@@ -659,7 +635,6 @@
 		$(function() {
 			modifyBox__init();
 		});
-		
 		
 	</script>
 

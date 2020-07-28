@@ -90,6 +90,18 @@ label {
 }
 
 
+@media ( max-width :799px ) {
+	.visible-on-md-up {
+		display: none !important;
+	}
+	
+	.join-box{
+		width:80%;
+		margin-top:100px;
+	}
+}
+
+
 </style>
 
 <script>
@@ -146,8 +158,8 @@ label {
 	}
 </script>
 
-<nav class="join-form-con">
-	<div class="left-box">
+<nav class="join-form-con ">
+	<div class="left-box visible-on-md-up">
 	<h2 class="left-h">처음뵙겠습니다</h2>
 	<p class="left-p">가입할 계정을 입력해주세요</p>
 	<p class="left-p2">로그인도 간편해요</p>

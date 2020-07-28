@@ -4,13 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
-<%
-List<Article> articles = (List<Article>) request.getAttribute("articles");
-List<Article> articles2 = (List<Article>) request.getAttribute("articles2");
-int totalPage = (int) request.getAttribute("totalPage");
-int paramPage = (int) request.getAttribute("page");
-String cateItemName = (String)request.getAttribute("cateItemName");
-%>
  
 <style>
 h1 {
@@ -378,11 +371,13 @@ font-family: 'Noto Sans KR', sans-serif;
 }
 .view-item {
 	display:flex;
-	flex-direction:column;
-	margin-bottom:30px;
+	flex-direction:row;
 	padding-bottom:30px;
 	border-bottom:1px solid #ccc;
+	align-items:baseline;
+	justify-content:space-between;
 }
+
 
 
 
@@ -394,6 +389,12 @@ font-family: 'Noto Sans KR', sans-serif;
 	.visible-on-sm-up {
 		display: none !important;
 	}
+	
+	.view-item {
+		display:flex;
+		flex-direction:column;
+	}
+	
 }
 
 /* 800px 이하면 안보이게 ( 모바일 버전 ) */
@@ -402,7 +403,7 @@ font-family: 'Noto Sans KR', sans-serif;
 @media ( min-width :800px ) {
 	.visible-on-sm-down {
 		display: none !important;
-	}ol
+	}
 }
 
 @media ( min-width: 480px){
@@ -430,24 +431,24 @@ font-family: 'Noto Sans KR', sans-serif;
 
 
 .tag-title {
-	font-size:2rem;
-	padding-bottom:10px;
+	font-size:18px;
 	font-weight:bold;
+	width:20%;
 }
 
 .tag-body {
-	width:100%;
+	width:50%;
 	text-overflow:ellipsis;
 	overflow:hidden;
 	white-space:nowrap;
-	height:155px;	
+	height:50px;	
 	color:#666;
-	font-size:1.5rem;
+	font-size:15px;
 }
 
 .tag-sub {
 	color:#ccc;
-	padding-bottom:30px;
+	font-size:13px;
 }
 
 .post-name {
@@ -457,7 +458,7 @@ font-family: 'Noto Sans KR', sans-serif;
 	margin-top:30px;
 	width:150px;
 	height:50px;
-	background-color:black;
+	background-color:#18306d;
 	border-radius:5px;
 	color:white;
 	border:none;
@@ -483,8 +484,12 @@ h2 {
 	font-size:2rem;
 }
 .about-sub {
-	width:60%;
+	width:100%;
 	margin:100px auto;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	
 }
 .about-body {
 	font-size:1.5rem;
@@ -554,7 +559,8 @@ img {vertical-align: middle;}
 	text-overflow:ellipsis;
 	white-space:no-wrap;
 	height:125px;
-	font-size:40px;
+	font-size:19px;
+	line-height:3;
 }
 
 
@@ -569,7 +575,7 @@ img {vertical-align: middle;}
 	outline:none;
 	border:none;
 	border-radius:5px;
-	background-color:black;
+	background-color:#18306d;
 	cursor:pointer;
 }
 
@@ -577,8 +583,8 @@ img {vertical-align: middle;}
 
 /* Number text (1/3 etc) */
 .numbertext {
-  color: black;
-  font-size: 1.5rem;
+  color: #424242;
+  font-size:20px;
   padding: 8px 12px;
   position: absolute;
   top: 30px;
@@ -659,8 +665,9 @@ img {vertical-align: middle;}
   color:#fff;
   border:none;
   position:relative;
-  height:60px;
-  font-size:1.6em;
+  height:50px;
+  width:150px;
+  border-radius:5px;
   padding:0 2em;
   cursor:pointer;
   transition:800ms ease all;
@@ -690,8 +697,48 @@ img {vertical-align: middle;}
   width:100%;
   transition:800ms ease all;
 }
+.about-img-box {
+	display:flex;
+	width:350px;
+	height:500px;
+	flex-direction:column;
+	border:1px solid #ccc;
+	padding:15px;
+}
+
+.about-img-box > .about-img-con > img {
+	height:400px;
+	transition:all ease 1s;
+	width:100%;
+}
+
+.about-img-box > p {
+	font-size:20px;
+}
+
+.about-img-box > span {
+	font-size:15px;
+	color:#9e9e9e;
+	padding:5px 0px;
+}
+
+.about-img-con {
+	width:100%;
+	overflow:hidden;
+	display:flex;
+	justify-content:center;
+}
 
 
+
+.about-img-box:hover  img{
+	transform:scale(1.1);
+	opacity:0.7;
+}
+
+.admin {
+	color:#c62828;
+}
 
 
 
@@ -701,21 +748,25 @@ img {vertical-align: middle;}
 		
 		<div class="wrap">
 		<div class="slideshow-container">
-<% for ( Article article : articles ) {%>
+<c:forEach items="${articles}" var="article">
 <div class="mySlides fade">
 	<div class="circles">
 		<div class="circle-1"></div>
 		<div class="circle-2"></div>
 	</div>
-  <div class="numbertext">No.<%=article.getId()%></div>
+	<c:forEach items="${cateItems}" var= "cateItem">
+	<c:if test="${article.cateItemId == cateItem.id }">
+  <div class="numbertext">${cateItem.name}</div>
+  </c:if>
+  </c:forEach>
   <img src="https://i.pinimg.com/originals/7c/cb/01/7ccb010d8fddc4bcd84587ef3c34d100.jpg" style="width:100%; height:80%;">
-  <div class="text"><%= article.getTitle() %></div>
+  <div class="text">${article.title}</div>
   <div class="text-wrap">
-  <div class="text-body"><%=article.getBody()%></div>
+  <div class="text-body">${article.body}</div>
   </div>
-  <button class="text-btn" onclick="location.href='${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=<%= article.getId()%>'">자세히 보기</button>
+  <button class="text-btn" onclick="location.href='${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id}'">자세히 보기</button>
 </div>
-<% } %>
+</c:forEach>
 
 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -734,31 +785,34 @@ img {vertical-align: middle;}
 		
 		<div class="inner-wrap">
 		<p class="post-name">POPULAR POSTS</p>
-		<%
-			for ( Article article2 : articles2){
-			%>
+		<c:forEach items="${articles2}" var="article2">
 			<div class="view-item">
-			<p class="tag-title" ><%=article2.getTitle() %></p>
-			<span class="tag-sub">
-			<%=article2.getRegDate()%>
-			&nbsp;&nbsp;&nbsp;조회수 : <%=article2.getHit()%>
-			</span>
-			<p class="tag-body"><%=article2.getBody()%></p>
-			<button class="btn-1" onclick="location.href='${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=<%= article2.getId()%>'">
+			<p class="tag-title" >${article2.title}</p>
+			<p class="tag-body">${article2.body}</p>
+			<button class="btn-1" onclick="location.href='${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article2.id}'">
 			자세히 보기
 			</button>
 			</div>
-			<%
-			}
-			%>
+			</c:forEach>
 		</div>
 	
 		
 		<div class="about-sub">
-		 <a href="#"><h2>ABOUT ME</h2></a>
-		<button class="ClickMe" onclick="location.href='${pageContext.request.contextPath}/s/home/aboutMe'">Click Me</button>
+		 <h2>ABOUT ME</h2>
+		 <br>
+		 <a href="${pageContext.request.contextPath}/s/home/aboutMe">
+		 <div class="about-img-box">
+		 <div class="about-img-con">
+		 <img src="https://img3.yna.co.kr/etc/inner/KR/2020/04/27/AKR20200427066051005_01_i_P2.jpg" alt="" />
+		 </div>
+		 <p>신성민</p>
+		 <span class="admin">CodeMountain Admin</span>
+		 <span>생년월일 95.05.18</span>
+		 <span>SBS컴퓨터 아카데미 학생</span>
+		 </div>
+		 </a>
+		
 		</div>
-	
 
 <%@ include file="/jsp/part/foot.jspf"%>
 

@@ -41,6 +41,7 @@
 	padding:15px;
 	color:white;
 	margin-bottom:30%;
+	cursor:pointer;
 	transition:background-color.4s;
 }
 
@@ -84,12 +85,24 @@
 	margin-top:10px;
 }
 
+@media ( max-width :799px ) {
+	.visible-on-md-up {
+		display: none !important;
+	}
+	
+	.find-box{
+		width:80%;
+		margin-top:100px;
+	}
+}
+
+
 </style>
 	
 
 
   <div class="findId-wrap">
-  		  	<div class="left-box">
+  		  	<div class="left-box visible-on-md-up">
 	<h2 class="left-h">찾아볼게요</h2>
 	<p class="left-p">가입하신 이메일을 입력해주세요.</p>
 	<p class="left-p2">비밀번호 찾기도 간편합니다</p>

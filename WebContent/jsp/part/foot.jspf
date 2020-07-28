@@ -37,11 +37,14 @@
 	margin-left:40px;
 }
 
-
+@media ( max-width :799px ) {
+	.visible-on-md-up {
+		display: none !important;
+	}
 
 </style>   
 
-	<div class="foot-con">
+	<div class="foot-con visible-on-md-up">
 	<div class="foot-box">
 	<p>© Copyright 2020 코드마운틴. All Rights Reserved. </p>
 	<div class="img-box">

@@ -99,12 +99,31 @@ label {
 	margin-top:10px;
 }
 
+/*pc �깙諛� 醫낅즺*/
+@media ( max-width :799px ) {
+	.visible-on-md-up {
+		display: none !important;
+	}
+	
+	.login-box{
+		width:80%;
+		margin-top:100px;
+	}
+}
+
+/*모바일 탑바 전체 부분  */
+@media ( min-width :800px ) {
+	.visible-on-sm-down {
+		display: none !important;
+	}
+}
+
 </style>
 <script>
-	var joinFormSubmitted = false;
+	var loginFormSubmitted = false;
 	
 	function submitLoginForm(form) {
-		if (joinFormSubmitted) {
+		if (loginFormSubmitted) {
 			alert('처리 중입니다.');
 			return;
 		}
@@ -114,13 +133,13 @@ label {
 		form.loginPwReal.value = sha256(form.loginPw.value);
 		form.loginPw.value = '' ;
 		form.submit();
-		joinFormSubmitted = true;
+		loginFormSubmitted = true;
 		
 
 	}
 </script>
 <nav class="login-form-con">
-	<div class="left-box">
+	<div class="left-box visible-on-md-up">
 	<h2 class="left-h">환영합니다</h2>
 	<p class="left-p">가입된 계정을 입력해주세요</p>
 	<p class="left-p2">회원가입도 간편합니다</p>

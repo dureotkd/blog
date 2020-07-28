@@ -95,6 +95,20 @@ public class MailService {
 		}
 	}
 
+	public void sendEmail(String subject, String content, String fromEmail, String toEmail) {
+		this.mailStart();
+		try {
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("%s",fromEmail));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+			message.setSubject(String.format("%s", subject));
+			message.setContent(String.format("%s", content),"text/html; charset=utf-8");// 글내용을 html타입 charset설정
+			Transport.send(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	
 	
 	

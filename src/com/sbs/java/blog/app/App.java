@@ -19,12 +19,12 @@ import com.sbs.java.blog.util.Util;
 public class App {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
-	private String maildId;
+	private String mailId;
 	private String mailPw;
 	public App(HttpServletRequest req, HttpServletResponse resp,String mailId,String mailPw) {
 		this.req = req;
 		this.resp = resp;
-		this.maildId = mailId;
+		this.mailId = mailId;
 		this.mailPw = mailPw;
 	}
 
@@ -102,10 +102,10 @@ public class App {
 			controller = new ArticleController(dbConn, actionMethodName, req, resp);
 			break;
 		case "member":
-			controller = new MemberController(dbConn, actionMethodName, req, resp , maildId,mailPw);
+			controller = new MemberController(dbConn, actionMethodName, req, resp , mailId,mailPw);
 			break;
 		case "home":
-			controller = new HomeController(dbConn, actionMethodName, req, resp);
+			controller = new HomeController(dbConn, actionMethodName, req, resp , mailId , mailPw);
 			break;
 		}
 

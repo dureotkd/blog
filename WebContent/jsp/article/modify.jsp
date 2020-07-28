@@ -6,9 +6,6 @@
 
 <%@ include file="/jsp/part/head.jspf"%>
 
-<%
-	Article article = (Article) request.getAttribute("article");
-%>
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
@@ -49,16 +46,16 @@
 <form action="doModify" class="pc-form" method="post"
 	onsubmit="submitModifyForm(this); return false;">
 	<!-- hidden 으로 숨겨버리고  -->
-	<input type="hidden" name="id" value="<%=article.getId()%>" />
-	<input type="hidden" name="body">
 	
 	<div class="m-write ">수정</div>
 
 	<div class="m-write-con ">
 		<input type="text" maxlength="50" id="subject" class="form-control"
 			placeholder="제목을 입력하세요" style="margin: 10px; height: 35px;"
-			name="title" value="<%=article.getTitle()%>">
-		<script type="text/x-template" id="origin1"><%=article.getBody()%></script>
+			name="title" value=" ${article.title}">
+		<input type="hidden" name="id" value="${article.id}" />
+		<input type="hidden" name="body">
+		<script type="text/x-template" id="origin1">${article.body}</script>
 		<div id="editor1"></div>
 	</div>
 

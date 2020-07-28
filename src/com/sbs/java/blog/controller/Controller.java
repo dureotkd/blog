@@ -9,10 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.dto.Member;
-import com.sbs.java.blog.service.memberService;
 import com.sbs.java.blog.service.ArticleService;
-import com.sbs.java.blog.util.Util;
-import com.sbs.java.blog.dto.Article;
+import com.sbs.java.blog.service.MemberService;
+
 public abstract class Controller {
 	protected Connection dbConn;
 	protected String actionMethodName;
@@ -27,7 +26,6 @@ public abstract class Controller {
 		this.actionMethodName = actionMethodName;
 		this.req = req;
 		this.resp = resp;
-		// session = req.getSeesion();
 		session = req.getSession();
 		articleService = new ArticleService(dbConn);
 		memberService = new MemberService(dbConn);
