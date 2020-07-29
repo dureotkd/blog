@@ -134,8 +134,6 @@ label {
 		form.loginPw.value = '' ;
 		form.submit();
 		loginFormSubmitted = true;
-		
-
 	}
 </script>
 <nav class="login-form-con">

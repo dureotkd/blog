@@ -9,6 +9,7 @@ import java.util.Map;
 public class Dto {
 	private int id;
 	private String regDate;
+	private String updateDate;
 	private Map<String, Object> extra;
 
 	public String getRegDateFormat1() {
@@ -30,7 +31,7 @@ public class Dto {
 		this.id = (int) row.get("id");
 		this.regDate = (String) row.get("regDate");
 		this.extra = new HashMap<>();
-
+		this.updateDate = (String) row.get("updateDate");
 		for (String key : row.keySet()) {
 			if (key.startsWith("extra__")) {
 				Object value = row.get(key);
@@ -62,6 +63,16 @@ public class Dto {
 
 	public void setExtra(Map<String, Object> extra) {
 		this.extra = extra;
+	}
+	
+	
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
 	}
 
 	@Override

@@ -1,12 +1,13 @@
 package com.sbs.java.blog.service;
 
 import java.sql.Connection;
+import java.util.UUID;
 
 import com.sbs.java.blog.dao.MemberDao;
 import com.sbs.java.blog.dto.Member;
 
 public class MemberService extends Service {
-
+	private AttrService attrService;
 	private MemberDao memberDao;
 
 	public MemberService(Connection dbConn) {
@@ -67,6 +68,23 @@ public class MemberService extends Service {
 
 	public boolean getMemberCode2(String loginId) {
 		return memberDao.getMemberCode2(loginId);
+	}
+
+	public boolean isValidModifyPrivateAuthCode(int actorId, String authCode) {
+		String authCodeOnDB = attrService.getValue("member__" + actorId + "__extra__modifyPrivateAuthCode");
+		
+		return authCodeOnDB.equals(authCode);
+	}
+
+	public void modify(int actorId, String loginPw) {
+		memberDao.modify(actorId, loginPw);
+	}
+
+	public String genModifyPrivateAuthCode(int actorId) {
+		String authCode = UUID.randomUUID().toString();
+		attrService.setValue("member__" + actorId + "__extra__modifyPrivateAuthCode", authCode);
+		
+		return authCode;
 	}
 
 

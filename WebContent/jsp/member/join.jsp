@@ -156,6 +156,88 @@ label {
 		form.loginPwConfirm.value= '';
 		form.submit();
 	}
+
+	function JoinForm__checkLoginIdDup(input) {
+		var form = input.form;
+
+		form.loginId.value = form.loginId.value.trim();
+
+		if (form.loginId.value.length == 0) {
+			return;
+		}
+
+		$.get('getLoginIdDup', {
+			loginId : form.loginId.value
+		}, function(data) {
+			var $message = $(form.loginId).next();
+
+			if (data.resultCode.substr(0, 2) == 'S-') {
+				$message.empty().append(
+						'<div style="color:green;">' + data.msg + '</div>');
+				JoinForm__validLoginId = data.loginId;
+			} else {
+				$message.empty().append(
+						'<div style="color:red;">' + data.msg + '</div>');
+				JoinForm__validLoginId = '';
+			}
+		}, 'json');
+	}
+
+
+
+	function JoinForm__checkEmailDup(input) {
+		
+		var form = input.form;
+
+		form.email.value = form.email.value.trim();
+
+		if (form.email.value.length == 0) {
+			return;
+		}
+
+		$.get('getEmailDup', {
+			email : form.email.value
+		}, function(data) {
+			var $message = $(form.email).next();
+
+			if (data.resultCode.substr(0, 2) == 'S-') {
+				$message.empty().append(
+						'<div style="color:green;">' + data.msg + '</div>');
+				JoinForm__validEmail = data.email;
+			} else {
+				$message.empty().append(
+						'<div style="color:red;">' + data.msg + '</div>');
+				JoinForm__validEmail = '';
+			}
+		}, 'json');
+	}
+
+function JoinForm__checkNicknameDup(input) {
+		
+		var form = input.form;
+
+		form.nickname.value = form.nickname.value.trim();
+
+		if (form.nickname.value.length == 0) {
+			return;
+		}
+
+		$.get('getNicknameDup', {
+			nickname : form.nickname.value
+		}, function(data) {
+			var $message = $(form.nickname).next();
+
+			if (data.resultCode.substr(0, 2) == 'S-') {
+				$message.empty().append(
+						'<div style="color:green;">' + data.msg + '</div>');
+				JoinForm__validNickname = data.nickname;
+			} else {
+				$message.empty().append(
+						'<div style="color:red;">' + data.msg + '</div>');
+				JoinForm__validNickname = '';
+			}
+		}, 'json');
+	}
 </script>
 
 <nav class="join-form-con ">
@@ -170,12 +252,15 @@ label {
 	 <input type="hidden" name="loginPwReal" />
 		<div class="join-box">
 			<input type="text" name="name" class="join-name" placeholder="User name" /> 
-			<input type="text" name="nickname" class="join-nickname" placeholder="User nickname" />
-			<input type="email" name="email" class="join-email" placeholder="User Email"/>
-			<input type="text" name="loginId" class="join-id" placeholder="User Id" />
+			<input onkeyup="JoinForm__checkNicknameDup(this);" type="text" name="nickname" class="join-nickname" placeholder="User nickname" />
+			<div class="message-msg"></div>
+			<input onkeyup="JoinForm__checkEmailDup(this);" type="email" name="email" class="join-email" placeholder="User Email"/>
+			<div class="message-msg"></div>
+			<input onkeyup="JoinForm__checkLoginIdDup(this);"  type="text" name="loginId" class="join-id" placeholder="User Id" />
+			<div class="message-msg"></div>
 			<input type="password" name="loginPw" class="join-pw" placeholder="Password" /> 
 			<input type="password" name="loginPwConfirm" class="join-Pwconfirm" placeholder="Password 확인" />
-			<input class="submit" type="submit" value="회원가입">
+			<input  class="submit" type="submit" value="회원가입">
 		</div>
 	</form>
 </nav>

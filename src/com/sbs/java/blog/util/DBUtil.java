@@ -175,4 +175,8 @@ public class DBUtil {
 		}
 		return id;
 	}
+
+	public static int delete(Connection dbConn, SecSql sql) {
+		return update(dbConn, sql);
+	}
 }

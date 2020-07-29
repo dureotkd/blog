@@ -71,13 +71,112 @@ public class MemberController extends Controller {
 			return doActionfindPw(req,resp);
 		case "doFindPw":
 			return doActiondoFindPw(req,resp);
-		case "doModifyMember":
-			return doActionModify(req,resp);
 		case "doAuthMail":
 			return doActionDoAuthMail(req,resp);
+		case "getLoginIdDup":
+			return actionGetLoginIdDup(req,resp);
+		case "getNicknameDup":
+			return actionGetNicknameDup(req,resp);
+		case "getEmailDup":
+			return actionGetEmailDup(req,resp);
+		case "passwordForPrivate":
+			return actionPasswordForPrivate();
+		case "doPasswordForPrivate":
+			return actionDoPasswordForPrivate();
+		case "modifyPrivate":
+			return actionModifyPrivate();
+		case "doModifyPrivate":
+			return actionDoModifyPrivate();
 		}
 		return "";
 	}
+	private String actionDoModifyPrivate() {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		String authCode = req.getParameter("authCode");
+
+		if (memberService.isValidModifyPrivateAuthCode(loginedMemberId, authCode) == false) {
+			return String.format(
+					"html:<script> alert('비밀번호를 다시 체크해주세요.'); location.replace('../member/passwordForPrivate'); </script>");
+		}
+
+		String loginPw = req.getParameter("loginPwReal");
+
+		memberService.modify(loginedMemberId, loginPw);
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		loginedMember.setLoginPw(loginPw); // 크게 의미는 없지만, 의미론적인 면에서 해야 하는
+
+		return String.format("html:<script> alert('개인정보가 수정되었습니다.'); location.replace('../home/main'); </script>");
+	}
+
+	private String actionModifyPrivate() {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
+		String authCode = req.getParameter("authCode");
+		if (memberService.isValidModifyPrivateAuthCode(loginedMemberId, authCode) == false) {
+			return String.format(
+					"html:<script> alert('비밀번호를 다시 체크해주세요.'); location.replace('../member/passwordForPrivate'); </script>");
+		}
+
+		return "member/modifyPrivate.jsp";
+	}
+
+	private String actionPasswordForPrivate() {
+		return "member/passwordForPrivate.jsp";
+	}
+
+	private String actionDoPasswordForPrivate() {
+		String loginPw = req.getParameter("loginPwReal");
+
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		int loginedMemberId = loginedMember.getId();
+
+		if (loginedMember.getLoginPw().equals(loginPw)) {
+			String authCode = memberService.genModifyPrivateAuthCode(loginedMemberId);
+
+			return String
+					.format("html:<script> location.replace('modifyPrivate?authCode=" + authCode + "'); </script>");
+		}
+
+		return String.format("html:<script> alert('비밀번호를 다시 입력해주세요.'); history.back(); </script>");
+	}
+
+	private String actionGetEmailDup(HttpServletRequest req, HttpServletResponse resp) {
+		String email = req.getParameter("email");
+		
+		boolean isJoinableEmail = memberService.isEmailJoinable(email);
+		
+		if ( isJoinableEmail) {
+			return "json:{\"msg\":\"사용가능 한 이메일 입니다.\", \"resultCode\": \"S-1\", \"loginId\":\"" + email + "\"}"; 
+		}  else {
+			return "json:{\"msg\":\"이미 사용중인 이메일 입니다.\", \"resultCode\": \"F-1\", \"loginId\":\"" + email + "\"}";
+		}
+	}
+
+	private String actionGetNicknameDup(HttpServletRequest req, HttpServletResponse resp) {
+		String nickname = req.getParameter("nickname");
+		
+		boolean isJoinableNickname = memberService.isNameJoinable(nickname);
+		
+		if (isJoinableNickname) {
+			return "json:{\"msg\":\"사용가능 한 닉네임 입니다.\", \"resultCode\": \"S-1\", \"loginId\":\"" + nickname + "\"}";
+		} else {
+			return "json:{\"msg\":\"이미 사용중인 닉네임 입니다.\", \"resultCode\": \"F-1\", \"loginId\":\"" + nickname + "\"}";
+		}
+	}
+
+	private String actionGetLoginIdDup(HttpServletRequest req, HttpServletResponse resp) {
+		String loginId = req.getParameter("loginId");
+		
+		boolean isJoinableLoginId = memberService.isLoginIdJoinable(loginId);
+		
+		if (isJoinableLoginId) {
+			return "json:{\"msg\":\"사용가능 한 아이디 입니다.\", \"resultCode\": \"S-1\", \"loginId\":\"" + loginId + "\"}";
+		}else {
+			return "json:{\"msg\":\"이미 사용중인 아이디 입니다.\", \"resultCode\": \"F-1\", \"loginId\":\"" + loginId + "\"}";
+		}
+	}
+
+
 	private String doActionDoAuthMail(HttpServletRequest req, HttpServletResponse resp) {
 		
 		String code = req.getParameter("code");
@@ -269,17 +368,6 @@ public class MemberController extends Controller {
 		String loginPw = req.getParameter("loginPwReal");
 		String email = req.getParameter("email");
 		
-	
-		boolean isNameJoinable = memberService.isNameJoinable(nickname);
-		if ( isNameJoinable == false ) {
-			return "html:<script> alert('중복된 닉네임입니다.'); location.replace('join'); </script>";
-		}
-		boolean isLoginIdJoinable = memberService.isLoginIdJoinable(loginId);
-		// isLoginIdJoinable == false면 중복 아이디
-		if (isLoginIdJoinable == false) {
-			return "html:<script> alert('중복된 아이디입니다.'); location.replace('join'); </script>";
-		}
-		
 		if ( loginId.equals("admin")) {
 			return "html:<script> alert(' [admin] 아이디는 사용하실 수 없습니다.'); location.replace('join'); </script>";
 		}
@@ -308,10 +396,7 @@ public class MemberController extends Controller {
                  break;
              }
          }
-		
-		
-		
-		
+
 		String a = temp.toString();
 		String title = "안녕하세요 코드마운틴입니다.";
 		int rm = memberService.doActionDojoin(name, nickname, loginId, loginPw, email,a);
