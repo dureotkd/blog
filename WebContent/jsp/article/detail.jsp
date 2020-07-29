@@ -469,11 +469,11 @@
 				${article.regDate}
 				writer : ${article.extra.writer} &nbsp;&nbsp;&nbsp; 조회수 : ${article.hit} 
 				&nbsp;&nbsp;&nbsp;
-				<c:if test="${loginedMemberId == article.memberId}">
+				<c:if test="${loginedMemberId == article.memberId || loginedMemberId == 1  }">
 				<a href="${pageContext.request.contextPath}/s/article/modify?id=${article.id}" class="modify-btn"><i class="fas fa-wrench"></i></a>
 				</c:if>
 				&nbsp;
-				<c:if test="${loginedMemberId == article.memberId}">
+				<c:if test="${loginedMemberId == article.memberId || loginedMemberId == 1 }" >
 				<a href="${pageContext.request.contextPath}/s/article/doDelete?id=${article.id}" class="delete-btn"><i class="far fa-trash-alt"></i></a>	
 				</c:if>
 			

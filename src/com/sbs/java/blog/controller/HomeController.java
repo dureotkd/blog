@@ -66,10 +66,15 @@ public class HomeController extends Controller {
 			return doActionMyWork3(req,resp);
 		case "mywork4":
 			return doActionmyWork4(req,resp);
-	
+		case "mywork5":
+			return doActionMyWork5(req,resp);
 		}
 
 		return "";
+	}
+
+	private String doActionMyWork5(HttpServletRequest req, HttpServletResponse resp) {
+		return "home/mywork5.jsp";
 	}
 
 	private String doActionAboutMe2(HttpServletRequest req, HttpServletResponse resp) {

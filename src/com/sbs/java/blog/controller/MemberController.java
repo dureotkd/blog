@@ -73,8 +73,6 @@ public class MemberController extends Controller {
 			return doActiondoFindPw(req,resp);
 		case "doModifyMember":
 			return doActionModify(req,resp);
-		case "doDeleteMember":
-			return doActionDelete(req,resp);
 		case "doAuthMail":
 			return doActionDoAuthMail(req,resp);
 		}
@@ -96,16 +94,6 @@ public class MemberController extends Controller {
 		return  "html:<script> alert('이메일 인증이 완료되었습니다.' ); location.replace('../home/main')</script>";
 	}
 
-
-	private String doActionDelete(HttpServletRequest req, HttpServletResponse resp) {
-		
-		int id = Util.getInt(req, "id");
-		String loginPw = req.getParameter("loginPw");
-		
-		memberService.doDeleteMember(id,loginPw);
-		
-		return  "html:<script> alert('회원님 삭제가 완료되었습니다 감사합니다.' ); location.replace('../home/main')</script>";
-	}
 
 	private String doActionModify(HttpServletRequest req, HttpServletResponse resp) {
 		
@@ -290,6 +278,14 @@ public class MemberController extends Controller {
 		// isLoginIdJoinable == false면 중복 아이디
 		if (isLoginIdJoinable == false) {
 			return "html:<script> alert('중복된 아이디입니다.'); location.replace('join'); </script>";
+		}
+		
+		if ( loginId.equals("admin")) {
+			return "html:<script> alert(' [admin] 아이디는 사용하실 수 없습니다.'); location.replace('join'); </script>";
+		}
+		
+		if ( nickname.equals("admin") || nickname.equals("운영자")) {
+			return "html:<script> alert(' [admin,운영자] 닉네임은 사용하실수 없습니다.'); location.replace('join'); </script>"; 
 		}
 		
 		 StringBuffer temp =new StringBuffer();

@@ -47,7 +47,7 @@
 	
 	<div class="m-write-con ">
 		<input type="text" maxlength="50" id="subject" class="form-control"
-			placeholder="제목을 입력하세요" style="margin: 10px; height: 35px;"
+			placeholder="제목을 입력하세요" style="height: 35px;"
 			name="title" value="">
 		<input type="hidden" name="body">
 		<div id="editor1"></div>
@@ -120,12 +120,22 @@ console.clear();
 	font-size:1.5rem;
 	text-align: left;
 	padding: 15px 0px 15px 0px;
-	border-bottom: 3px solid green;
+	border-bottom: 2px solid #18306d;
 }
 
 .cateId {
-	height:30px;
+	height:45px;
+	padding:10px;
+	border:1px solid #18306d;
 }
+
+.form-control {
+	padding:30px;
+	font-size:20px;
+	border:1px solid #18306d;
+}
+
+
 
 .m-write-title {
 	margin: 20px 0px 20px 0px;
@@ -138,31 +148,42 @@ console.clear();
 
 .m-button-con {
 	padding: 15px 0px 15px 0px;
+	display:flex;
 }
+
+
 
 button {
 	cursor:pointer;
-	background-color: white;
-	width: 100px;
-	height: 30px;
 }
+
+
 
 .m-write-con {
 	display: flex;
 	flex-direction: column;
-	margin-left:-10px;
 }
 
 .cateItem-area {
 	padding:20px 0px 20px 0px;
 }
 
+.back {
+	background:#18306d;
+	width:50%;
+	height:50px;
+	color:white;
+	font-size:1.2rem;
+}
+
 .submit{
 	cursor:pointer;
-	background-color:white;
-	width:100px;
-	height:30px;
+	background-color:#18306d;
+	width:50%;
+	height:50px;
 	margin-right:20px;
+	color:white;
+	font-size:1.2rem;
 }
 .m-button-con{
 	margin-bottom:150px;

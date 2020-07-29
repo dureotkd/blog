@@ -169,11 +169,5 @@ public class MemberDao {
 		return DBUtil.selectRowIntValue(dbConn, secSql) == 0;
 	}
 
-	public Object doDeleteMember(int id, String loginPw) {
-		SecSql secSql = new SecSql();
-		secSql.append("DELETE FROM member");
-		secSql.append("WHERE id = ?",id);
-		secSql.append("AND loginPw = ?",loginPw);
-		return DBUtil.;
-	}
+	
 }

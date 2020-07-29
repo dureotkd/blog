@@ -69,8 +69,5 @@ public class MemberService extends Service {
 		return memberDao.getMemberCode2(loginId);
 	}
 
-	public void doDeleteMember(int id, String loginPw) {
-		return memberDao.doDeleteMember(id,loginPw);
-	}
 
 }

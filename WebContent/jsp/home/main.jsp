@@ -542,7 +542,7 @@ img {vertical-align: middle;}
   font-size: 3rem;
   position: absolute;
   top:140px;
-  left:20%;
+  left:16%;
   width: 100%;
   font-weight:bold;
 }
@@ -550,7 +550,7 @@ img {vertical-align: middle;}
 .text-wrap {
 	position:absolute;
 	top:250px;
-	left:20%;
+	left:16%;
 	width:50%;
 }
 
@@ -569,7 +569,7 @@ img {vertical-align: middle;}
 	color:white;
 	position:absolute;
 	top:400px;
-	left:20%;
+	left:16%;
 	width:150px;
 	height:50px;
 	outline:none;
