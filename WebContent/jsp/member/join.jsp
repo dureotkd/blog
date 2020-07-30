@@ -212,16 +212,21 @@ label {
 		}, 'json');
 	}
 
+	document.getElementById('input').onkeyup = _.debounce(function() {
+		  document.getElementById('debounced').innerHTML = 'Debounced message!';
+		}, 500);
+	
+
 function JoinForm__checkNicknameDup(input) {
+
 		
 		var form = input.form;
-
+		
 		form.nickname.value = form.nickname.value.trim();
 
 		if (form.nickname.value.length == 0) {
 			return;
 		}
-
 		$.get('getNicknameDup', {
 			nickname : form.nickname.value
 		}, function(data) {
@@ -229,6 +234,7 @@ function JoinForm__checkNicknameDup(input) {
 
 			if (data.resultCode.substr(0, 2) == 'S-') {
 				$message.empty().append(
+						
 						'<div style="color:green;">' + data.msg + '</div>');
 				JoinForm__validNickname = data.nickname;
 			} else {

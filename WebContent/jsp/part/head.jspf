@@ -432,12 +432,12 @@ body {
 				<div class="left-item">
 					<ul class="content-box">
 						<div class="id-box">
-							<c:if test="${isLogined}"> 
-							<div class="login-nickname">
-								<a href="/blog/s/member/info"
-									style="padding: 12px; font-size: 1.1rem;">${loginedMember.nickname}님의
-									블로그</a>
-							</div>
+							<c:if test="${isLogined}">
+								<div class="login-nickname">
+									<a href="#" class="list"
+										onclick="window.open('/blog/s/member/info','나의정보','width=963, height=880'); return false">
+										<i class="fas fa-user"></i>${loginedMember.nickname}님의 블로그</a>
+								</div>
 							</c:if>
 							<c:if test="${isLogined == false}">
 							<a href="#"><div class="visit">나그네님의 블로그</div></a>

@@ -9,8 +9,6 @@ public class Letter extends Dto {
 	private String title;
 	private String body;
 	
-	
-	
 	public Letter(Map<String, Object> row) {
 		super(row);
 		
@@ -21,8 +19,6 @@ public class Letter extends Dto {
 		
 	}
 	
-
-
 	@Override
 	public String toString() {
 		return "Letter [sendNickname=" + sendNickname + ", fromNickname=" + fromNickname + ", fromId=" + fromId
@@ -34,39 +30,18 @@ public class Letter extends Dto {
 	}
 
 
-
-
-
-
-
 	public void setSendNickname(String sendNickname) {
 		this.sendNickname = sendNickname;
 	}
-
-
-
-
-
 
 
 	public String getFromNickname() {
 		return fromNickname;
 	}
 
-
-
-
-
-
-
 	public void setFromNickname(String fromNickname) {
 		this.fromNickname = fromNickname;
 	}
-
-
-
-
-
 
 
 	public int getFromId() {
@@ -74,11 +49,9 @@ public class Letter extends Dto {
 	}
 
 
-
 	public void setFromId(int fromId) {
 		this.fromId = fromId;
 	}
-
 
 
 	public String getTitle() {
@@ -86,11 +59,9 @@ public class Letter extends Dto {
 	}
 
 
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 
 	public String getBody() {
@@ -98,10 +69,8 @@ public class Letter extends Dto {
 	}
 
 
-
 	public void setBody(String body) {
 		this.body = body;
 	}
-
 
 }

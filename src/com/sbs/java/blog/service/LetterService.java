@@ -19,6 +19,10 @@ public class LetterService extends Service {
 	public  int actionSendLetter(String title, String body ,String sendNickname, String loginedNickname ) {
 		return letterDao.actionSendLetter(title,body,sendNickname,loginedNickname);
 	}
+
+	public List<Letter> getForPrintListLetters() {
+		return letterDao.getForPrintListLetters();
+	}
 	
 	
 }

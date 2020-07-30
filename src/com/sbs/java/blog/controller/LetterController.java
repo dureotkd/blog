@@ -1,10 +1,12 @@
 package com.sbs.java.blog.controller;
 
 import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sbs.java.blog.dto.Letter;
 import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.util.DBUtil;
 import com.sbs.java.blog.util.Util;
@@ -53,6 +55,9 @@ public class LetterController extends Controller {
 	}
 
 	private String actionLetterList(HttpServletRequest req, HttpServletResponse resp) {
+		List<Letter> letters = letterService.getForPrintListLetters();
+		req.setAttribute("letters", letters);
+		
 		return "letter/list.jsp";
 	}
 	
