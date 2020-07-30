@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.java.blog.controller.ArticleController;
 import com.sbs.java.blog.controller.Controller;
 import com.sbs.java.blog.controller.HomeController;
+import com.sbs.java.blog.controller.LetterController;
 import com.sbs.java.blog.controller.MemberController;
 import com.sbs.java.blog.exception.SQLErrorException;
 import com.sbs.java.blog.util.Util;
@@ -107,6 +108,8 @@ public class App {
 		case "home":
 			controller = new HomeController(dbConn, actionMethodName, req, resp , mailId , mailPw);
 			break;
+		case "letter":
+			controller = new LetterController(dbConn,actionMethodName);
 		}
 
 		// 얘도 죽고

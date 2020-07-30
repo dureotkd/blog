@@ -63,6 +63,8 @@ public class MemberController extends Controller {
 			return doActiondoLogOut(req,resp);
 		case "info":
 			return doActionInfo(req,resp);
+		case "infoEmail":
+			return actionInfoEmail(req,resp);
 		case "findId":
 			return doActionfindId(req,resp);
 		case "doFindId":
@@ -90,6 +92,23 @@ public class MemberController extends Controller {
 		}
 		return "";
 	}
+	private String actionInfoEmail(HttpServletRequest req, HttpServletResponse resp) {
+		
+		String code = req.getParameter("code");
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		int loginedMemberId = loginedMember.getId();
+		MailService ms = new MailService(mailId,mailPw);
+		
+		String email = "dureotkd123@naver.com";
+		String title = "안녕하세요 코드마운틴입니다.";
+		String msg = "<html><body><a href=" + "https://dureotkd.my.iu.gy/blog/s/member/doAuthMail?code=" + code + ">인증하기</a></body></html>";
+		String body = "회원가입 감사합니다." + msg;
+		
+		ms.sendWelcomeMail(email, title, body);
+		
+		return "html:<script> alert('인증코드 이메일이 전송되었습니다.' );   location.href = document.referrer\r\n" +"</script>";
+	}
+
 	private String actionDoModifyPrivate() {
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		String authCode = req.getParameter("authCode");
@@ -120,10 +139,6 @@ public class MemberController extends Controller {
 		return "member/modifyPrivate.jsp";
 	}
 
-	private String actionPasswordForPrivate() {
-		return "member/passwordForPrivate.jsp";
-	}
-
 	private String actionDoPasswordForPrivate() {
 		String loginPw = req.getParameter("loginPwReal");
 
@@ -139,6 +154,11 @@ public class MemberController extends Controller {
 
 		return String.format("html:<script> alert('비밀번호를 다시 입력해주세요.'); history.back(); </script>");
 	}
+	
+	private String actionPasswordForPrivate() {
+		return "member/passwordForPrivate.jsp";
+	}
+
 
 	private String actionGetEmailDup(HttpServletRequest req, HttpServletResponse resp) {
 		String email = req.getParameter("email");
@@ -180,15 +200,16 @@ public class MemberController extends Controller {
 	private String doActionDoAuthMail(HttpServletRequest req, HttpServletResponse resp) {
 		
 		String code = req.getParameter("code");
-		String loginId = req.getParameter("loginId");
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		int loginedMemberId = loginedMember.getId();
 		
-		boolean am = memberService.getMemberCode(code,loginId);
+		boolean am = memberService.getMemberCode(code,loginedMemberId);
 		
-		if ( am == false ) {
+		if ( !loginedMember.getCode().equals(code) ) {
 			return "html:<script> alert('이메일 인증이 실패하였습니다.' ); location.replace('../home/main')</script>";
 		}
 		
-		memberService.doActionUpdateCode(loginId);
+		memberService.doActionUpdateCode(loginedMemberId);
 		
 		return  "html:<script> alert('이메일 인증이 완료되었습니다.' ); location.replace('../home/main')</script>";
 	}
@@ -316,7 +337,16 @@ public class MemberController extends Controller {
 	}
 
 	private String doActionInfo(HttpServletRequest req, HttpServletResponse resp) {
-	
+		
+		
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		int loginedMemberId = loginedMember.getId();
+		
+		boolean memberCode = memberService.getMemberCode2(loginedMemberId);
+		System.out.println(memberCode);
+		if ( memberCode == false ) {
+			return "html:<script> alert('이메일 인증후 이용asdasddsa가능합니다.'); location.replace('login'); </script>";
+		}
 		return "member/info.jsp";
 	}
 
@@ -346,11 +376,7 @@ public class MemberController extends Controller {
 			return "html:<script> alert('회원정보가 일치하지 않습니다.'); location.replace('login'); </script>";
 		} 
 		
-		boolean memberCode = memberService.getMemberCode2(loginId);
 		
-		if ( memberCode == false ) {
-			return "html:<script> alert('이메일 인증후 이용가능합니다.'); location.replace('login'); </script>";
-		}
 			
 		session.setAttribute("loginedMemberId", loginedMemberId);
 
@@ -362,6 +388,29 @@ public class MemberController extends Controller {
 	}
 
 	private String doActionDojoin(HttpServletRequest req, HttpServletResponse resp) {
+		
+		StringBuffer temp =new StringBuffer();
+        Random rnd = new Random();
+        for(int i=0;i<10;i++)
+        {
+            int rIndex = rnd.nextInt(3);
+            switch (rIndex) {
+            case 0:
+                // a-z
+                temp.append((char) ((int) (rnd.nextInt(26)) + 97));
+                break;
+            case 1:
+                // A-Z
+                temp.append((char) ((int) (rnd.nextInt(26)) + 65));
+                break;
+            case 2:
+                // 0-9
+                temp.append((rnd.nextInt(10)));
+                break;
+            }
+        }
+
+		String a = temp.toString();
 		String name = req.getParameter("name");
 		String nickname = req.getParameter("nickname");
 		String loginId = req.getParameter("loginId");
@@ -376,38 +425,16 @@ public class MemberController extends Controller {
 			return "html:<script> alert(' [admin,운영자] 닉네임은 사용하실수 없습니다.'); location.replace('join'); </script>"; 
 		}
 		
-		 StringBuffer temp =new StringBuffer();
-         Random rnd = new Random();
-         for(int i=0;i<10;i++)
-         {
-             int rIndex = rnd.nextInt(3);
-             switch (rIndex) {
-             case 0:
-                 // a-z
-                 temp.append((char) ((int) (rnd.nextInt(26)) + 97));
-                 break;
-             case 1:
-                 // A-Z
-                 temp.append((char) ((int) (rnd.nextInt(26)) + 65));
-                 break;
-             case 2:
-                 // 0-9
-                 temp.append((rnd.nextInt(10)));
-                 break;
-             }
-         }
-
-		String a = temp.toString();
+		
 		String title = "안녕하세요 코드마운틴입니다.";
 		int rm = memberService.doActionDojoin(name, nickname, loginId, loginPw, email,a);
 		MailService ms = new MailService(mailId,mailPw);
 		
-		String msg = "<html><body><a href=" + "https://dureotkd.my.iu.gy/blog/s/member/doAuthMail?code=" + a + "&loginId="+loginId+">인증하기</a></body></html>";
-		String body = "회원가입 감사합니다." + msg;
+		String body = "회원가입 감사합니다.";
 		
 		ms.sendWelcomeMail(email, title, body);
 		
-		return String.format("html:<script> alert('%s님 환영합니다. 이메일인증을 꼭 해주세요'); location.replace('../home/main'); </script>", name);
+		return String.format("html:<script> alert('%s님 환영합니다. Info 에서 이메일인증을 꼭 해주세요'); location.replace('../home/main'); </script>", name);
 	}
 
 	private String doActionJoin(HttpServletRequest req, HttpServletResponse resp) {

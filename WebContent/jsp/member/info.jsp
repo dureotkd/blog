@@ -23,6 +23,12 @@ h2{
     
 <h2>회원정보</h2>
 
+<c:if test=" ${logiendMember.mailStatus == 0 }">
+<form action="infoEmail">
+<input type="submit" value="이메일 인증"/>
+<input type="hidden" value="${loginedMember.code}" name="code" />
+</form>
+</c:if>
 <div class="info-box">
 <div class="info-item">
 <p>가입날짜 : ${loginedMember.regDate}</p>    
@@ -32,6 +38,7 @@ h2{
 <p>아이디 : ${loginedMember.loginId}</p>
 <p class="pw">비밀번호 : ****</p>
 <a href="${pageContext.request.contextPath}/s/member/passwordForPrivate"">수정</a>
+<a href="${pageContext.request.contextPath}/s/letter/send"">쪽지보내기</a>
 </div>
 </div>
 

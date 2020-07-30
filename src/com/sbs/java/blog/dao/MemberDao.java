@@ -19,7 +19,8 @@ public class MemberDao {
 		SecSql secSql = new SecSql();
 
 		secSql.append("INSERT INTO member ");
-		secSql.append("SET regDate = NOW() ");
+		secSql.append("SET regDate = NOW()");
+		secSql.append(", updateDate = NOW()");
 		secSql.append(", name = ? ", name);
 		secSql.append(", nickname = ? ",nickname);
 		secSql.append(", loginId = ? ",loginId);
@@ -140,32 +141,31 @@ public class MemberDao {
 		return DBUtil.update(dbConn, secSql);
 	}
 
-	public boolean getMemberCode(String code, String loginId) {
+	public boolean getMemberCode(String code, int loginedMemberId) {
 		SecSql secSql = new SecSql();
 		secSql.append("SELECT COUNT(*) from member ");
 		secSql.append("WHERE code = ? ",code);
-		secSql.append("AND loginId = ? ",loginId);
+		secSql.append("AND id = ? ",loginedMemberId);
 		
 		return DBUtil.selectRowIntValue(dbConn, secSql) == 1;
 	}
 
-	public int doActionUpdateCode(String loginId) {
+	public int doActionUpdateCode(int loginedMemberId) {
 		SecSql secSql = new SecSql();
 		
 		secSql.append("UPDATE member");
 		secSql.append("SET mailStatus = 1");
-		secSql.append("WHERE loginId = ?", loginId);
+		secSql.append("WHERE id = ?", loginedMemberId);
 		
 		
 		return DBUtil.update(dbConn, secSql);
 	}
 
-	public boolean getMemberCode2(String loginId) {
+	public boolean getMemberCode2(int loginedMemberId) {
 		SecSql secSql = new SecSql();
 		secSql.append("SELECT COUNT(*) from member ");
-		secSql.append("WHERE loginId = ? ",loginId);
+		secSql.append("WHERE loginId = ? ",loginedMemberId);
 		secSql.append("AND mailStatus = 0");
-		
 		return DBUtil.selectRowIntValue(dbConn, secSql) == 0;
 	}
 

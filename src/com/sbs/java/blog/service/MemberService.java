@@ -7,11 +7,15 @@ import com.sbs.java.blog.dao.MemberDao;
 import com.sbs.java.blog.dto.Member;
 
 public class MemberService extends Service {
+	//  attrService 에다가 아무값도 안넣어줌
 	private AttrService attrService;
 	private MemberDao memberDao;
-
+	
+	
 	public MemberService(Connection dbConn) {
 		memberDao = new MemberDao(dbConn);
+		attrService = new AttrService(dbConn);
+		System.out.println(attrService);
 	}
 
 	public int doActionDojoin(String name, String nickname, String loginId, String loginPw, String email, String a) {
@@ -58,16 +62,23 @@ public class MemberService extends Service {
 		return memberDao.getRightMember(name, loginId, toEmail);
 	}
 
-	public boolean getMemberCode(String code, String loginId) {
-		return memberDao.getMemberCode(code, loginId);
+	public boolean getMemberCode(String code, int loginedMemberId) {
+		return memberDao.getMemberCode(code, loginedMemberId);
 	}
 
-	public int doActionUpdateCode(String loginId) {
-		return memberDao.doActionUpdateCode(loginId);
+	public int doActionUpdateCode(int loginedMemberId) {
+		return memberDao.doActionUpdateCode(loginedMemberId);
 	}
 
-	public boolean getMemberCode2(String loginId) {
-		return memberDao.getMemberCode2(loginId);
+	public boolean getMemberCode2(int loginedMemberId) {
+		return memberDao.getMemberCode2(loginedMemberId);
+	}
+	
+	public String genModifyPrivateAuthCode(int actorId) {
+		System.out.println(attrService);
+		String authCode = UUID.randomUUID().toString();
+		attrService.setValue("member__" + actorId + "__extra__modifyPrivateAuthCode", authCode);
+		return authCode;
 	}
 
 	public boolean isValidModifyPrivateAuthCode(int actorId, String authCode) {
@@ -79,13 +90,5 @@ public class MemberService extends Service {
 	public void modify(int actorId, String loginPw) {
 		memberDao.modify(actorId, loginPw);
 	}
-
-	public String genModifyPrivateAuthCode(int actorId) {
-		String authCode = UUID.randomUUID().toString();
-		attrService.setValue("member__" + actorId + "__extra__modifyPrivateAuthCode", authCode);
-		
-		return authCode;
-	}
-
 
 }

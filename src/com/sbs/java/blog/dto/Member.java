@@ -10,6 +10,7 @@ public class Member extends Dto {
 	private String name;
 	private String nickname;
 	private String email;
+	private int mailStatus;
 	
 	
 	
@@ -20,15 +21,27 @@ public class Member extends Dto {
 		this.loginPw = (String) row.get("loginPw");
 		this.name = (String) row.get("name");
 		this.nickname = (String) row.get("nickname");
+		this.mailStatus = (int) row.get("mailStatus");
 	}
 	
+	
+	
+
+
 	@Override
 	public String toString() {
-		return "Member [loginId=" + loginId + ", loginPw=" + loginPw + ", name=" + name
-				+ ", nickname=" + nickname + ", email=" + email + ", getId()=" + getId() + ", getRegDate()="
-				+ getRegDate() + ", getExtra()=" + getExtra() + "]";
+		return "Member [loginId=" + loginId + ", loginPw=" + loginPw + ", name=" + name + ", nickname=" + nickname
+				+ ", email=" + email + ", mailStatus=" + mailStatus + "]";
 	}
 
+
+	public int getMailStatus() {
+		return mailStatus;
+	}
+
+	public void setMailStatus(int mailStatus) {
+		this.mailStatus = mailStatus;
+	}
 
 	public String getLoginId() {
 		return loginId;

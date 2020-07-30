@@ -11,7 +11,7 @@ public class Dto {
 	private String regDate;
 	private String updateDate;
 	private Map<String, Object> extra;
-
+	private String code;
 	public String getRegDateFormat1() {
 
 		String startTime = this.getRegDate();
@@ -31,7 +31,9 @@ public class Dto {
 		this.id = (int) row.get("id");
 		this.regDate = (String) row.get("regDate");
 		this.extra = new HashMap<>();
+		this.code = (String) row.get("code");
 		this.updateDate = (String) row.get("updateDate");
+		
 		for (String key : row.keySet()) {
 			if (key.startsWith("extra__")) {
 				Object value = row.get(key);
@@ -39,6 +41,15 @@ public class Dto {
 				this.extra.put(extraKey, value);
 			}
 		}
+	}
+	
+	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public int getId() {
@@ -77,7 +88,10 @@ public class Dto {
 
 	@Override
 	public String toString() {
-		return "Dto [id=" + id + ", regDate=" + regDate + ", extra=" + extra + "]";
+		return "Dto [id=" + id + ", regDate=" + regDate + ", updateDate=" + updateDate + ", extra=" + extra + ", code="
+				+ code + "]";
 	}
+
+	
 
 }
