@@ -13,7 +13,6 @@ public class Member extends Dto {
 	private int mailStatus;
 	
 	
-	
 	public Member(Map<String, Object> row) {
 		super(row);
 		this.email = (String) row.get("email");
@@ -24,15 +23,6 @@ public class Member extends Dto {
 		this.mailStatus = (int) row.get("mailStatus");
 	}
 	
-	
-	
-
-
-	@Override
-	public String toString() {
-		return "Member [loginId=" + loginId + ", loginPw=" + loginPw + ", name=" + name + ", nickname=" + nickname
-				+ ", email=" + email + ", mailStatus=" + mailStatus + "]";
-	}
 
 
 	public int getMailStatus() {
@@ -73,4 +63,13 @@ public class Member extends Dto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Member [loginId=" + loginId + ", loginPw=" + loginPw + ", name=" + name + ", nickname=" + nickname
+				+ ", email=" + email + ", mailStatus=" + mailStatus + "]";
+	}
+	
 }

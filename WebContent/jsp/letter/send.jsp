@@ -21,7 +21,6 @@ ul,li{
 }
 .total-wrap {
 	display:flex;
-	width:100%
 }
 	
 .send-wrap {
@@ -29,18 +28,19 @@ ul,li{
 	flex-direction:column;
 	margin:0 auto;
 	width:50%;
-	height:500px;;
+	min-width:400px;
 	margin-bottom:100px;
 	margin-top:30px;
 }
 
 h1 {
 	font-size:2rem;
+	margin-top:100px;
 }
 
 .left-wrap {
 	height:100vh;
-	width:30%;
+	width:300px;
 	background:aliceblue;
 }
 .send-con {

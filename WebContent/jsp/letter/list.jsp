@@ -21,7 +21,6 @@ ul,li{
 }
 .total-wrap {
 	display:flex;
-	width:100%
 }
 	
 .send-wrap {
@@ -41,7 +40,7 @@ h1 {
 
 .left-wrap {
 	height:100vh;
-	width:30%;
+	width:300px;
 	background:aliceblue;
 }
 .send-con {

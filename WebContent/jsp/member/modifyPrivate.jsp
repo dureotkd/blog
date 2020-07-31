@@ -24,7 +24,6 @@ ul,li{
 }
 .total-wrap {
 	display:flex;
-	width:100%
 }
 	
 .send-wrap {
@@ -43,7 +42,7 @@ h1 {
 
 .left-wrap {
 	height:100vh;
-	width:30%;
+	width:300px;
 	background:aliceblue;
 }
 .send-con {
@@ -124,6 +123,32 @@ img {
 	font-size:1.2rem;
 	padding:15px;
 }
+input {
+	margin-top:20px;
+	border:1px solid #e1e1e1;
+	text-indent:10px;
+	height:60px;
+}
+.form1 {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	width:70%;
+}
+.form-row {
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	width:80%;
+	height:80%;
+	max-width:600px;
+	min-width:600px;
+}
+
+.submit {
+	background:aliceblue;
+}
+
 </style>
 
 
@@ -174,33 +199,16 @@ img {
 	</a>
 </ul>
 
-<div class="modify-private-form-box con">
-	<form action="doModifyPrivate" method="POST" class="form1"
-		onsubmit="ModifyPrivateForm__submit(this); return false;">
+	<form action="doModifyPrivate" method="POST" class="form1" onsubmit="ModifyPrivateForm__submit(this); return false;">
 		<input type="hidden" name="authCode" value="${param.authCode}" />
-		<input type="hidden"
-			name="loginPwReal" />
 		<div class="form-row">
-			<div class="label">새 로그인 비번</div>
-			<div class="input">
-				<input name="loginPw" type="password" placeholder="새 로그인 비번을 입력해주세요." />
-			</div>
-		</div>
-		<div class="form-row">
-			<div class="label">새 로그인 비번 확인</div>
-			<div class="input">
-				<input name="loginPwConfirm" type="password" placeholder="새 로그인 비번을 입력해주세요." />
-			</div>
-		</div>
-		<div class="form-row">
-			<div class="label">전송</div>
-			<div class="input">
-				<input type="submit" value="전송" /> <a href="../home/main">취소</a>
-			</div>
+		<label for="">새 비밀번호</label>
+				<input name="loginPw" type="password" placeholder="비밀번호" />
+		<label for="">새 비밀번호 확인</label>
+				<input name="loginPwConfirm" type="password" placeholder="확인" />
+				<input type="submit" value="전송" class="submit"/>
 		</div>
 	</form>
-</div>
-
 </nav>
 
 	

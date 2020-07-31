@@ -52,43 +52,43 @@ public class MemberController extends Controller {
 		// 스위치문 case 주고
 		switch (actionMethodName) {
 		case "join":
-			return doActionJoin(req, resp);
+			return doActionJoin(req, resp); // 회원가입
 		case "doJoin":
-			return doActionDojoin(req, resp);
+			return doActionDojoin(req, resp); // 회원가입 실행
 		case "doLogin":
-			return doActionLogin(req, resp);
+			return doActionLogin(req, resp); // 로그인 실행
 		case "login":
-			return doActiondoLogin(req, resp);
+			return doActiondoLogin(req, resp); // 로그인
 		case "logOut":
-			return doActiondoLogOut(req,resp);
+			return doActiondoLogOut(req,resp); // 로그아웃 실행
 		case "info":
-			return doActionInfo(req,resp);
+			return doActionInfo(req,resp); // 회원정보
 		case "infoEmail":
-			return actionInfoEmail(req,resp);
+			return actionInfoEmail(req,resp); // 이메일 인증보내기
 		case "findId":
-			return doActionfindId(req,resp);
+			return doActionfindId(req,resp); // 아이디 찾기
 		case "doFindId":
-			return doActiondoFindId(req,resp);
+			return doActiondoFindId(req,resp); // 아이디 찾기 실행
 		case "findPw":
-			return doActionfindPw(req,resp);
+			return doActionfindPw(req,resp); // 비밀번호 찾기
 		case "doFindPw":
-			return doActiondoFindPw(req,resp);
+			return doActiondoFindPw(req,resp); // 비밀번호 찾기 실행
 		case "doAuthMail":
-			return doActionDoAuthMail(req,resp);
+			return doActionDoAuthMail(req,resp); // 이메일 인증 확인 
 		case "getLoginIdDup":
-			return actionGetLoginIdDup(req,resp);
+			return actionGetLoginIdDup(req,resp); // 아이디 중복 확인
 		case "getNicknameDup":
-			return actionGetNicknameDup(req,resp);
+			return actionGetNicknameDup(req,resp); // 닉네임 중복 확인
 		case "getEmailDup":
-			return actionGetEmailDup(req,resp);
+			return actionGetEmailDup(req,resp); // 이메일 중복 확인
 		case "passwordForPrivate":
-			return actionPasswordForPrivate();
+			return actionPasswordForPrivate(); // 비밀번호 수정전 비번확인
 		case "doPasswordForPrivate":
-			return actionDoPasswordForPrivate();
+			return actionDoPasswordForPrivate(); //  비밀번호 수정전 비번확인 실행
 		case "modifyPrivate":
-			return actionModifyPrivate();
+			return actionModifyPrivate(); // 비밀번호 수정
 		case "doModifyPrivate":
-			return actionDoModifyPrivate();
+			return actionDoModifyPrivate(); // 비밀번호 수정 실행
 		}
 		return "";
 	}
@@ -99,7 +99,7 @@ public class MemberController extends Controller {
 		int loginedMemberId = loginedMember.getId();
 		MailService ms = new MailService(mailId,mailPw);
 		
-		String email = "dureotkd123@naver.com";
+		String email = loginedMember.getEmail();
 		String title = "안녕하세요 코드마운틴입니다.";
 		String msg = "<html><body><a href=" + "https://dureotkd.my.iu.gy/blog/s/member/doAuthMail?code=" + code + ">인증하기</a></body></html>";
 		String body = "회원가입 감사합니다." + msg;
@@ -117,12 +117,23 @@ public class MemberController extends Controller {
 			return String.format(
 					"html:<script> alert('비밀번호를 다시 체크해주세요.'); location.replace('../member/passwordForPrivate'); </script>");
 		}
-
-		String loginPw = req.getParameter("loginPwReal");
-
-		memberService.modify(loginedMemberId, loginPw);
+		String loginPw = req.getParameter("loginPw");
+		
+		// SHA-256 암호화 작업
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 md.update(loginPw.getBytes());
+		 String loginPwEncryption = String.format("%064x", new BigInteger(1, md.digest()));
+		//
+		 
+		memberService.modify(loginedMemberId,loginPwEncryption);
 		Member loginedMember = (Member) req.getAttribute("loginedMember");
-		loginedMember.setLoginPw(loginPw); // 크게 의미는 없지만, 의미론적인 면에서 해야 하는
+		loginedMember.setLoginPw(loginPwEncryption); // 크게 의미는 없지만, 의미론적인 면에서 해야 하는
 
 		return String.format("html:<script> alert('개인정보가 수정되었습니다.'); location.replace('../home/main'); </script>");
 	}
@@ -212,30 +223,6 @@ public class MemberController extends Controller {
 		memberService.doActionUpdateCode(loginedMemberId);
 		
 		return  "html:<script> alert('이메일 인증이 완료되었습니다.' ); location.replace('../home/main')</script>";
-	}
-
-
-	private String doActionModify(HttpServletRequest req, HttpServletResponse resp) {
-		
-		int id = Util.getInt(req, "id");
-		String loginPw = req.getParameter("loginPw");
-		
-		
-		// SHA-256 암호화 작업
-		MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		 md.update(loginPw.getBytes());
-		 String hex = String.format("%064x", new BigInteger(1, md.digest()));
-		//
-		
-		 int memberModify = MemberDao.doActionModify(hex,id);
-		
-		return"html:<script> alert('수정이 완료되었습니다.' );   location.href = document.referrer\r\n" +"</script>";
 	}
 
 	private String doActiondoFindPw(HttpServletRequest req, HttpServletResponse resp) {
@@ -342,11 +329,12 @@ public class MemberController extends Controller {
 		Member loginedMember = (Member) req.getAttribute("loginedMember");
 		int loginedMemberId = loginedMember.getId();
 		
-		boolean memberCode = memberService.getMemberCode2(loginedMemberId);
-		System.out.println(memberCode);
-		if ( memberCode == false ) {
-			return "html:<script> alert('이메일 인증후 이용asdasddsa가능합니다.'); location.replace('login'); </script>";
-		}
+//		boolean memberCode = memberService.getMemberCode2(loginedMemberId);
+//		System.out.println(memberCode);
+//		if ( memberCode == false ) {
+//			return "html:<script> alert('이메일 인증후 이용asdasddsa가능합니다.'); location.replace('login'); </script>";
+//		}
+		
 		return "member/info.jsp";
 	}
 
@@ -371,15 +359,18 @@ public class MemberController extends Controller {
 		
 		int loginedMemberId = memberService.getMemberIdByLoginInfo(loginId, loginPw);
 		// 여기서 
+		
+		
 
 		if (loginedMemberId <= 0 ) {
 			return "html:<script> alert('회원정보가 일치하지 않습니다.'); location.replace('login'); </script>";
 		} 
 		
-		
-			
 		session.setAttribute("loginedMemberId", loginedMemberId);
-
+		
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		
+		
 		return "html:<script> alert('로그인 되었습니다.'); location.replace('../home/main'); </script>";
 	}
 

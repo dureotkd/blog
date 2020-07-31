@@ -24,7 +24,6 @@ ul,li{
 }
 .total-wrap {
 	display:flex;
-	width:100%
 }
 	
 .send-wrap {
@@ -43,7 +42,7 @@ h1 {
 
 .left-wrap {
 	height:100vh;
-	width:30%;
+	width:300px;
 	background:aliceblue;
 }
 .send-con {
@@ -67,9 +66,9 @@ label {
 	padding-top:10px;
 }
 .submit {
-	background:pink;
 	font-size:15px;
 	cursor:pointer;
+	background:aliceblue;
 }
 
 .spam {
@@ -124,6 +123,37 @@ img {
 	font-size:1.2rem;
 	padding:15px;
 }
+
+.password-form {
+	display:flex;
+	width:70%;
+}
+.form-row  {
+	display:flex;
+	flex-direction:column;
+	width:80%;
+	height:80%;
+	margin:0 auto;
+	justify-content:center;
+	max-width:600px;
+	min-width:600px;
+}
+
+input {
+	margin-top:20px;
+	border:1px solid #e1e1e1;
+	text-indent:10px;
+	height:60px;
+}
+
+.label-sub {
+	color:#9e9e9e;
+	font-size:13px;
+	margin-top:5px;
+}
+
+
+
 </style>
 
 
@@ -173,25 +203,17 @@ img {
 	</li>
 	</a>
 </ul>
-<div class="password-form-box con">
-	<form action="doPasswordForPrivate" method="POST" class="password-form form1"
+	<form action="doPasswordForPrivate" method="POST" class="password-form"
 		onsubmit="submitLoginForm(this); return false;">
-		<input type="hidden"
-			name="loginPwReal" value=${loginedMember.id }  />
+		<input type="hidden" name="loginPwReal" value=${loginedMember.id }  />
 		<div class="form-row">
-			<div class="label">로그인 비번</div>
-			<div class="password">
-				<input name="loginPw" type="text" placeholder="로그인 비번을 입력해주세요." />
-			</div>
+			<label for="">비밀번호</label>
+			<span class="label-sub">회원님의 개인정보를 안전하게 지키기 위해 개인정보 수정시 비밀번호가 필요합니다.</span>
+			<input name="loginPw" type="password" placeholder="****" />
+			<input type="submit" value="확인" class="submit"/>
 		</div>
-		<div class="form-row">
-			<div class="label">확인</div>
-			<div class="input">
-				<input type="submit" value="확인" /> <a href="../home/main">취소</a>
-			</div>
-		</div>
+				
 	</form>
-</div>
 </nav>
 
 	

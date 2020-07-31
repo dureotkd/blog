@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.19/lodash.min.js"></script>
 <link rel="stylesheet" href="/blog/resource/css/common.css" />
 <link rel="stylesheet" href="/blog/resource/css/home/main.css" />
 <style>
@@ -105,7 +106,7 @@ label {
 </style>
 
 <script>
-	var joinFormSubmitted = false;
+	var joinFormSubmitted = false;	
 
 	function submitJoinForm(form) {
 		if (joinFormSubmitted) {
@@ -156,6 +157,8 @@ label {
 		form.loginPwConfirm.value= '';
 		form.submit();
 	}
+	
+	
 
 	function JoinForm__checkLoginIdDup(input) {
 		var form = input.form;
@@ -182,18 +185,16 @@ label {
 			}
 		}, 'json');
 	}
-
-
-
 	function JoinForm__checkEmailDup(input) {
 		
 		var form = input.form;
-
 		form.email.value = form.email.value.trim();
 
 		if (form.email.value.length == 0) {
 			return;
 		}
+
+		
 
 		$.get('getEmailDup', {
 			email : form.email.value
@@ -211,15 +212,8 @@ label {
 			}
 		}, 'json');
 	}
-
-	document.getElementById('input').onkeyup = _.debounce(function() {
-		  document.getElementById('debounced').innerHTML = 'Debounced message!';
-		}, 500);
-	
-
 function JoinForm__checkNicknameDup(input) {
 
-		
 		var form = input.form;
 		
 		form.nickname.value = form.nickname.value.trim();
@@ -234,7 +228,6 @@ function JoinForm__checkNicknameDup(input) {
 
 			if (data.resultCode.substr(0, 2) == 'S-') {
 				$message.empty().append(
-						
 						'<div style="color:green;">' + data.msg + '</div>');
 				JoinForm__validNickname = data.nickname;
 			} else {
@@ -244,6 +237,9 @@ function JoinForm__checkNicknameDup(input) {
 			}
 		}, 'json');
 	}
+	var JoinForm__checkLoginIdDup__debounce = _.debounce(JoinForm__checkLoginIdDup, 1000);
+	var JoinForm__checkNicknameDup__debounce = _.debounce(JoinForm__checkNicknameDup, 1000);
+	var JoinForm__checkEmailDup__debounce = _.debounce(JoinForm__checkEmailDup, 1000);
 </script>
 
 <nav class="join-form-con ">
@@ -258,11 +254,11 @@ function JoinForm__checkNicknameDup(input) {
 	 <input type="hidden" name="loginPwReal" />
 		<div class="join-box">
 			<input type="text" name="name" class="join-name" placeholder="User name" /> 
-			<input onkeyup="JoinForm__checkNicknameDup(this);" type="text" name="nickname" class="join-nickname" placeholder="User nickname" />
+			<input onkeyup="JoinForm__checkNicknameDup__debounce(this);" type="text" name="nickname" class="join-nickname" placeholder="User nickname" />
 			<div class="message-msg"></div>
-			<input onkeyup="JoinForm__checkEmailDup(this);" type="email" name="email" class="join-email" placeholder="User Email"/>
+			<input onkeyup="JoinForm__checkEmailDup__debounce(this);" type="email" name="email" class="join-email" placeholder="User Email"/>
 			<div class="message-msg"></div>
-			<input onkeyup="JoinForm__checkLoginIdDup(this);"  type="text" name="loginId" class="join-id" placeholder="User Id" />
+			<input onkeyup="JoinForm__checkLoginIdDup__debounce(this);"  type="text" name="loginId" class="join-id" placeholder="User Id" />
 			<div class="message-msg"></div>
 			<input type="password" name="loginPw" class="join-pw" placeholder="Password" /> 
 			<input type="password" name="loginPwConfirm" class="join-Pwconfirm" placeholder="Password 확인" />

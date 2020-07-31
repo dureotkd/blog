@@ -87,8 +87,8 @@ public class MemberService extends Service {
 		return authCodeOnDB.equals(authCode);
 	}
 
-	public void modify(int actorId, String loginPw) {
-		memberDao.modify(actorId, loginPw);
+	public void modify(int actorId, String encryption) {
+		memberDao.modify(actorId, encryption);
 	}
 
 }

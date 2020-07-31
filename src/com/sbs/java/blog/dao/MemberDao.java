@@ -169,10 +169,10 @@ public class MemberDao {
 		return DBUtil.selectRowIntValue(dbConn, secSql) == 0;
 	}
 
-	public void modify(int actorId, String loginPw) {
+	public void modify(int actorId, String encryption) {
 		SecSql sql = SecSql.from("UPDATE member");
 		sql.append("SET updateDate = NOW()");
-		sql.append(", loginPw = ?", loginPw);
+		sql.append(", loginPw = ?", encryption);
 		sql.append("WHERE id = ?", actorId);
 		DBUtil.update(dbConn, sql);
 	}
