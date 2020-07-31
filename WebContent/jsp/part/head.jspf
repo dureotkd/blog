@@ -369,7 +369,14 @@ body {
 .logo {
 	margin-right:2%;
 }
+.needChange {
+	color:#999;
+	font-size:15px;
+}
 
+.info-data {
+	font-size:1.3rem;
+}
 
 
 
@@ -436,22 +443,27 @@ body {
 								<div class="login-nickname">
 									<a href="#" class="list"
 										onclick="window.open('/blog/s/member/info','나의정보','width=963, height=880'); return false">
-										<i class="fas fa-user"></i>${loginedMember.nickname}님의 블로그</a>
+										<p class="info-data"><i class="fas fa-user"></i> : ${loginedMember.nickname}</p>
+									</a>
+									<c:if test="${loginedMember.extra.isNeedToChangePasswordForTemp}">
+										<p class="needChange">현재 임시 비밀번호를 사용중입니다.<br>빠른 시일내에 변경해주세요.</p>
+									</c:if>
+
 								</div>
 							</c:if>
 							<c:if test="${isLogined == false}">
-							<a href="#"><div class="visit">나그네님의 블로그</div></a>
+								<a href="#"><div class="visit">나그네님의 블로그</div></a>
 							</c:if>
 							<c:if test="${isLogined == false}">
-							<div class="login-item">
-								<a href="${pageContext.request.contextPath}/s/member/login">로그인</a>
-							</div>
+								<div class="login-item">
+									<a href="${pageContext.request.contextPath}/s/member/login">로그인</a>
+								</div>
 						</div>
 						</c:if>
 						<c:if test="${isLogined}">
-						<div class="login-item">
-							<a href="${pageContext.request.contextPath}/s/member/logOut">로그아웃</a>
-						</div>
+							<div class="login-item">
+								<a href="${pageContext.request.contextPath}/s/member/logOut">로그아웃</a>
+							</div>
 				</div>
 				</c:if>
 				<a class="contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=">전체 (${cateArticle})</a>

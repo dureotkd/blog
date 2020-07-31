@@ -253,7 +253,7 @@ function JoinForm__checkNicknameDup(input) {
 	<form action="doJoin" class="join-form" method="post" onsubmit="submitJoinForm(this); return false;">
 	 <input type="hidden" name="loginPwReal" />
 		<div class="join-box">
-			<input type="text" name="name" class="join-name" placeholder="User name" /> 
+			<input type="text" name="name" class="join-name" placeholder="User name" autofocus /> 
 			<input onkeyup="JoinForm__checkNicknameDup__debounce(this);" type="text" name="nickname" class="join-nickname" placeholder="User nickname" />
 			<div class="message-msg"></div>
 			<input onkeyup="JoinForm__checkEmailDup__debounce(this);" type="email" name="email" class="join-email" placeholder="User Email"/>

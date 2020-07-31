@@ -539,7 +539,7 @@ img {vertical-align: middle;}
 /* Caption text */
 .text {
   color: black;
-  font-size: 3rem;
+  font-size: 2rem;
   position: absolute;
   top:140px;
   left:16%;
@@ -561,6 +561,7 @@ img {vertical-align: middle;}
 	height:125px;
 	font-size:19px;
 	line-height:3;
+	color:#666;
 }
 
 

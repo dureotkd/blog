@@ -48,7 +48,7 @@
 	<div class="m-write-con ">
 		<input type="text" maxlength="50" id="subject" class="form-control"
 			placeholder="제목을 입력하세요" style="height: 35px;"
-			name="title" value="">
+			name="title" value="" autofocus>
 		<input type="hidden" name="body">
 		<div id="editor1"></div>
 		

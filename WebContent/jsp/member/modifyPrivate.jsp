@@ -203,7 +203,7 @@ input {
 		<input type="hidden" name="authCode" value="${param.authCode}" />
 		<div class="form-row">
 		<label for="">새 비밀번호</label>
-				<input name="loginPw" type="password" placeholder="비밀번호" />
+				<input name="loginPw" type="password" placeholder="비밀번호" autofocus />
 		<label for="">새 비밀번호 확인</label>
 				<input name="loginPwConfirm" type="password" placeholder="확인" />
 				<input type="submit" value="전송" class="submit"/>

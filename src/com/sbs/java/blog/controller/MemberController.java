@@ -227,7 +227,6 @@ public class MemberController extends Controller {
 
 	private String doActiondoFindPw(HttpServletRequest req, HttpServletResponse resp) {
 		
-		
 		 StringBuffer temp =new StringBuffer();
          Random rnd = new Random();
          for(int i=0;i<10;i++)
@@ -253,7 +252,6 @@ public class MemberController extends Controller {
 		String loginId = req.getParameter("loginId");
 		String toEmail =req.getParameter("toEmail"); // 콤마(,)로 여러개 나열
 		
-		// 문제점 -> 3개중 하나로 (우연히 다른회원정보를 입력해서 ) 다르면 경고창이 떠야하는데 null이 뜬다. 
 		Member memberSearch = memberService.getRightMember(name,loginId,toEmail);
 		
 		if ( memberSearch == null ) {
@@ -271,12 +269,14 @@ public class MemberController extends Controller {
 		 md.update(a.getBytes());
 		 String hex = String.format("%064x", new BigInteger(1, md.digest()));
 		 
-		 	Member memberPw = memberService.getMemberPw(name,loginId,toEmail);
-		 	
+		 	Member member = memberService.getMemberPw(name,loginId,toEmail);
 		 	int memberPwUpdate = memberService.doActionMemberPwUpdate(hex,toEmail);
 		   
 		 	String title = "안녕하세요 코드마운틴입니다.";
 		 	MailService findPw = new MailService(mailId,mailPw);
+		 	
+		 	memberService.setValue(member);
+		 	// 임시비밀번호 업데이트시 useTempPassword value 값을 1로 해서  구분하기.
 		 	
 		 	findPw.sendFindPw(toEmail, title, a);
 		 	
@@ -311,10 +311,6 @@ public class MemberController extends Controller {
 	    MailService findIdMail = new MailService(mailId,mailPw);
 		
 	    findIdMail.sendFindId(toEmail, title, body);
-	    
-	    
-	    
-
 	    
 		return "html:<script> alert('귀하에 아이디가 담긴 이메일이 전송되었습니다.' );   location.href = document.referrer\r\n" +"</script>";
 	}
@@ -358,18 +354,22 @@ public class MemberController extends Controller {
 		}
 		
 		int loginedMemberId = memberService.getMemberIdByLoginInfo(loginId, loginPw);
-		// 여기서 
+	
 		
-		
-
 		if (loginedMemberId <= 0 ) {
 			return "html:<script> alert('회원정보가 일치하지 않습니다.'); location.replace('login'); </script>";
 		} 
 		
 		session.setAttribute("loginedMemberId", loginedMemberId);
 		
-		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		//  logiendMemberId  value 값이 .equals 1이면 true ->  임시비밀번호 사용중 
+		boolean isNeedToChangePasswordForTemp = memberService.isNeedToChangeaPasswordForTemp(loginedMemberId);
 		
+		if (isNeedToChangePasswordForTemp) {
+			return "html:<script> alert('로그인 되었습니다 \\n[현재 임시패스워드를 사용중입니다 비밀번호를 변경해주세요.]'); location.replace('../home/main'); </script>";
+		}
+		
+		// Member loginedMember = (Member) req.getAttribute("loginedMember");
 		
 		return "html:<script> alert('로그인 되었습니다.'); location.replace('../home/main'); </script>";
 	}

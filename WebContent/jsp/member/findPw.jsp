@@ -100,7 +100,7 @@
         <form action="doFindPw" method="post" class="find-wrap">
         <div class="find-box">
         		<p class="head-text">회원가입한 정보를 입력해주세요.</p>
-            	<input type="text" name="name" class="input" placeholder="User name"/>
+            	<input type="text" name="name" class="input" placeholder="User name" autofocus/>
             	<input type="text" name="loginId"class="input"  placeholder="User ID" />
                 <input type="text" name="toEmail"class="input"  placeholder="User Email" />
                 <input type="submit" value="전송" class="submit"  placeholder=""/>

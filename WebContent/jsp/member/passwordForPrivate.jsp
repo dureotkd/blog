@@ -209,7 +209,7 @@ input {
 		<div class="form-row">
 			<label for="">비밀번호</label>
 			<span class="label-sub">회원님의 개인정보를 안전하게 지키기 위해 개인정보 수정시 비밀번호가 필요합니다.</span>
-			<input name="loginPw" type="password" placeholder="****" />
+			<input name="loginPw" type="password" autofocus/>
 			<input type="submit" value="확인" class="submit"/>
 		</div>
 				

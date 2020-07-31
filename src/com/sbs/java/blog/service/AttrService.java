@@ -52,4 +52,17 @@ public class AttrService extends Service {
 		
 		return attrDao.remove(relTypeCode, relId, typeCode, type2Code);
 	}
+
+
+	public int setValue(String relTypeCode, int relId, String typeCode, String type2Code,String value) {
+		return attrDao.setValue(relTypeCode, relId, typeCode, type2Code, value);
+	}
+
+	public Object getValue(String relTypeCode, int relId, String typeCode, String type2Code) {
+		return attrDao.getValue(relTypeCode, relId, typeCode, type2Code);
+	}
+
+	public int remove(String relTypeCode, int relId, String typeCode, String type2Code) {
+		return attrDao.remove(relTypeCode, relId, typeCode, type2Code);
+	}
 }

@@ -147,7 +147,7 @@ label {
 		<input type="hidden" name="loginPwReal" />
 		<div class="login-box">
 			<label for="user-id">계정 아이디</label>
-			<input type="text" name="loginId" class="login-Id" placeholder="admin" /> 
+			<input type="text"  name="loginId" class="login-Id" placeholder="admin" autofocus/> 
 			<label for="user-pw" class="user-pw">비밀번호</label>
 			<input type="password" name="loginPw" class="login-Pw" placeholder="*****" />
 			<div class="box-sub">

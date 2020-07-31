@@ -156,7 +156,7 @@ img {
 <span class="spam">홍보, 도배, 비방 등의 쪽지는 동의 없이 임의 삭제될 수 있습니다.</span>
 <form action="doSend" class="send-wrap">
 <label for="#">받는 사람</label>
-<input type="text" name="sendNickname" placeholder="상대방 닉네임을 입력해주세요." class="sendNickname"/>
+<input type="text" name="sendNickname" placeholder="상대방 닉네임을 입력해주세요." class="sendNickname" autofocus/>
 <input type="hidden" name="fromNickname" value=" ${loginedMember.nickname}"  />
 <label for="#">제목</label>
 <input type="text" name="title"/>

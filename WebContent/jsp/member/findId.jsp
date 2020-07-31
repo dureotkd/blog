@@ -110,7 +110,7 @@
         <form action="doFindId" method="post" class="find-wrap" onsubmit="submitFindIdForm(this); return false;">   
         <div class="find-box">
             	<p class="head-text">회원가입한 이메일을 입력해주세요.</p>
-            	<input type="email" name="toEmail" class="input" placeholder="admin@gmail.com" />
+            	<input type="email" name="toEmail" class="input" placeholder="admin@gmail.com"  autofocus/>
             	<a href="/blog/s/member/findPw" class="asd">비밀번호를 잊으셨나요?</a>
                 <input type="submit" value="전송" class="submit"/>
            </div>

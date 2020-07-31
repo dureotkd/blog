@@ -39,7 +39,14 @@ public class MemberService extends Service {
 	}
 
 	public Member getMemberById(int id) {
-		return memberDao.getMemberById(id);
+		Member member = memberDao.getMemberById(id);
+		boolean isNeedToChangePasswordForTemp = isNeedToChangePasswordForTemp(member.getId());
+		member.getExtra().put("isNeedToChangePasswordForTemp", isNeedToChangePasswordForTemp);
+		return member;
+	}
+
+	private boolean isNeedToChangePasswordForTemp(int id) {
+		return attrService.getValue("member", id, "extra", "useTempPassword").equals("1");
 	}
 
 	public Member getMemberId(String toEmail) {
@@ -75,7 +82,6 @@ public class MemberService extends Service {
 	}
 	
 	public String genModifyPrivateAuthCode(int actorId) {
-		System.out.println(attrService);
 		String authCode = UUID.randomUUID().toString();
 		attrService.setValue("member__" + actorId + "__extra__modifyPrivateAuthCode", authCode);
 		return authCode;
@@ -89,6 +95,17 @@ public class MemberService extends Service {
 
 	public void modify(int actorId, String encryption) {
 		memberDao.modify(actorId, encryption);
+		
+		
+		attrService.remove("member", actorId, "extra", "useTempPassword");
+	}
+
+	public void setValue(Member member) {
+		attrService.setValue("member",member.getId(),"extra","useTempPassword","1");
+	}
+
+	public boolean isNeedToChangeaPasswordForTemp(int actorId) {
+		return attrService.getValue("member", actorId, "extra", "useTempPassword").equals("1");
 	}
 
 }
