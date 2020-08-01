@@ -154,6 +154,12 @@ img {
 	<li class="left-item"><i class="fas fa-exchange-alt"></i><span>정보수정</span>
 	</li>
 	</a>
+	
+	<a href="/blog/s/letter/memberList" class="list">
+	<li class="left-item"><i class="fas fa-users"></i><span>접속유저</span>
+	</li>
+	</a>
+	
 </ul>
 <div class="send-con">
 <h1>CodeMountain 쪽지</h1>

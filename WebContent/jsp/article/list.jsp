@@ -38,6 +38,7 @@ h2 {
 .top-bar {
 	display:flex;
 	justify-content:space-between;
+	background:#f5f5f5;
 }
 
 .col {
@@ -125,8 +126,8 @@ table td,th {
 }
 
     .head3{
-        background-image: url(https://images.pexels.com/photos/3182810/pexels-photo-3182810.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
-        height:400px;
+        background-image: url(https://www.samsonitemall.co.kr/on/demandware.static/-/Sites-KR-Samsonite-Master/default/dw0b3840a7/images/swatch/chip_COL_0651_TrueBlack.jpg);
+        height:350px;
         background-size:cover;
     }
 
@@ -162,9 +163,10 @@ table td,th {
         font-weight:bold;
        display:flex;
         color: white;
-       justify-content:flex-end;
-        width:52%;
+       justify-content:center;
+        width:100%;
         align-items: center;
+        line-height:65px;
     }
 .left-btn {
 	position:absolute;
@@ -177,10 +179,6 @@ table td,th {
 .hide {
 display:none;
 position:relative;
-}
-
-.contentbtn:hover {
-	color:#388e3c;
 }
 
 .flex {
@@ -324,9 +322,7 @@ position:relative;
 	font-size:2em;
 	font-weight:900;
 }
-.tag-title:hover {
-	color:#1976d2;
-}
+
 .tag-sub {
 	font-size:0.8em;
 }
@@ -339,7 +335,7 @@ position:relative;
 	flex-direction:column;
 	width:700px;
 	border-bottom:2px solid #EEE;
-	margin-bottom:50px;
+	margin-bottom:30px;
 	}
 .tag-Id , .tag-title , .tag-sub {
 	margin-bottom:20px;
@@ -355,9 +351,16 @@ position:relative;
 	opacity:0.8;
 }
 
-
-
-
+.writer-img {
+	width:40px;
+	height:40px;
+	border-radius:50%;
+	margin-left:20px;
+}
+.tag-Id {
+	display:flex;
+	align-items:center;
+}
 
 
 
@@ -385,17 +388,20 @@ position:relative;
 /* 800px 이상이면 안보이게 ( pc 버전 ) */
 </style>
 	<div class="head3 flex visible-on-md-up">
-		<div class="text1">친구와 함께하는 생각, <br> 코드마운틴 </div>
-	</div>
+		<div class="text1">
+		럭셔리한 개발자를 꿈꾸는, <br>초보개발자 블로그 </div>
+		</div>
 	
 	
 	<div class="con visible-on-sm-up table-box">
 		<c:forEach items="${articles}" var="article">	
 			<div class="list-box">
 			<span class="tag-Id">
-			${article.id}			
-			${cateItemName}
-			${article.extra.writer}	
+			${cateItemName} 
+			,
+			&nbsp;
+			<p>${article.extra.text}</p>
+			<img src="${article.extra.writer}" alt="" class="writer-img" />	
 			</span>
 			<a class="tag-title" href="./detail?cateItemId=${param.cateItemId}&id=${article.id}">${article.title}</a>
 			<span class="tag-sub">

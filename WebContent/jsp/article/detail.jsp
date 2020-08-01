@@ -166,10 +166,6 @@
 	position: relative;
 }
 
-.contentbtn:hover {
-	color: #388e3c;
-}
-
 .flex {
 	display: flex;
 }
@@ -459,7 +455,7 @@
 		<div class="boardName">
 			${cateItemName}
 		</div>
-		<div class="slogun">코드마운틴에서 소중한 일상을 공유하세요.</div>
+		<div class="slogun"></div>
 	</div>
 
 	<nav class="table-box visible-on-sm-up">

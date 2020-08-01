@@ -117,10 +117,11 @@ img {
 }
 
 .info-item {
-	padding: 30px;
+	padding: 20px;
 	display: flex;
 	flex-direction: row;
 	border: 1px solid #bdbdbd;
+	align-items:center;
 }
 
 .info-item>p {
@@ -211,8 +212,8 @@ img {
 								</c:if>
 								<c:if test="${loginedMember.nickname != member.nickname}">
 									<p class="user-nick">${member.nickname}</p>
+										</div>
 								</c:if>
-							</div>
 						</c:forEach>
 				</div>
 			</div>

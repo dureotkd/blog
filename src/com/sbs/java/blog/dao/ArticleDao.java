@@ -27,7 +27,8 @@ public class ArticleDao extends Dao {
 		
 
 		secSql.append("SELECT A.* ,");
-		secSql.append(" M.nickname AS extra__writer");
+		secSql.append(" M.image AS extra__writer,");
+		secSql.append("M.nickname AS extra__text");
 		secSql.append("FROM article AS A");
 		secSql.append("INNER JOIN member AS M");
 		secSql.append("ON A. memberId = M.id ");

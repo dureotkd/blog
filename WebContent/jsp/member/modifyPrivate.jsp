@@ -210,7 +210,7 @@ input {
 				<input name="loginPw" type="password" placeholder="비밀번호" autofocus />
 		<label for="">새 비밀번호 확인</label>
 				<input name="loginPwConfirm" type="password" placeholder="확인" />
-				<input type="submit" value="전송" class="submit"/>
+				<input type="submit" value="변경" class="submit"/>
 		</div>
 	</form>
 </nav>
