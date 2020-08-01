@@ -1,8 +1,11 @@
 package com.sbs.java.blog.dao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import com.sbs.java.blog.dto.Letter;
 import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.util.DBUtil;
 import com.sbs.java.blog.util.SecSql;
@@ -14,7 +17,7 @@ public class MemberDao {
 		this.dbConn = dbConn;
 	}
 
-	public int doActionDojoin(String name,String nickname,String loginId,String loginPw,String email,String a) {
+	public int doActionDojoin(String name,String nickname,String loginId,String loginPw,String email,String a,String image) {
 
 		SecSql secSql = new SecSql();
 
@@ -28,7 +31,7 @@ public class MemberDao {
 		secSql.append(", email = ? ",email);
 		secSql.append(", code = ? ",a);
 		secSql.append(", mailStatus = 0 ");
-		
+		secSql.append(", image = ? ",image);
 		return DBUtil.insert(dbConn, secSql);
 	}
 
@@ -109,10 +112,15 @@ public class MemberDao {
 		return DBUtil.update(dbConn, secSql);
 	}
 
-	public Member getAllMember() {
+	public List<Member> getAllMember() {
 		SecSql secSql = new SecSql();
 		secSql.append("SELECT * FROM member");
-		return new Member(DBUtil.selectRow(dbConn, secSql));
+		List<Map<String,Object>> rows = DBUtil.selectRows(dbConn, secSql);
+		List<Member> members = new ArrayList<>();
+		for (Map<String, Object> row : rows) {
+			members.add(new Member(row));
+		}
+		return members;
 	}
 
 	public Member getRightMember(String name,String loginId,String toEmail) {
@@ -175,6 +183,21 @@ public class MemberDao {
 		sql.append(", loginPw = ?", encryption);
 		sql.append("WHERE id = ?", actorId);
 		DBUtil.update(dbConn, sql);
+	}
+
+	public Member getAllMember2() {
+		SecSql secSql = new SecSql();
+		secSql.append("SELECT FROM member");
+		
+		
+		Map<String, Object> row = DBUtil.selectRow(dbConn, secSql);
+		
+		if ( row.isEmpty() ) {
+			return null;
+		}
+	
+		return new Member(row);
+		
 	}
 
 

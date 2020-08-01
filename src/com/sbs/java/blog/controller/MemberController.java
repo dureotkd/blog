@@ -407,6 +407,8 @@ public class MemberController extends Controller {
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
 		String email = req.getParameter("email");
+		String image = req.getParameter("image");
+		
 		
 		if ( loginId.equals("admin")) {
 			return "html:<script> alert(' [admin] 아이디는 사용하실 수 없습니다.'); location.replace('join'); </script>";
@@ -418,7 +420,7 @@ public class MemberController extends Controller {
 		
 		
 		String title = "안녕하세요 코드마운틴입니다.";
-		int rm = memberService.doActionDojoin(name, nickname, loginId, loginPw, email,a);
+		int rm = memberService.doActionDojoin(name, nickname, loginId, loginPw, email,a,image);
 		MailService ms = new MailService(mailId,mailPw);
 		
 		String body = "회원가입 감사합니다.";

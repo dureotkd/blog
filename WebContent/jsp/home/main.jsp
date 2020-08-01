@@ -542,7 +542,7 @@ img {vertical-align: middle;}
   font-size: 2rem;
   position: absolute;
   top:140px;
-  left:16%;
+  left:20%;
   width: 100%;
   font-weight:bold;
 }
@@ -550,7 +550,7 @@ img {vertical-align: middle;}
 .text-wrap {
 	position:absolute;
 	top:250px;
-	left:16%;
+	left:20%;
 	width:50%;
 }
 
@@ -570,7 +570,7 @@ img {vertical-align: middle;}
 	color:white;
 	position:absolute;
 	top:400px;
-	left:16%;
+	left:20%;
 	width:150px;
 	height:50px;
 	outline:none;
@@ -762,8 +762,10 @@ img {vertical-align: middle;}
   </c:forEach>
   <img src="https://i.pinimg.com/originals/7c/cb/01/7ccb010d8fddc4bcd84587ef3c34d100.jpg" style="width:100%; height:80%;">
   <div class="text">${article.title}</div>
+  
   <div class="text-wrap">
   <div class="text-body">${article.body}</div>
+  <div class="text">${article.imgTagFormat}</div>
   </div>
   <button class="text-btn" onclick="location.href='${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id}'">자세히 보기</button>
 </div>

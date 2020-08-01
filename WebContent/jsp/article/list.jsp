@@ -338,7 +338,7 @@ position:relative;
 	display:flex;
 	flex-direction:column;
 	width:700px;
-	border-bottom:2px solid green;
+	border-bottom:2px solid #EEE;
 	margin-bottom:50px;
 	}
 .tag-Id , .tag-title , .tag-sub {
@@ -397,10 +397,9 @@ position:relative;
 			${cateItemName}
 			${article.extra.writer}	
 			</span>
-			
 			<a class="tag-title" href="./detail?cateItemId=${param.cateItemId}&id=${article.id}">${article.title}</a>
 			<span class="tag-sub">
-			${article.regDateFormat1}
+			${article.regDateFormat2}
 			&nbsp;&nbsp;&nbsp;<i class="far fa-eye"></i> : ${article.hit}
 			</span>
 			</div>

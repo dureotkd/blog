@@ -48,7 +48,7 @@
 }
 
 
-.join-name,.join-Pw,.join-PwConfirm,.join-id,.join-email,.join-nickname{
+.join-name,.join-Pw,.join-PwConfirm,.join-id,.join-email,.join-nickname,.join-profile{
 	margin-top:20px;
 	height:60px;
 	border:1px solid #e1e1e1;
@@ -253,6 +253,7 @@ function JoinForm__checkNicknameDup(input) {
 	<form action="doJoin" class="join-form" method="post" onsubmit="submitJoinForm(this); return false;">
 	 <input type="hidden" name="loginPwReal" />
 		<div class="join-box">
+			<input type="input" name="image" placeholder="User Profile [ image URL ] " class="join-profile"/>
 			<input type="text" name="name" class="join-name" placeholder="User name" autofocus /> 
 			<input onkeyup="JoinForm__checkNicknameDup__debounce(this);" type="text" name="nickname" class="join-nickname" placeholder="User nickname" />
 			<div class="message-msg"></div>

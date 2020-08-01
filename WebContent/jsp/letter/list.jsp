@@ -140,6 +140,11 @@ td {
 	width:100%;
 	height:100%;
 }
+.profile {
+	width:100px;
+	height:100px;
+	border-radius:50%;
+}
 
 
 </style>
@@ -148,7 +153,7 @@ td {
 <nav class="total-wrap">
 <ul class="left-wrap">
 	<div class="img-box">
-	<img src="https://yt3.ggpht.com/a-/AOh14GjOrFI0WOrVRHRcZ6aBsG-IPRfxA4KBxQcw5LqP=s88-c-k-c0xffffffff-no-rj-mo" alt="" />
+	<img src="${loginedMember.image}" alt="프로필" class="profile"/>
 	<div class="text-box">
 	<span class="nick">${loginedMember.nickname }</span>
 	<span>님 환영합니다</span>

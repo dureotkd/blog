@@ -152,24 +152,22 @@ public class HomeController extends Controller {
 		if (!Util.empty(req, "searchKeyword")) {
 			searchKeyword = Util.getString(req, "searchKeyword");
 		}
-
+		
 		int itemsInAPage = 3;
 		int totalCount = articleService.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
 		int totalPage = (int) Math.ceil(totalCount / (double) itemsInAPage);
+		
+		
+		List<Article> articles = articleService.getForPrintListArticles(page, itemsInAPage, cateItemId,
+				searchKeywordType, searchKeyword);
+		List<Article> articles2 = articleService.getFortPrintViewsDESC(cateItemId,page,itemsInAPage);
 
+		
 		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("totalPage", totalPage);
 		req.setAttribute("page", page);
-		List<Article> articles = articleService.getForPrintListArticles(page, itemsInAPage, cateItemId,
-				searchKeywordType, searchKeyword);
 		req.setAttribute("articles", articles);
-		List<Article> articles2 = articleService.getFortPrintViewsDESC(cateItemId,page,itemsInAPage);
 		req.setAttribute("articles2",articles2);
-		
-		
-	
-		
-		
 		
 		return "home/main.jsp";
 	}

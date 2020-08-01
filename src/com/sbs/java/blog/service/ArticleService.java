@@ -99,5 +99,9 @@ public class ArticleService extends Service {
 		return articleDao.getArticleFirstId();
 	}
 
+	public int getForPrintCatePrivateCnt(int cateItemId) {
+		return articleDao.getForPrintCatePrivateCnt(cateItemId);
+	}
+
 
 }

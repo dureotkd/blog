@@ -223,7 +223,6 @@ public class ArticleController extends Controller {
 
 	private String doActionList(HttpServletRequest req, HttpServletResponse resp) {
 		
-		long startTime = System.nanoTime();
 
 		int page = 1;
 
@@ -269,13 +268,7 @@ public class ArticleController extends Controller {
 		List<Article> articles = articleService.getForPrintListArticles(page, itemsInAPage, cateItemId,
 				searchKeywordType, searchKeyword);
 		req.setAttribute("articles", articles);
-		
-		long endTime = System.nanoTime();
-		long estimatedTime = endTime - startTime;
-		double seconds = estimatedTime/ 1000000000.0;
-		System.out.println("seconds : " + seconds);
 
-		
 		return "article/list.jsp";
 	}
 }

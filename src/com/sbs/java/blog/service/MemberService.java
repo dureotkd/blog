@@ -1,6 +1,7 @@
 package com.sbs.java.blog.service;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.UUID;
 
 import com.sbs.java.blog.dao.MemberDao;
@@ -18,8 +19,8 @@ public class MemberService extends Service {
 		System.out.println(attrService);
 	}
 
-	public int doActionDojoin(String name, String nickname, String loginId, String loginPw, String email, String a) {
-		return memberDao.doActionDojoin(name, nickname, loginId, loginPw, email, a);
+	public int doActionDojoin(String name, String nickname, String loginId, String loginPw, String email, String a,String image) {
+		return memberDao.doActionDojoin(name, nickname, loginId, loginPw, email, a,image);
 	}
 
 	public boolean isLoginIdJoinable(String loginId) {
@@ -62,7 +63,7 @@ public class MemberService extends Service {
 	}
 
 	public Member getAllMember() {
-		return memberDao.getAllMember();
+		return memberDao.getAllMember2();
 	}
 
 	public Member getRightMember(String name, String loginId, String toEmail) {
@@ -106,6 +107,10 @@ public class MemberService extends Service {
 
 	public boolean isNeedToChangeaPasswordForTemp(int actorId) {
 		return attrService.getValue("member", actorId, "extra", "useTempPassword").equals("1");
+	}
+
+	public List<Member> actionDoAllMemberViews() {
+		return	memberDao.getAllMember();
 	}
 
 }

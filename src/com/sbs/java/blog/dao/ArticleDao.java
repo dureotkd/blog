@@ -302,4 +302,12 @@ public class ArticleDao extends Dao {
 		secSql.append("ORDER BY id DESC LIMIT 1");
 		return new Article(DBUtil.selectRow(dbConn, secSql));
 	}
+
+	public int getForPrintCatePrivateCnt(int cateItemId) {
+		SecSql secSql = new SecSql();
+		secSql.append("SELECT COUNT (*)");
+		secSql.append("AS cnt FROM article");
+		secSql.append("WHERE cateItemId = ? ",cateItemId);
+		return DBUtil.selectRowIntValue(dbConn, secSql);
+		}
 }

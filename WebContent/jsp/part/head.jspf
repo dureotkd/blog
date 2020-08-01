@@ -145,7 +145,7 @@ body {
 	box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.75);
 }
 
-.right-menu>a>i, .login-nickname, .visit {
+.right-menu>a>i, .visit {
 	padding: 30px;
 	font-size: 1.5rem;
 }
@@ -168,20 +168,9 @@ body {
 	position: absolute;
 	opacity: 0;
 }
-
-.login-nickname {
-	padding: 40px;
-}
-
 .login-nickname>a:hover {
 	color: red;
 }
-
-.left-menu-1 {
-	margin-right: 4%;
-	padding: 30px;
-}
-
 .fa-bars {
 	font-size: 2rem;
 }
@@ -189,10 +178,10 @@ body {
 .left-item {
 	height: 100vh;
 	position: absolute;
-	background-color: white;
-	width: 340px;
+	background-color: #fff;
+	width: 300px;
 	top:80;
-	left: -400px;
+	left: -300px;
 	z-index: 400;
 	transition: left.6s;
 	overflow: auto;
@@ -225,20 +214,22 @@ body {
 }
 
 .contentbtn {
-	border-bottom: 1px solid #ccc;
 	padding: 20px;
+	transition:background.4s;
+	color:#212121;
 }
 
 .contentbtn:hover {
-	color: #388e3c;
+	background:#eee;
 }
 
 .id-box {
 	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
 	disply: flex;
 	flex-direction: column;
 	width: 100%;
-	height: 60%;
+	height: 20%;
 	opacity: 0.7;
 	display: flex;
 	justify-content: center;
@@ -247,12 +238,10 @@ body {
 
 .login-item {
 	width: 100%;
-	height: 50%;
+	height: 100%;
 }
 
 .login-item>a {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -274,11 +263,6 @@ body {
 	text-align: center;
 	font-size: 1.1rem;
 }
-
-.work-item>a:hover {
-	color: #388e3c;
-}
-
 .work-item>a>i {
 	padding: 35px;
 	font-size: 1.4rem;
@@ -332,42 +316,36 @@ body {
 }
 
 .m-search-box {
-	position: absolute;
-	right: 100px;
-	top: 25px;
-	opacity: 0;
-	transition: opacity.4s;
+	display:flex;
+	align-items:center;
+	margin-top:17px;
 }
 
-.m-search-box.active {
-	opacity: 1;
-}
 
 .search-text {
-	border-top: none;
-	border-left: none;
-	border-right: none;
-	outline: none;
-	border-bottom: 3px solid black;
+	border:1px solid #ccc;
 	width:322px;
 	background:#f5f5f5;
+	padding:10px;
+	font-size:15px;
+}
+
+.fa-search  {
+	font-size:20px;
+	cursor:pointer;
 }
 
 .search-btn {
 	outline: none;
 	border: none;
-	background-color: black;
-	color: white;
-	border-radius: 5px;
-	font-size: 1.3rem;
-	margin-right: 20px;
+	background-color: #f5f5f5;
 }
 
-.search-text {
-	font-size:1.4rem;
-}
 .logo {
-	margin-right:2%;
+	margin-left:100px;
+	display:flex;
+	height:100%;
+	align-items:center;
 }
 .needChange {
 	color:#999;
@@ -377,9 +355,40 @@ body {
 .info-data {
 	font-size:1.3rem;
 }
+.profile {
+	width:58px;
+	height:58px;
+	border-radius:50%;
+	margin-left:20px;
+}
+.P-image {
+	height:70px;
+}
 
-
-
+.right-box {
+	margin-right:30px;
+	display:flex;
+	align-items:center;
+}
+.right-item {
+	color:#424242;
+	font-size:25px;
+	padding:20px;
+}
+.fa-folder {
+	margin-right:10px;
+}
+.message-box {
+	width:100%;
+	height:50%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	border-bottom:1px solid #ccc;
+}
+.none {
+	display:none;
+}
 </style>
 
 </head>
@@ -435,24 +444,18 @@ body {
 					<div></div>
 					<div></div>
 					<div></div>
+				</a> 
+				<a href="/blog/s/home/main" class="logo"> <img
+					class="P-image" src="/blog/resource/css/home/logo1.png"
+					alt="/blog/jsp/home/main.jsp">
 				</a>
 				<div class="left-item">
 					<ul class="content-box">
 						<div class="id-box">
 							<c:if test="${isLogined}">
-								<div class="login-nickname">
-									<a href="#" class="list"
-										onclick="window.open('/blog/s/member/info','나의정보','width=963, height=880'); return false">
-										<p class="info-data"><i class="fas fa-user"></i> : ${loginedMember.nickname}</p>
-									</a>
 									<c:if test="${loginedMember.extra.isNeedToChangePasswordForTemp}">
 										<p class="needChange">현재 임시 비밀번호를 사용중입니다.<br>빠른 시일내에 변경해주세요.</p>
 									</c:if>
-
-								</div>
-							</c:if>
-							<c:if test="${isLogined == false}">
-								<a href="#"><div class="visit">나그네님의 블로그</div></a>
 							</c:if>
 							<c:if test="${isLogined == false}">
 								<div class="login-item">
@@ -466,39 +469,42 @@ body {
 							</div>
 				</div>
 				</c:if>
-				<a class="contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=">전체 (${cateArticle})</a>
-				
+				<a class="contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=">카테고리 전체 (${cateArticle})</a>
 				<c:forEach items="${cateItems}" var="cateItem">
-				<a class="contentbtn"
-					href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">${cateItem.name}</a>
+				<a class="contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}"><i class="fas fa-folder"></i>${cateItem.name}</a>
 				</c:forEach>
+				
+				
 
 				<div class="work-item">
-					<a
-						href="${pageContext.request.contextPath}/s/article/write?cateItemId=1"><i
-						class="fas fa-feather-alt"></i>글쓰기</a> <a
-						href="${pageContext.request.contextPath}/s/article/allList"><i
+					 <a href="${pageContext.request.contextPath}/s/article/allList" class="none"><i
 						class="far fa-calendar-check"></i>활동내역</a> 
 				</div>
 				</ul>
 			</div>
 		</div>
 
-		<a href="/blog/s/home/main" class="logo"> <img class="P-image"
-			src="/blog/resource/css/home/logo1.png" alt="/blog/jsp/home/main.jsp">
-		</a>
 		<div class="m-search-box visible-on-sm-up">
 			<form action="${pageContext.request.contextPath}/s/article/list">
 				<input type="hidden" name="page" value="1" /> <input type="hidden"
 					name="cateItemId" value="${param.cateItemId}" /> <input
-					type="hidden" name="searchKeywordType" value="title" /> <input
-					type="text" name="searchKeyword" value="${param.searchKeyword}"
-					class="search-text" placeholder="검색어를 입력해주세요." />
-				<button type="submit" class="search-btn">검색</button>
+					type="hidden" name="searchKeywordType" value="title" /> 
+				<input type="text" name="searchKeyword" value="${param.searchKeyword}" class="search-text" placeholder="검색" />
+				<button type="submit" class="search-btn" ><i class="fas fa-search"></i></button>
 			</form>
 		</div>
-		<div class="search-box">
-			<i class="fas fa-search "></i>
+		
+		<!--  top-bar 3번째 -->
+		<div class="right-box">
+			<a href="${pageContext.request.contextPath}/s/article/write?cateItemId=1" ><i class="fas fa-pencil-alt  right-item"></i></a>
+			<c:if test="${isLogined}">
+			<a href="#" onclick="window.open('/blog/s/member/info','나의정보','width=963, height=880'); return false" >
+			 <img src="${loginedMember.image}" alt="profile" class="profile" />
+			 </a>
+			 </c:if>
+			 <c:if test="${isLogined == false }">
+			 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSoy3heSU-2SeFekCWTQ2mgw-WfCzV8DJYdtg&usqp=CAU" alt="profile" class="profile" />
+			 </c:if>
 		</div>
 
 	</div>

@@ -1,9 +1,8 @@
 package com.sbs.java.blog.dto;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Article extends Dto {
 	private String updateDate;
@@ -12,6 +11,19 @@ public class Article extends Dto {
 	private int memberId;
 	private String title;
 	private String body;
+	
+	
+	String img = null;
+	public String getimgTagFormat() {
+		Pattern pattern  =  Pattern.compile("(?i)<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+		Matcher match = pattern.matcher(this.getBody());
+		
+		if ( match.find()) {
+			img = match.group(1);
+		}
+		return img;
+	}
+	
 	
 	public String getBodyForXTemplate() {
 		return body.replaceAll("(?i)script", "<!--REPLACE:script-->");

@@ -13,6 +13,7 @@ import com.sbs.java.blog.service.ArticleService;
 import com.sbs.java.blog.service.AttrService;
 import com.sbs.java.blog.service.LetterService;
 import com.sbs.java.blog.service.MemberService;
+import com.sbs.java.blog.util.Util;
 
 public abstract class Controller {
 	protected Connection dbConn;
@@ -45,10 +46,15 @@ public abstract class Controller {
 
 	// 얘도 죽고
 	public void beforeAction() {
+		
+		//int cateItemId = 1;
+		
 		// 액션 전 실행
 		// 이 메서드는 모든 컨트롤러의 모든 액션이 실행되기 전에 실행된다.
-		int cateArticle = articleService.getAllarticle();
+		
+		//int catePrivateCount = articleService.getForPrintCatePrivateCnt(cateItemId);
 
+		int cateArticle = articleService.getAllarticle();
 		List<CateItem> cateItems = articleService.getForPrintCateItems();
 		req.setAttribute("cateItems", cateItems);
 		
@@ -61,6 +67,7 @@ public abstract class Controller {
 			isLogined = true;
 			loginedMember = memberService.getMemberById(loginedMemberId);
 		}
+		//req.setAttribute("catePrivateCount",catePrivateCount);
 		req.setAttribute("cateArticle", cateArticle);
 		req.setAttribute("loginedMemberId", loginedMemberId);
 		req.setAttribute("loginedMember", loginedMember);

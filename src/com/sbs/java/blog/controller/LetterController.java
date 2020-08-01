@@ -31,11 +31,20 @@ public class LetterController extends Controller {
 			return actionLetterSend(req,resp);
 		case "doSend":
 			return actionDoLetterSend(req,resp);
+		case "memberList":
+			return actionDoAllMemberViews(req,resp);
 		}
 		return "";
 	}
 	
 	
+	private String actionDoAllMemberViews(HttpServletRequest req, HttpServletResponse resp) {
+		
+		List<Member> members = memberService.actionDoAllMemberViews();
+		req.setAttribute("members", members);
+		return	"letter/memberList.jsp";
+	}
+
 	private String actionDoLetterSend(HttpServletRequest req, HttpServletResponse resp) {
 		
 		Member loginedMember = (Member) req.getAttribute("loginedMember");

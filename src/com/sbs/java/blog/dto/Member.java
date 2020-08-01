@@ -11,6 +11,7 @@ public class Member extends Dto {
 	private String nickname;
 	private String email;
 	private int mailStatus;
+	private String image;
 	
 	
 	public Member(Map<String, Object> row) {
@@ -20,9 +21,22 @@ public class Member extends Dto {
 		this.loginPw = (String) row.get("loginPw");
 		this.name = (String) row.get("name");
 		this.nickname = (String) row.get("nickname");
+		this.image = (String) row.get("image");
 		this.mailStatus = (int) row.get("mailStatus");
 	}
 	
+	
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 
 
 	public int getMailStatus() {

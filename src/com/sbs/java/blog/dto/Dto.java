@@ -12,8 +12,9 @@ public class Dto {
 	private String updateDate;
 	private Map<String, Object> extra;
 	private String code;
-	public String getRegDateFormat1() {
-
+	
+	
+	public String getRegDateFormat2() {
 		String startTime = this.getRegDate();
 		// This could be MM/dd/yyyy, you original value is ambiguous
 		SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -119,7 +119,7 @@ img {
 .info-item {
 	padding: 30px;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	border: 1px solid #bdbdbd;
 }
 
@@ -150,6 +150,21 @@ img {
 	border-radius:50%;
 }
 
+.member-box {
+	display:flex;
+	flex-direction:column;
+	aling-item:center;
+	padding:10px;
+}
+.member-box > p {
+	text-align:center;
+}
+.head-text {
+	margin-bottom:50px;
+}
+.user-nick {
+	margin-top:5px;
+}
 
 </style>
 </head>
@@ -157,7 +172,7 @@ img {
 	<nav class="total-wrap">
 		<ul class="left-wrap">
 			<div class="img-box">
-				<img src="${loginedMember.image}" alt="프로필" class="profile"/>
+				<img src="${loginedMember.image}" alt="프로필" class="profile" />
 				<div class="text-box">
 					<span class="nick">${loginedMember.nickname }</span> <span>님
 						환영합니다</span>
@@ -186,23 +201,19 @@ img {
 			</a>
 		</ul>
 		<div class="send-con">
+			<h2 class="head-text">접속 유저</h2>
 			<div class="info-box">
 				<div class="info-item">
-					<p>가입날짜 : ${loginedMember.regDate}</p>
-					<p>이름 : ${loginedMember.name}</p>
-					<p>이메일 : ${loginedMember.email}</p>
-					<p>닉네임 : ${loginedMember.nickname}</p>
-					<p>아이디 : ${loginedMember.loginId}</p>
-					<c:if test="${loginedMember.mailStatus == 1}">
-					<p>이메일 인증 : 완료 </p>
-					</c:if>
-					<c:if test="${loginedMember.mailStatus == 0}">
-					<p>이메일 인증 : 미완료 </p>
-						<form action="infoEmail" class="infoEmail" >
-							<input type="submit" value="이메일 인증" class="submit" />
-							 <input type="hidden" value="${loginedMember.code}" name="code" />
-						</form>
-					</c:if>
+						<c:forEach items="${members}" var="member">
+							<div class="member-box">
+							<c:if test="${loginedMember.image != member.image}">
+								<img src="${member.image}" alt="" />
+								</c:if>
+								<c:if test="${loginedMember.nickname != member.nickname}">
+									<p class="user-nick">${member.nickname}</p>
+								</c:if>
+							</div>
+						</c:forEach>
 				</div>
 			</div>
 		</div>
