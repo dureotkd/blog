@@ -55,12 +55,27 @@ public class ArticleController extends Controller {
 			return doActionReplyModify(req,resp);
 		case "allList":
 			return doActionAllList(req,resp);
+		case "userAllList":
+			return actionUserAllList();
 			}
 		
 		return "";
 	}
 
 
+
+	private String actionUserAllList() {
+		int id = Util.getInt(req, "id");
+		
+		
+		Member member = memberService.getMemberById(id);
+		List<Article> articles = articleService.getForPrintUserArticle(id);
+		List<ArticleReply> articleReplys = articleService.getForPrintUserArticleReplys(id);
+		req.setAttribute("articles", articles);
+		req.setAttribute("member", member);
+		req.setAttribute("articleReplys",articleReplys);
+		return "article/userAllList.jsp";
+	}
 
 	private String doActionAllList(HttpServletRequest req, HttpServletResponse resp) {
 		List<Article> articles = articleService.getForPrintAllArticle();

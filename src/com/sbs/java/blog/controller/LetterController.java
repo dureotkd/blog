@@ -52,6 +52,7 @@ public class LetterController extends Controller {
 		String sendNickname = req.getParameter("sendNickname");
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
+		System.out.println(body);
 		
 		int am = letterService.actionSendLetter(title,body,sendNickname,loginedNickname);
 		

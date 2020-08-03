@@ -16,6 +16,7 @@ public class ArticleService extends Service {
 
 	public ArticleService(Connection dbConn) {
 		articleDao = new ArticleDao(dbConn);
+		System.out.println(articleDao);
 	}
 
 	public List<Article> getForPrintListArticles(int page, int itemsInAPage, int cateItemId, String searchKeywordType, String searchKeyword) {
@@ -101,6 +102,14 @@ public class ArticleService extends Service {
 
 	public int getForPrintCatePrivateCnt(int cateItemId) {
 		return articleDao.getForPrintCatePrivateCnt(cateItemId);
+	}
+
+	public List<Article> getForPrintUserArticle(int id) {
+		return articleDao.getForPrintUserArticle(id);
+	}
+
+	public List<ArticleReply> getForPrintUserArticleReplys(int id) {
+		return articleDao.getForPrintUserArticleReplys(id);
 	}
 
 

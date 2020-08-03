@@ -113,4 +113,8 @@ public class MemberService extends Service {
 		return	memberDao.getAllMember();
 	}
 
+	public Member actionMemberById(int id) {
+		return memberDao.getMemberById(id);
+	}
+
 }

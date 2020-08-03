@@ -117,11 +117,10 @@ img {
 }
 
 .info-item {
-	padding: 20px;
+	padding: 30px;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	border: 1px solid #bdbdbd;
-	align-items:center;
 }
 
 .info-item>p {
@@ -134,88 +133,81 @@ img {
 	justify-content: center;
 	width: 100%;
 }
+
 .infoEmail {
-	display:flex;
-	justify-content:center;
+	display: flex;
+	justify-content: center;
 }
 
 .submit {
-	width:100px;
-	height:50px;
-	background:aliceblue;
-	border:1px solid #bdbdbd;
+	width: 100px;
+	height: 50px;
+	background: aliceblue;
+	border: 1px solid #bdbdbd;
 }
+
 .profile {
-	width:100px;
-	height:100px;
-	border-radius:50%;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
 }
-
-.member-box {
+.article-wrap {
+	width:50%;
+	line-break:anywhere;
+	border:1px solid #ccc;
+	padding:20px;
+	margin-top:10px;
+}
+.articleReply-wrap {
+	width:50%;
 	display:flex;
+	line-break:anywhere;
+	border:1px solid #ccc;
+	padding:20px;
 	flex-direction:column;
-	aling-item:center;
-	padding:10px;
+	margin-top:10px;
 }
-.member-box > p {
-	text-align:center;
-}
-.head-text {
-	margin-bottom:50px;
-}
-.user-nick {
-	margin-top:5px;
-}
-
 </style>
 </head>
 <body>
 	<nav class="total-wrap">
 		<ul class="left-wrap">
 			<div class="img-box">
-				<img src="${loginedMember.image}" alt="프로필" class="profile" />
+				<img src="${member.image}" alt="프로필" class="profile" />
 				<div class="text-box">
-					<span class="nick">${loginedMember.nickname }</span> <span>님
-						환영합니다</span>
+					<span class="nick">${member.nickname }</span>
 				</div>
 			</div>
 
-			<a href="/blog/s/member/info" class="list">
-				<li class="left-item"><i class="fas fa-user"></i><span>나의
-						정보</span></li>
+			<a href="/blog/s/article/userAllList?id=${member.id}" class="list">
+				<li class="left-item"><i class="far fa-paper-plane"></i><span>활동내역</span></li>
+			</a>
+			<a href="/blog/s/guestBook/list?id=${member.id}" class="list">
+				<li class="left-item"><i class="far fa-sticky-note"></i><span>방명록</span>
+			</li>
+			</a>
+			<a href="/blog/s/privatePhoto/list?id=${member.id}" class="list">
+				<li class="left-item"><i class="far fa-image"></i><span>사진첩</span>
+			</li>
 			</a>
 
-			<a href="/blog/s/letter/send" class="list">
-				<li class="left-item"><i class="far fa-paper-plane"></i><span>쪽지보내기</span></li>
-			</a>
-			<a href="/blog/s/letter/list" class="list">
-				<li class="left-item"><i class="far fa-comment-dots"></i><span>쪽지내역</span>
-			</li>
-			</a>
-			<a href="/blog/s/member/passwordForPrivate" class="list">
-				<li class="left-item"><i class="fas fa-exchange-alt"></i><span>정보수정</span>
-			</li>
-			</a>
-			<a href="/blog/s/letter/memberList" class="list">
-				<li class="left-item"><i class="fas fa-users"></i><span>접속유저</span>
-			</li>
-			</a>
 		</ul>
 		<div class="send-con">
-			<h2 class="head-text">접속 유저</h2>
-			<div class="info-box">
-				<div class="info-item">
-						<c:forEach items="${members}" var="member">
-							<div class="member-box">
-							<c:if test="${loginedMember.image != member.image}">
-								<img src="${member.image}" alt="" />
-								</c:if>
-								<c:if test="${loginedMember.nickname != member.nickname}">
-									<p class="user-nick">${member.nickname}</p>
-								</c:if>
-								</div>
-						</c:forEach>
-				</div>
+			<h2>게시글</h2>
+			<div class="article-wrap">
+				<c:forEach items="${articles}" var="article">
+					<div class="article-box">
+						${article.id} <a href="#">${article.title}</a>
+					</div>
+				</c:forEach>
+			</div>
+			<h2>댓글</h2>
+			<div class="articleReply-wrap">
+				<c:forEach items="${articleReplys}" var="articleReply">
+					<div class="articleReply-box">
+						${articleReply.id} <a href="#">${articleReply.body}</a>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</nav>

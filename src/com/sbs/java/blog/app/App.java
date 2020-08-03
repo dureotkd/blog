@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.controller.ArticleController;
 import com.sbs.java.blog.controller.Controller;
+import com.sbs.java.blog.controller.GuestBookController;
 import com.sbs.java.blog.controller.HomeController;
 import com.sbs.java.blog.controller.LetterController;
 import com.sbs.java.blog.controller.MemberController;
@@ -110,6 +111,10 @@ public class App {
 			break;
 		case "letter":
 			controller = new LetterController(dbConn,actionMethodName);
+			break;
+		case "guestBook":
+			controller = new GuestBookController(dbConn,actionMethodName);
+			break;
 		}
 
 		// 얘도 죽고

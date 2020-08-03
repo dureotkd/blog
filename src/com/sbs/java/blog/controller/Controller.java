@@ -11,6 +11,7 @@ import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.service.ArticleService;
 import com.sbs.java.blog.service.AttrService;
+import com.sbs.java.blog.service.GuestBookService;
 import com.sbs.java.blog.service.LetterService;
 import com.sbs.java.blog.service.MemberService;
 import com.sbs.java.blog.util.Util;
@@ -25,6 +26,7 @@ public abstract class Controller {
 	protected MemberService memberService;
 	protected AttrService attrService;
 	protected LetterService letterService;
+	protected GuestBookService guestBookService;
 
 	
 	public Controller(Connection dbConn, String actionMethodName, HttpServletRequest req, HttpServletResponse resp) {
@@ -36,6 +38,7 @@ public abstract class Controller {
 		articleService = new ArticleService(dbConn);
 		memberService = new MemberService(dbConn);
 		letterService = new LetterService(dbConn);
+		guestBookService = new GuestBookService(dbConn);
 	}
 
 	public abstract String getControllerName();

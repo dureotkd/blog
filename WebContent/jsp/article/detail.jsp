@@ -2,7 +2,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page import="com.sbs.java.blog.dto.CateItem"%>
-<%@ page import="com.sbs.java.blog.dto.ArticleReply" %>
+<%@ page import="com.sbs.java.blog.dto.ArticleReply"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
@@ -43,24 +43,38 @@
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 
 <style>
-.tui-editor-contents :not(table){
-	line-height:2.0em;
+.tui-editor-contents :not(table) {
+	line-height: 2.0em;
 }
+
 .head2 {
 	background-image: url(http://www.awesomecorp.kr/img_new/portbg.jpg);
 	height: 400px;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+.image {
+	width:70px;
+	height:70px;
+	border-radius:50%;
+}
+.reply-nick {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	margin-right:50px;
+}
+
+
 
 .table-box {
-	margin-bottom:400px;
+	margin-bottom: 400px;
 	margin-top: 50px;
 }
 
 .title {
-	margin-bottom:30px;
-	text-align:center;
+	margin-bottom: 30px;
+	text-align: center;
 	font-weight: bold;
 	font-size: 2em;
 }
@@ -94,14 +108,13 @@
 	align-items: flex-start;
 }
 
-
 .head1 {
 	height: 100px;
 	background-color: white;
 }
 
 .line {
-	background-color:#eee;
+	background-color: #eee;
 	height: 1px;
 	margin: 0 auto;
 	margin-top: 25px;
@@ -117,7 +130,7 @@
 	font-size: 20px;
 	color: black;
 	margin-top: 3px;
-	margin:0 auto;
+	margin: 0 auto;
 }
 
 .left-btn>.hide>.left-menu {
@@ -174,8 +187,8 @@
 	font-size: 1.2rem;
 }
 
-.tui-editor-contents{
-	font-size:1.1rem;
+.tui-editor-contents {
+	font-size: 1.1rem;
 }
 /*============================= pc 화면 끝 ===================== */
 
@@ -185,9 +198,8 @@
 		display: none !important;
 	}
 	.reply-box {
-		width:100%;
+		width: 100%;
 	}
-
 }
 
 /* 800px 이하면 안보이게 ( 모바일 버전 ) */
@@ -198,7 +210,7 @@
 		display: none !important;
 	}
 	.reply-box {
-		width:60%;
+		width: 60%;
 	}
 }
 
@@ -206,8 +218,8 @@
 
 /*============================= mobile 화면 시작 ===================== */
 .m-board-bar {
-	z-index:200;
-	height:50px;
+	z-index: 200;
+	height: 50px;
 	border-bottom: 1px solid silver;
 	position: relative;
 }
@@ -221,10 +233,9 @@
 }
 
 .m-table-box {
-	margin-bottom:50px;
+	margin-bottom: 50px;
 	padding: 8px 15px;
 }
-
 
 .m-subitem {
 	font-size: 0.7rem;
@@ -256,11 +267,11 @@
 }
 
 .m-board-change2 {
-	display:none;
+	display: none;
 }
 
 .m-board-change2.active {
-	display:block;
+	display: block;
 }
 
 .m-board-menu {
@@ -318,281 +329,315 @@
 	width: 100%;
 	height: 100%;
 }
+
 .M-top-bar {
-	z-index:300;
+	z-index: 300;
 }
-.m-icon-box{
-	margin-left:5px;
+
+.m-icon-box {
+	margin-left: 5px;
 }
-.back-btn-con{
-	margin-top:100px;
-	display:flex;
-	justify-content:center;
+
+.back-btn-con {
+	margin-top: 100px;
+	display: flex;
+	justify-content: center;
 }
+
 .list-back-btn {
-	padding:20px;
-	background-color:white;
-	margin-left:50px;
+	padding: 20px;
+	background-color: white;
+	margin-left: 50px;
 	border: 2px solid #eee;
-	cursor:pointer;
-	margin-bottom:100px;
+	cursor: pointer;
+	margin-bottom: 100px;
 }
+
 .reply-box {
-	margin:0 auto;
-	border-top:1px solid #ccc;
+	margin: 0 auto;
+	border-top: 1px solid #ccc;
 }
 
 .reply-item {
-	padding:12px;
-	border:1px solid #ccc;
-	display:flex;
-	justify-content:center;
-	flex-direction:column;
-	text-align:start;	
+	padding: 12px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	text-align: start;
 }
+
 .reply-con {
-	display:flex;
-	justify-content:center;
+	display: flex;
+	justify-content: center;
 }
+
 .reply-body {
-	width:100%;
+	width: 100%;
 }
+
 .reply-form {
-	border-top:1px solid #ccc;
-	margin-top:100px;
+	border-top: 1px solid #ccc;
+	margin-top: 100px;
 }
+
 .table-1 {
-	width:60%;
-	margin:0 auto;
+	width: 60%;
+	margin: 0 auto;
 }
+
 .reply-boxi {
-	display:flex;
-	flex-direction:row;
-	align-items:baseline;
+	display: flex;
+	flex-direction: row;
+	align-items:center;
 }
+
 .reply-writer {
-	width:114px;
-	margin-right:50px;
-	color:#1A4C89;
-	font-weight:bold;
+	width: 114px;
+	color: #1A4C89;
+	font-weight: bold;
+	text-align:center;
 }
+
 .pc-form {
-	width:100%;
+	width: 100%;
 }
+
 .reply-subitem {
-	margin-top:100px;
-	display:flex;
-	font-size:1.3rem;
-
+	margin-top: 100px;
+	display: flex;
+	font-size: 1.3rem;
 }
-.reply-regDate , .modify-item , .delete-item  {
-	color:#ccc;
-	font-size:6px;
+
+.reply-regDate, .modify-item, .delete-item {
+	color: #ccc;
+	font-size: 6px;
 }
 
 .modify-item {
-	display:inline-block;
+	display: inline-block;
 }
+
 .modiy-body-box {
-	display:flex;
+	display: flex;
 }
-.modify-body-item{
-	width:100%;
+
+.modify-body-item {
+	width: 100%;
 }
 
 .modify-item {
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .pc-form {
-	display:none;
+	display: none;
 }
+
 .pc-form.active {
-	width:100%;
-	display:block;
+	width: 100%;
+	display: block;
 }
 
 .Co {
-	font-size:1.4rem;
+	font-size: 1.4rem;
 }
 
-.reply-item:nth-child(odd){
-	background-color:#fafafa;
+.reply-item:nth-child(odd) {
+	background-color: #fafafa;
 }
 
 /* Next & previous buttons */
 .prev, .next {
-  cursor: pointer;
-  position: fixed;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: black;
-  font-weight: bold;
-  font-size: 30px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
+	cursor: pointer;
+	position: fixed;
+	top: 50%;
+	width: auto;
+	padding: 16px;
+	margin-top: -22px;
+	color: black;
+	font-weight: bold;
+	font-size: 30px;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
 }
 
 /* Position the "next button" to the right */
 .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+	right: 0;
+	border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-  color:white;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
 }
-
+.reply-bodyitem {
+	border:1px solid #eee;
+	padding:20px;
+	overflow-wrap:anywhere;
+}
+.reply-subitem {
+	display:none;
+}
 </style>
 
-	
 
-	<div class="head2 flex visible-on-sm-up">
-		<div class="boardName">
-			${cateItemName}
+
+<div class="head2 flex visible-on-sm-up">
+	<div class="boardName">${cateItemName}</div>
+	<div class="slogun"></div>
+</div>
+
+<nav class="table-box visible-on-sm-up">
+	<div class="table-1">
+		<div class="title">${article.title}</div>
+		<div class="subitem">
+			${article.regDate} writer : ${article.extra.writer}
+			&nbsp;&nbsp;&nbsp; 조회수 : ${article.hit} &nbsp;&nbsp;&nbsp;
+			<c:if
+				test="${loginedMemberId == article.memberId || loginedMemberId == 1  }">
+				<a
+					href="${pageContext.request.contextPath}/s/article/modify?id=${article.id}"
+					class="modify-btn"><i class="fas fa-wrench"></i></a>
+			</c:if>
+			&nbsp;
+			<c:if
+				test="${loginedMemberId == article.memberId || loginedMemberId == 1 }">
+				<a
+					href="${pageContext.request.contextPath}/s/article/doDelete?id=${article.id}"
+					class="delete-btn"><i class="far fa-trash-alt"></i></a>
+			</c:if>
+
 		</div>
-		<div class="slogun"></div>
-	</div>
-
-	<nav class="table-box visible-on-sm-up">
-		<div class="table-1">
-			<div class="title">${article.title}</div>
-			<div class="subitem">
-				${article.regDate}
-				writer : ${article.extra.writer} &nbsp;&nbsp;&nbsp; 조회수 : ${article.hit} 
-				&nbsp;&nbsp;&nbsp;
-				<c:if test="${loginedMemberId == article.memberId || loginedMemberId == 1  }">
-				<a href="${pageContext.request.contextPath}/s/article/modify?id=${article.id}" class="modify-btn"><i class="fas fa-wrench"></i></a>
-				</c:if>
-				&nbsp;
-				<c:if test="${loginedMemberId == article.memberId || loginedMemberId == 1 }" >
-				<a href="${pageContext.request.contextPath}/s/article/doDelete?id=${article.id}" class="delete-btn"><i class="far fa-trash-alt"></i></a>	
-				</c:if>
-			
-			</div>
-			<div class="line"></div>
-			<div class="body-box">
+		<div class="line"></div>
+		<div class="body-box">
 			<script type="text/x-template" id="origin1" style="display: none;">${article.bodyForXTemplate}</script>
-			</div>
-			<div id="viewer1"></div>
 		</div>
-	</nav>
-     
-				
+		<div id="viewer1"></div>
+	</div>
+</nav>
+
+
 <!--  onclick="location='list' " 리스트로 돌아가기 버튼 링크  -->
-	
-	<!--   ================================= pc 화면  끝 ================================= -->
 
-	<!--   ================================= mobile 화면 시작 ================================= -->
+<!--   ================================= pc 화면  끝 ================================= -->
 
-	<div class="m-board-bar visible-on-sm-down">
-		<a class="m-board-name">${cateItemName}
+<!--   ================================= mobile 화면 시작 ================================= -->
+
+<div class="m-board-bar visible-on-sm-down">
+	<a class="m-board-name">${cateItemName}
 		<div class="m-icon-box">
-		<i class="m-board-change fas fa-angle-down"></i> 
-		<i class="m-board-change2 fas fa-angle-up"></i>
+			<i class="m-board-change fas fa-angle-down"></i> <i
+				class="m-board-change2 fas fa-angle-up"></i>
 		</div>
-		</a>
-		<div class="m-board-menu">
-			<c:forEach items="${cateItems}" var="cateItem">
+	</a>
+	<div class="m-board-menu">
+		<c:forEach items="${cateItems}" var="cateItem">
 			<a class="m-contentbtn"
 				href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">${cateItem.name}</a>
-			</c:forEach>
-		</div>
+		</c:forEach>
 	</div>
+</div>
 
-	<nav class="m-table-box visible-on-sm-down">
-		<div class="m-table-1">
-			<div class="m-title"> ${article.title}</div>
-			<div class="m-subitem flex">
-				writer :  ${article.extra.writer} &nbsp;&nbsp; 조회수 :  ${article.hit}
-				<div class="m-
-"> ${article.regDate}</div>
-			</div>
-			<div class="m-line"></div>
-			<script type="text/x-template"  id="m-origin1" style="display: none;">
+<nav class="m-table-box visible-on-sm-down">
+	<div class="m-table-1">
+		<div class="m-title">${article.title}</div>
+		<div class="m-subitem flex">
+			writer : ${article.extra.writer} &nbsp;&nbsp; 조회수 : ${article.hit}
+			<div class="m-
+">${article.regDate}</div>
+		</div>
+		<div class="m-line"></div>
+		<script type="text/x-template" id="m-origin1" style="display: none;">
 				  ${article.bodyForXTemplate}
 			</script>
-			<div id="m-viewer1"></div>
-		</div>
-	</nav>
-	
-	<c:if test="${article.id > articleFirstId.id }">
-	<a class="prev visible-on-sm-up" href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id-1}">&#10094;</a>
-	</c:if>
-	<c:if test="${article.id < articleLastId.id }">
-	<a class="next visible-on-sm-up" href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id+1}">&#10095;</a>
-	</c:if>
-	
-	 <div class="reply-box">
-      <h2 class="Co">Comment (${totalCount})</h2>
-     <c:forEach items="${articleReplys}" var="articleReply">
-         <div class="reply-item">
-         <div class="reply-boxi">
-         <div class="reply-nick">
-         <p class="reply-writer"> ${articleReply.extra.writer}</p>
-         </div>
-         <div class="reply-bodyitem">
-         <p> ${articleReply.body}</p>
-         <div class="reply-regDate">${articleReply.regDate}
-         <c:if test="${loginedMemberId == articleReply.memberId}">
-         <a class="delete-item" href="${pageContext.request.contextPath}/s/article/replyDelete?id=${articleReply.id}">삭제</a>
-               <p class="modify-item">수정  </p>
-               </c:if>
-               </div>
-               </div>	
-               </div>
-               </div>   
-            </c:forEach>
-         
-      <c:forEach items="${articleReplys}" var="articleReply">   
-            <c:if test="${loginedMemberId == articleReply.memberId}">
-               <div class="reply-subitem">
-               <form action="replyModify" class="pc-form" method="post">
-               <input type="hidden" name="id" value="${articleReply.id}" />
-               <div class="modiy-body-box">
-               <textarea name="body" class="modify-body-item" cols="30" rows="4"  placeholder="선정적, 극단적인 비속어는 통보없이 삭제 및 차단 될 수 있습니다"></textarea>
-               <input class="submit" type="submit" value="수정" ></input>
-               </div>
-               </form>
-               </div>
-              </c:if>
-     </c:forEach>
-     
-      			<c:if test="${loginedMemberId != -1 }"> 
-      <form action="reply" class="reply-form">
-      <div class="reply-con">
-      <input type="hidden" name ="id" value="${article.id}"/>
-      <input type="hidden" name ="memberId" value="${loginedMemberId}"/>
-      <textarea name="body" class="reply-body" cols="30" rows="4"  placeholder="선정적, 극단적인 비속어는 통보없이 삭제 및 차단 될 수 있습니다"></textarea>
-      <input class="submit" type="submit" value="작성"></input>
-      </div>   
-   </form>
-    </c:if>
-            
-      
-      
-       <c:if test="${loginedMemberId == -1 }"> 
-      <form action="reply" class="reply-form">
-      <div class="reply-con">
-      <input type="hidden" name ="id" value="${article.id}"/>
-      <input type="hidden" name ="memberId" value="${loginedMemberId}"/>
-      <textarea name="body" class="reply-body" cols="30" rows="4"  placeholder="로그인 후 이용해주세요."></textarea>
-      <input class="submit" type="submit" value="작성"></input>
-      </div>   
-   </form>
-  </c:if>
-   
-   <div class="back-btn-con ">
-	<input class="list-back-btn" type="button" value="목록으로 돌아가기" onclick="location='list'"/>
+		<div id="m-viewer1"></div>
 	</div>
-   
-   </div>
-	
-	<script>
+</nav>
+
+<c:if test="${article.id > articleFirstId.id }">
+	<a class="prev visible-on-sm-up"
+		href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id-1}">&#10094;</a>
+</c:if>
+<c:if test="${article.id < articleLastId.id }">
+	<a class="next visible-on-sm-up"
+		href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id+1}">&#10095;</a>
+</c:if>
+
+<div class="reply-box">
+	<h2 class="Co">Comment (${totalCount})</h2>
+	<c:forEach items="${articleReplys}" var="articleReply">
+		<div class="reply-item">
+			<div class="reply-boxi">
+				<div class="reply-nick">
+					<a href="#" onclick="window.open('/blog/s/member/userInfo?id=${articleReply.memberId}','유저정보','width=963, height=880'); return false" >
+					<img src="${articleReply.extra.image}" alt="" class="image" /></a>
+					<p class="reply-writer">${articleReply.extra.writer}</p>
+				</div>
+				<div class="reply-bodyitem">
+					<p>${articleReply.body}</p>
+					<div class="reply-regDate">${articleReply.regDate}
+						<c:if test="${loginedMemberId == articleReply.memberId}">
+							<a class="delete-item"
+								href="${pageContext.request.contextPath}/s/article/replyDelete?id=${articleReply.id}">삭제</a>
+							<p class="modify-item">수정</p>
+						</c:if>
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+
+	<c:forEach items="${articleReplys}" var="articleReply">
+		<c:if test="${loginedMemberId == articleReply.memberId}">
+			<div class="reply-subitem">
+				<form action="replyModify" class="pc-form" method="post">
+					<input type="hidden" name="id" value="${articleReply.id}" />
+					<div class="modiy-body-box">
+						<textarea name="body" class="modify-body-item" cols="30" rows="4"
+							placeholder="선정적, 극단적인 비속어는 통보없이 삭제 및 차단 될 수 있습니다"></textarea>
+						<input class="submit" type="submit" value="수정"></input>
+					</div>
+				</form>
+			</div>
+		</c:if>
+	</c:forEach>
+
+	<c:if test="${loginedMemberId != -1 }">
+		<form action="reply" class="reply-form">
+			<div class="reply-con">
+				<input type="hidden" name="id" value="${article.id}" /> <input
+					type="hidden" name="memberId" value="${loginedMemberId}" />
+				<textarea name="body" class="reply-body" cols="30" rows="4"
+					placeholder="선정적, 극단적인 비속어는 통보없이 삭제 및 차단 될 수 있습니다"></textarea>
+				<input class="submit" type="submit" value="작성"></input>
+			</div>
+		</form>
+	</c:if>
+
+
+
+	<c:if test="${loginedMemberId == -1 }">
+		<form action="reply" class="reply-form">
+			<div class="reply-con">
+				<input type="hidden" name="id" value="${article.id}" /> <input
+					type="hidden" name="memberId" value="${loginedMemberId}" />
+				<textarea name="body" class="reply-body" cols="30" rows="4"
+					placeholder="로그인 후 이용해주세요."></textarea>
+				<input class="submit" type="submit" value="작성"></input>
+			</div>
+		</form>
+	</c:if>
+
+	<div class="back-btn-con ">
+		<input class="list-back-btn" type="button" value="목록으로 돌아가기"
+			onclick="location='list'" />
+	</div>
+
+</div>
+
+<script>
 		var editor1__initialValue = getBodyFromXTemplate('#origin1');
 		var editor1 = new toastui.Editor({
 			el : document.querySelector("#viewer1"),
@@ -604,7 +649,7 @@
 	</script>
 
 
-	<script>
+<script>
 		var editor1__initialValue = $('#m-origin1').html();
 		var editor1 = new toastui.Editor({
 			el : document.querySelector("#m-viewer1"),
@@ -634,8 +679,8 @@
 		
 	</script>
 
-	
 
 
 
-	<%@ include file="/jsp/part/foot.jspf"%>
+
+<%@ include file="/jsp/part/foot.jspf"%>

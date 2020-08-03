@@ -63,6 +63,8 @@ public class MemberController extends Controller {
 			return doActiondoLogOut(req,resp); // 로그아웃 실행
 		case "info":
 			return doActionInfo(req,resp); // 회원정보
+		case "userInfo":
+			return actionUserInfo(); //  다른사람 정보
 		case "infoEmail":
 			return actionInfoEmail(req,resp); // 이메일 인증보내기
 		case "findId":
@@ -92,6 +94,15 @@ public class MemberController extends Controller {
 		}
 		return "";
 	}
+	private String actionUserInfo() {
+		
+		int id = Util.getInt(req, "id");
+		Member member = memberService.actionMemberById(id);
+		req.setAttribute("member",member);
+		
+		return "member/userInfo.jsp";
+	}
+
 	private String actionInfoEmail(HttpServletRequest req, HttpServletResponse resp) {
 		
 		String code = req.getParameter("code");

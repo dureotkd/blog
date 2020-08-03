@@ -202,7 +202,8 @@ public class ArticleDao extends Dao {
 	public List<ArticleReply> getForPrintArticleReplys(int id) {
 		SecSql secSql = new SecSql();
 		secSql.append("SELECT A.*, ");
-		secSql.append("M.nickname AS extra__writer");
+		secSql.append("M.nickname AS extra__writer,");
+		secSql.append("M.image AS extra__image");
 		secSql.append("FROM articleReply AS A");
 		secSql.append("INNER JOIN member AS M");
 		secSql.append("ON A. memberId= M.id");
@@ -311,4 +312,30 @@ public class ArticleDao extends Dao {
 		secSql.append("WHERE cateItemId = ? ",cateItemId);
 		return DBUtil.selectRowIntValue(dbConn, secSql);
 		}
+
+	public List<Article> getForPrintUserArticle(int id) {
+		SecSql secSql = new SecSql();
+		secSql.append("SELECT * FROM article");
+		secSql.append("WHERE memberId = ?",id);
+		
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, secSql);
+		List<Article> articles = new ArrayList<>();
+		for (Map<String, Object> row : rows) {
+			articles.add(new Article(row));
+		}
+		return articles;
+	}
+
+	public List<ArticleReply> getForPrintUserArticleReplys(int id) {
+		SecSql secSql = new SecSql();
+		secSql.append("SELECT * FROM articleReply");
+		secSql.append("WHERE memberId = ?",id);
+		
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, secSql);
+		List<ArticleReply> articleReplys = new ArrayList<>();
+		for (Map<String, Object> row:rows) {
+			articleReplys.add(new ArticleReply(row));
+		}
+		return articleReplys;
+	}
 }
