@@ -15,12 +15,24 @@ public class Article extends Dto {
 	
 	String img = null;
 	public String getimgTagFormat() {
-		Pattern pattern  =  Pattern.compile("[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)");
+		
+        Pattern pattern = Pattern.compile(
+                "\\b(((ht|f)tp(s?)\\:\\/\\/|~\\/|\\/)|www.)" + 
+                "(\\w+:\\w+@)?(([-\\w]+\\.)+(com|org|net|gov" + 
+                "|mil|biz|info|mobi|name|aero|jobs|museum" + 
+                "|travel|[a-z]{2}))(:[\\d]{1,5})?" + 
+                "(((\\/([-\\w~!$+|.,=]|%[a-f\\d]{2})+)+|\\/)+|\\?|#)?" + 
+                "((\\?([-\\w~!$+|.,*:]|%[a-f\\d{2}])+=?" + 
+                "([-\\w~!$+|.,*:=]|%[a-f\\d]{2})*)" + 
+                "(&(?:[-\\w~!$+|.,*:]|%[a-f\\d{2}])+=?" + 
+                "([-\\w~!$+|.,*:=]|%[a-f\\d]{2})*)*)*" + 
+                "(#([-\\w~!$+|.,*:=]|%[a-f\\d]{2})*)?\\b");
+		
 		Matcher match = pattern.matcher(this.getBody());
 		
-		if ( match.find()) {
-			img = match.group(1);
-		}
+		 while (match.find()) {
+	            img = match.group();
+	        }
 		return img;
 	}
 	

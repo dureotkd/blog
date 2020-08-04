@@ -6,467 +6,523 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-	
+<link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/blog/resource/css/common.css" />
 <link rel="stylesheet" href="/blog/resource/css/home/main.css" />
 <style>
-*{
-	color:inherit;
+* {
+	color: inherit;
 }
-.title{
-	text-align:left;
-	color:black;
+
+
+
+.title {
+	text-align: left;
+	color: black;
 }
-.title > a{
-	text-align:left;
-	color:black;
-	font-sizle : 1.3rem;
+
+.title>a {
+	text-align: left;
+	color: black;
+	font-sizle: 1.3rem;
 }
 
 h2 {
-	text-align:center;
+	text-align: center;
 }
 
 .table-box {
-	display:flex;
-	justify-content:center;
-	align-items:center;
-	width:100%;
-	margin-top:30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-top: 30px;
 }
 
 .top-bar {
-	display:flex;
-	justify-content:space-between;
-	background:#f5f5f5;
+	display: flex;
+	justify-content: space-between;
+	background: #f5f5f5;
 }
 
 .col {
-	color:red;
+	color: red;
 }
 
 table {
 	border-collapse: collapse;
-    line-height: 30px;
-    border-left: none; 
-   border-right: none;
-   width:60%;
-   
+	line-height: 30px;
+	border-left: none;
+	border-right: none;
+	width: 60%;
 }
 
 table .first-tr {
-	border-top:2px solid #388e3c;
+	border-top: 2px solid #388e3c;
 }
 
-table td,th {
+table td, th {
 	border-bottom: 1px solid silver;
-    border-collapse: collapse;
-    text-align: center;
-    padding: 7px;
+	border-collapse: collapse;
+	text-align: center;
+	padding: 7px;
 }
+
 .boardName {
-  align-items:center;
-  display:flex;
-  flex: 1, 0 , 0;
-  width:50%;
-  justify-content:flex-end;
-  font-size:2.5rem;
-  font-weight:bold;
-  color:white;
+	align-items: center;
+	display: flex;
+	flex: 1, 0, 0;
+	width: 50%;
+	justify-content: flex-end;
+	font-size: 2.5rem;
+	font-weight: bold;
+	color: white;
 }
 
 .board {
-  display:flex;
-  flex:1, 0, 0 ;
-  width:40%;
-  font-size:1.1rem;
-  align-items:flex-end;
-  margin-bottom:50px;
-  color:white;
+	display: flex;
+	flex: 1, 0, 0;
+	width: 40%;
+	font-size: 1.1rem;
+	align-items: flex-end;
+	margin-bottom: 50px;
+	color: white;
 }
 
 .con {
-  display:flex;
-  flex-direction:column;
+	display: flex;
+	flex-wrap:wrap;
 }
 
-.text-box{
-  width:60%;
-   justify-content:space-between;
-  display:flex;
+.text-box {
+	width: 60%;
+	justify-content: space-between;
+	display: flex;
 }
 
-.text-box2{
-	width:100px;
+.text-box2 {
+	width: 100px;
 }
 
 .paging {
-	margin-bottom:100px;
-	margin-top:10px;
-	font-size:0;
+	margin-bottom: 100px;
+	margin-top: 10px;
+	font-size: 0;
 }
 
-.paging > .num {
+.paging>.num {
 	border: 1px solid #388e3c;
 	border-radius: 2000px;
 }
 
-
-.paging > a {
+.paging>a {
 	padding: 5px 10px;
-    display: inline-block;
-    margin-left: 10px;
-    font-size: 12px;
-    color:black;
+	display: inline-block;
+	margin-left: 10px;
+	font-size: 12px;
+	color: black;
 }
 
 .head2 {
-	height:100px;
-	background-color:black;
+	height: 100px;
+	background-color: black;
 }
 
-    .head3{
-        background-image: url(https://www.samsonitemall.co.kr/on/demandware.static/-/Sites-KR-Samsonite-Master/default/dw0b3840a7/images/swatch/chip_COL_0651_TrueBlack.jpg);
-        height:350px;
-        background-size:cover;
-    }
-
-.bd{
-	text-align:center;
-	color:black;
+.head3 {
+	height: 350px;
+	background-size: cover;
+	background:linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
 }
 
-
-.left-btn > .hide > .left-menu {
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    width: 150px;
-    top: 100%;
-    left:-15px;
-    margin-top:10px;
-    height: auto;
-    
+.bd {
+	text-align: center;
+	color: black;
 }
 
-.left-menu > a {
-    height: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-	color:black;
-	padding:13px 4px;
-	margin-left:10px;
+.left-btn>.hide>.left-menu {
+	display: flex;
+	position: absolute;
+	flex-direction: column;
+	width: 150px;
+	top: 100%;
+	left: -15px;
+	margin-top: 10px;
+	height: auto;
 }
-    .text1 {
-        font-size:2.5rem;
-        font-weight:bold;
-       display:flex;
-        color: white;
-       justify-content:center;
-        width:100%;
-        align-items: center;
-        line-height:65px;
-    }
+
+.left-menu>a {
+	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	color: black;
+	padding: 13px 4px;
+	margin-left: 10px;
+}
+
+.text1 {
+	font-size: 2.5rem;
+	font-weight: bold;
+	display: flex;
+	color: white;
+	justify-content: center;
+	width: 100%;
+	align-items: center;
+	line-height: 65px;
+}
+
 .left-btn {
-	position:absolute;
-	left:2%;
-	top:60%;
+	position: absolute;
+	left: 2%;
+	top: 60%;
 }
+
 .left-btn i {
-	position:relative;
+	position: relative;
 }
+
 .hide {
-display:none;
-position:relative;
+	display: none;
+	position: relative;
 }
 
 .flex {
-	display:flex;
+	display: flex;
 }
 
-.pc-search-box{
-	display:flex;
-	justify-content:flex-end;
-	margin-bottom:10px;
+.pc-search-box {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 10px;
 }
 
 .page-box {
-	margin-bottom:20px;
-	margin-top:20px;
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 /* ================================= pc 화면  끝 ================================= */
-
-
-
-
 .m-top-table {
-	position:relative;
-	display:flex;
-	height:8%;
-	border-bottom:1px solid silver;
+	position: relative;
+	display: flex;
+	height: 8%;
+	border-bottom: 1px solid silver;
 }
 
 .m-title {
-	padding : 0px 15px;
-	align-items:center;
-	display:flex;
-	height:100%;
-	width:100%;
+	padding: 0px 15px;
+	align-items: center;
+	display: flex;
+	height: 100%;
+	width: 100%;
 }
 
-.article-table{
-	height:80%
+.article-table {
+	height: 80%
 }
+
 .article-post {
-	flex-direction:column;
+	flex-direction: column;
 }
 
 .m-article-title, .m-article-id {
-	padding:11px 15px;
+	padding: 11px 15px;
 }
 
-.m-article-title{
-	border-bottom:1px solid green;
+.m-article-title {
+	border-bottom: 1px solid green;
 }
 
 .m-table {
 	border-collapse: collapse;
-	line-height : 54px;
-	border-left:none;
-	border-rghit:none;
-	width:100%;
-	border-bottom:1px solid silver;
+	line-height: 54px;
+	border-left: none;
+	border-rghit: none;
+	width: 100%;
+	border-bottom: 1px solid silver;
 }
 
-
 .m-tag-title:hover {
-	color:red;
+	color: red;
 }
 
 .m-board-change, .m-board-change2 {
-	cursor :pointer;
+	cursor: pointer;
 }
+
 .m-board-change.active {
-	display:none;
+	display: none;
 }
+
 .m-board-change2 {
-	display:none;
+	display: none;
 }
-.m-board-change2.active{
-	display:block;
+
+.m-board-change2.active {
+	display: block;
 }
 
 .m-board-menu {
-	display:none;
+	display: none;
 }
 
 .m-board-menu.active {
-	position:absolute;
-	top:101%;
-	background-color:#f5f5f5;
-	display:flex;
-	left:0;
-	flex-direction:column;
-	width:100%;
-	opacity:0.9;
+	position: absolute;
+	top: 101%;
+	background-color: #f5f5f5;
+	display: flex;
+	left: 0;
+	flex-direction: column;
+	width: 100%;
+	opacity: 0.9;
 }
 
-.m-board-menu > .m-contentbtn {
-	padding:30px;
-	text-align:center;
+.m-board-menu>.m-contentbtn {
+	padding: 30px;
+	text-align: center;
 }
 
 .m-title-text {
-	margin-right:5px;
+	margin-right: 5px;
 }
 
 .m-sub {
-	margin-top:7px;
-	font-size:0.7em;
-	color:silver;
+	margin-top: 7px;
+	font-size: 0.7em;
+	color: silver;
 }
+
 .m-page-box {
-	display:flex;
+	display: flex;
 	justify-content: center;
 }
 
 .m-page-box>ul>li {
-	background-color:green;
-	width:20px;
-	border-radius:100px;
-	text-align:center;
+	background-color: green;
+	width: 20px;
+	border-radius: 100px;
+	text-align: center;
 	margin: 10px;
 }
 
 .m-a {
-	color:white;
+	color: white;
 }
-
-
-
 
 /* 800px 이하면 안보이게 ( 모바일 버전 ) */
-
-@media( max-width:799px ) {
-    .visible-on-sm-up {
-        display: none !important;
-    }
+@media ( max-width :799px ) {
+	.visible-on-sm-up {
+		display: none !important;
+	}
 }
 
-
-.page-ul{
+.page-ul {
 	margin: 0 auto;
 }
+
 .tag-title {
-	font-size:2em;
-	font-weight:900;
+	font-size: 1.6em;
+	font-weight: 900;
+	text-align: cetner;
+	margin-right:10px;
+	margin-left:10px;
 }
 
 .tag-sub {
-	font-size:0.8em;
+	font-size: 0.8em;
 }
+
 .tag-Id {
-	font-size:15.75px;
+	font-size: 15.75px;
 }
+
 .list-box {
-	float:left;
-	display:flex;
-	flex-direction:column;
-	width:700px;
-	border-bottom:2px solid #EEE;
-	margin-bottom:30px;
-	}
-.tag-Id , .tag-title , .tag-sub {
-	margin-bottom:20px;
+	float: left;
+	display: flex;
+	width: 700px;
+	border: 2px solid #EEE;
+	margin-bottom: 30px;
+	align-items: center;
 }
 
 .page-btn {
-	padding-left:15px;
-	padding-right:15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 .page-btn:hover {
-	background-color:silver;
-	opacity:0.8;
+	background-color: silver;
+	opacity: 0.8;
 }
 
 .writer-img {
-	width:40px;
-	height:40px;
-	border-radius:50%;
-	margin-left:20px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	margin-left: 20px;
 }
+
 .tag-Id {
-	display:flex;
-	align-items:center;
+	display: flex;
+	align-items: center;
 }
 
+.article-image-tag {
+	width: 300px;
+	height: 250px;
+	transition: all ease.6s;
+}
 
+.list-box:hover .article-image-tag {
+	transform: scale(1.1);
+	opacity: 0.7;
+}
 
+.article-text-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 60%;
+	justify-content: center;
+}
 
+.list-a {
+	display: flex;
+	width: 100%;
+}
 
-@media ( min-width: 480px){
+.article-image-box {
+	overflow: hidden;
+	width:40%;
+	border-right:1px solid #eee;
+}
+
+.list-box:nth-child(2n){
+	margin-left:50px;
+}
+
+.cateName {
+	text-align:center;
+	font-weight:800;
+	font-size:1.5rem;
+	font-family:'Questrial','Helvetica Neue',Arial,sans-serif;
+}
+
+.cateItem-box{
+	display:flex;
+	justify-content:center;
+	margin-top:30px;
+}
+
+@media ( min-width : 480px) {
 	body {
-		font-size:1.0vw;
+		font-size: 1.0vw;
 	}
 }
 
 /* 800px 이하면 안보이게 ( 모바일 버전 ) */
 
-
 /* 800px 이상이면 안보이게 ( pc 버전 ) */
-
-@media( min-width:800px ) {
-    .visible-on-sm-down {
-        display: none !important;
-    }
+@media ( min-width :800px ) {
+	.visible-on-sm-down {
+		display: none !important;
+	}
 }
-
-
 
 /* 800px 이상이면 안보이게 ( pc 버전 ) */
 </style>
-	<div class="head3 flex visible-on-md-up">
-		<div class="text1">
-		럭셔리한 개발자를 꿈꾸는, <br>초보개발자 블로그 </div>
-		</div>
-	
-	
-	<div class="con visible-on-sm-up table-box">
-		<c:forEach items="${articles}" var="article">	
-			<div class="list-box">
-			<span class="tag-Id">
-			${cateItemName} 
-			,
-			&nbsp;
-			<p>${article.extra.text}</p>
-			<img src="${article.extra.writer}" alt="" class="writer-img" />	
-			</span>
-			<a class="tag-title" href="./detail?cateItemId=${param.cateItemId}&id=${article.id}">${article.title}</a>
-			<span class="tag-sub">
-			${article.regDateFormat2}
-			&nbsp;&nbsp;&nbsp;<i class="far fa-eye"></i> : ${article.hit}
-			</span>
-			</div>
-			</c:forEach>
-					
-		<div class="con page-box">
-		<ul class="page-ul flex flex-jc-c">
-		<c:forEach var="i" begin="1" end="${totalPage}" step="1">
-		<li class="${i == paramPage ? "current" : ""}"><a  class= "page-btn"
-			href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=${i}" class="block">${i}</a></li>
-		</c:forEach>
-	</ul>
+<div class="head3 flex visible-on-md-up">
+	<div class="text1">
+		럭셔리한 개발자를 꿈꾸는, <br>초보개발자 블로그
+	</div>
 </div>
+
+<div class="cateItem-box">
+<p class="cateName">${cateItemName}</p>
+</div>
+
+<div class="con visible-on-sm-up table-box">
+	<c:forEach items="${articles}" var="article">
+		<div class="list-box">
+			<a href="./detail?cateItemId=${param.cateItemId}&id=${article.id}"
+				class="list-a">
+				<div class="article-image-box">
+				<c:if test="${article.imgTagFormat != null }">
+				<img src=" ${article.imgTagFormat }" alt="" class="article-image-tag" />
+				</c:if>
+				<c:if test="${article.imgTagFormat == null }">
+				<img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4RDaRXhpZgAATU0AKgAAAAgABAE7AAIAAAAFAAAISodpAAQAAAABAAAIUJydAAEAAAAKAAAQyOocAAcAAAgMAAAAPgAAAAAc6gAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHVzZXIAAAAFkAMAAgAAABQAABCekAQAAgAAABQAABCykpEAAgAAAAMwOQAAkpIAAgAAAAMwOQAA6hwABwAACAwAAAiSAAAAABzqAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMjAyMDowODowNCAxNzo0NTo0NAAyMDIwOjA4OjA0IDE3OjQ1OjQ0AAAAdQBzAGUAcgAAAP/hCxdodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvADw/eHBhY2tldCBiZWdpbj0n77u/JyBpZD0nVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkJz8+DQo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIj48cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSJ1dWlkOmZhZjViZGQ1LWJhM2QtMTFkYS1hZDMxLWQzM2Q3NTE4MmYxYiIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIi8+PHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9InV1aWQ6ZmFmNWJkZDUtYmEzZC0xMWRhLWFkMzEtZDMzZDc1MTgyZjFiIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iPjx4bXA6Q3JlYXRlRGF0ZT4yMDIwLTA4LTA0VDE3OjQ1OjQ0LjA4NzwveG1wOkNyZWF0ZURhdGU+PC9yZGY6RGVzY3JpcHRpb24+PHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9InV1aWQ6ZmFmNWJkZDUtYmEzZC0xMWRhLWFkMzEtZDMzZDc1MTgyZjFiIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iPjxkYzpjcmVhdG9yPjxyZGY6U2VxIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+PHJkZjpsaT51c2VyPC9yZGY6bGk+PC9yZGY6U2VxPg0KCQkJPC9kYzpjcmVhdG9yPjwvcmRmOkRlc2NyaXB0aW9uPjwvcmRmOlJERj48L3g6eG1wbWV0YT4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgPD94cGFja2V0IGVuZD0ndyc/Pv/bAEMABwUFBgUEBwYFBggHBwgKEQsKCQkKFQ8QDBEYFRoZGBUYFxseJyEbHSUdFxgiLiIlKCkrLCsaIC8zLyoyJyorKv/bAEMBBwgICgkKFAsLFCocGBwqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKv/AABEIAQEBXgMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APoKiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACkxS0hoELRRRQMKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApDS0d6BBRRRQMKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApKWjvQIKKKKBhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAF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" alt="" class="article-image-tag" />
+				</c:if>
+				</div>
+				<div class="article-text-box">
+					<span class="tag-Id"> ${cateItemName} , &nbsp;
+						<p>${article.extra.text}</p> <img src="${article.extra.writer}"
+						alt="" class="writer-img" />
+					</span>
+					<p class="tag-title">${article.title}</p>
+					<span class="tag-sub"> ${article.regDateFormat2}
+						&nbsp;&nbsp;&nbsp;<i class="far fa-eye"></i> : ${article.hit}
+					</span>
+				</div>
+			</a>
 		</div>
-		
- <!--   ================================= pc 화면  끝 ================================= -->
-				
-		
-		<!-- 모바일 테이블부분  --> 
-		<nav class="m-top-table visible-on-sm-down">
-			<div class="m-title">
-			<div class="m-title-text">${cateItemName}(${totalCount})</div>
-			<div class="m-icon-box">
-			<i class="m-board-change fas fa-angle-down"></i>
-			<i class="m-board-change2 fas fa-angle-up"></i>
-			</div>
-			<div class="m-board-menu">
-			<c:forEach items="${cateItems}" var="cateItem">
-				<a class = "m-contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">${cateItem.name}</a>
+	</c:forEach>
+</div>
+
+	<div class="con page-box">
+		<ul class="page-ul flex flex-jc-c">
+			<c:forEach var="i" begin="1" end="${totalPage}" step="1">
+				<li class="${i == paramPage ? "current" : ""}"><a
+					class="page-btn"
+					href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=${i}"
+					class="block">${i}</a></li>
 			</c:forEach>
-			</div>
-			 </div>
-			
-	</form>
-		</nav>
-		
-		<section class="article-table visible-on-sm-down">
-				<c:forEach items="${articles}" var="article">
-				${article.extra.writer}
-				<div class = "m-article-title text-align-left">
-				<a class="m-tag-title" href="./detail?cateItemId=${param.cateItemId}&id=${article.id}">${article.title}</a>
-				<div class="m-sub">
-				${article.id}	
-				신성민
-				조회 : 1
-				</div>
-				</div>
-				</c:forEach>
-				<div class="m-page-box">
-		<ul class="m-page flex flex-jc-c">
-		<c:forEach var="i" begin="1" end="${totalPage}" step="1">
-		<li class="${i == paramPage ? "current" : ""}"><a class = "m-a"
-			href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=${i}" class="block">${i}</a></li>
-		</c:forEach>
 		</ul>
+	</div>
+
+<!--   ================================= pc 화면  끝 ================================= -->
+
+
+<!-- 모바일 테이블부분  -->
+<nav class="m-top-table visible-on-sm-down">
+	<div class="m-title">
+		<div class="m-title-text">${cateItemName}(${totalCount})</div>
+		<div class="m-icon-box">
+			<i class="m-board-change fas fa-angle-down"></i> <i
+				class="m-board-change2 fas fa-angle-up"></i>
 		</div>
-		</section>
-		<div class="con search-box flex flex-jc-c">
+		<div class="m-board-menu">
+			<c:forEach items="${cateItems}" var="cateItem">
+				<a class="m-contentbtn"
+					href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">${cateItem.name}</a>
+			</c:forEach>
 		</div>
-		
-		
-		
-		
-<%@ include file="/jsp/part/foot.jspf" %>
+	</div>
+
+	</form>
+</nav>
+
+<section class="article-table visible-on-sm-down">
+	<c:forEach items="${articles}" var="article">
+				${article.extra.writer}
+				<div class="m-article-title text-align-left">
+			<a class="m-tag-title"
+				href="./detail?cateItemId=${param.cateItemId}&id=${article.id}">${article.title}</a>
+			<div class="m-sub">${article.id}신성민조회: 1</div>
+		</div>
+	</c:forEach>
+	<div class="m-page-box">
+		<ul class="m-page flex flex-jc-c">
+			<c:forEach var="i" begin="1" end="${totalPage}" step="1">
+				<li class="${i == paramPage ? "current" : ""}"><a class="m-a"
+					href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=${i}"
+					class="block">${i}</a></li>
+			</c:forEach>
+		</ul>
+	</div>
+</section>
+<div class="con search-box flex flex-jc-c"></div>
+
+
+
+
+<%@ include file="/jsp/part/foot.jspf"%>
