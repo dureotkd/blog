@@ -15,7 +15,7 @@ public class Article extends Dto {
 	
 	String img = null;
 	public String getimgTagFormat() {
-		Pattern pattern  =  Pattern.compile("(?i)<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+		Pattern pattern  =  Pattern.compile("[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)");
 		Matcher match = pattern.matcher(this.getBody());
 		
 		if ( match.find()) {

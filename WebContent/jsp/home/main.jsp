@@ -765,7 +765,7 @@ img {vertical-align: middle;}
   
   <div class="text-wrap">
   <div class="text-body">${article.body}</div>
-  <div class="text">${article.imgTagFormat}</div>
+  <img src="${article.imgTagFormat}" alt="" />
   </div>
   <button class="text-btn" onclick="location.href='${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id}'">자세히 보기</button>
 </div>

@@ -15,6 +15,7 @@ import com.sbs.java.blog.controller.GuestBookController;
 import com.sbs.java.blog.controller.HomeController;
 import com.sbs.java.blog.controller.LetterController;
 import com.sbs.java.blog.controller.MemberController;
+import com.sbs.java.blog.controller.GuestBookController;
 import com.sbs.java.blog.exception.SQLErrorException;
 import com.sbs.java.blog.util.Util;
 

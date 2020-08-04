@@ -238,6 +238,9 @@ public class ArticleController extends Controller {
 
 	private String doActionList(HttpServletRequest req, HttpServletResponse resp) {
 		
+		
+		
+		
 
 		int page = 1;
 
