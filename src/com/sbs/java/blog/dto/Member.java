@@ -22,7 +22,6 @@ public class Member extends Dto {
 		this.name = (String) row.get("name");
 		this.nickname = (String) row.get("nickname");
 		this.image = (String) row.get("image");
-		this.mailStatus = (int) row.get("mailStatus");
 	}
 	
 	

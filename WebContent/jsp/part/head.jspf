@@ -21,20 +21,21 @@
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/3b1f8c6d21.js"
 	crossorigin="anonymous"></script>
-	
+
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!--  구글 폰트 로고  -->
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
 
 <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
+	
 <style>
 * {
 	font-family: 'Archivo', sans-serif;
-}
-
-.top-bar {
-	background:#f5f5f5;
 }
 
 .top-bar2 {
@@ -67,8 +68,21 @@
 	align-its: center;
 }
 
+.meet-logo {
+	font-family: 'Courgette', cursive;
+	color:#fff;
+	font-weight:normal;
+	font-size:3rem;
+	transition:all.3s;
+}
+
+
 .jus-c-spa {
 	justify-content: space-between;
+}
+
+.white {
+	color:#fff;
 }
 
 .po-absol {
@@ -87,8 +101,12 @@
 	height: 20px;
 }
 
-.top-bar2{
-	height:80px;
+.top-bar2 {
+	height: 80px;
+}
+
+.top-bar {
+	height: 80px;
 }
 
 .m-SNS ul {
@@ -113,12 +131,11 @@
 	.m-search-box {
 		display: flex;
 	}
-	
 }
 
 @media ( max-width :799px ) {
 	.top-bar {
-		height:80px;
+		height: 80px;
 	}
 	.m-top-bar-z {
 		height: 100px;
@@ -140,10 +157,6 @@ body {
 	font-size: 1.5rem;
 }
 
-.top-bar {
-	justify-content: space-between;
-	box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.75);
-}
 
 .right-menu>a>i, .visit {
 	padding: 30px;
@@ -168,9 +181,11 @@ body {
 	position: absolute;
 	opacity: 0;
 }
+
 .login-nickname>a:hover {
 	color: red;
 }
+
 .fa-bars {
 	font-size: 2rem;
 }
@@ -180,7 +195,7 @@ body {
 	position: absolute;
 	background-color: #fff;
 	width: 300px;
-	top:80;
+	top: 80;
 	left: -300px;
 	z-index: 400;
 	transition: left.6s;
@@ -214,18 +229,19 @@ body {
 }
 
 .contentbtn {
-	padding: 20px;
-	transition:background.4s;
-	color:#212121;
+	padding: 10px;
+	transition: all.4s;
+	color: #a0a0a0;
+	font-family:normal;
 }
 
 .contentbtn:hover {
-	background:#eee;
+	color: black;
 }
 
 .id-box {
-	border-top:1px solid #ccc;
-	border-bottom:1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
 	disply: flex;
 	flex-direction: column;
 	width: 100%;
@@ -247,7 +263,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color:black;
+	color: black;
 }
 
 .id-box>a {
@@ -263,6 +279,7 @@ body {
 	text-align: center;
 	font-size: 1.1rem;
 }
+
 .work-item>a>i {
 	padding: 35px;
 	font-size: 1.4rem;
@@ -312,82 +329,129 @@ body {
 	font-size: 30px;
 	padding: 25px;
 	cursor: pointer;
-	margin-right:10px;
+	margin-right: 10px;
 }
 
 .m-search-box {
-	display:flex;
-	align-items:center;
-	margin-top:17px;
+	display: flex;
+	align-items: center;
+	margin-top: 17px;
 }
-
 
 .search-text {
-	border:1px solid #ccc;
-	width:322px;
-	background:#f5f5f5;
-	padding:10px;
-	font-size:15px;
+	border: 1px solid #ccc;
+	width: 250px;
+	padding: 10px;
+	font-size: 15px;
 }
 
-.fa-search  {
-	font-size:20px;
-	cursor:pointer;
+.fa-search {
+	font-size: 20px;
+	cursor: pointer;
 }
 
 .search-btn {
 	outline: none;
 	border: none;
-	background:#f5f5f5;
+	background: #fff;
 }
 
-.logo {
-	margin-left:100px;
-	display:flex;
-	height:100%;
-	align-items:center;
-}
 .needChange {
-	color:#999;
-	font-size:15px;
+	color: #999;
+	font-size: 15px;
 }
 
 .info-data {
-	font-size:1.3rem;
+	font-size: 1.3rem;
 }
+
+.user-profile {
+	width:50px;
+	height:50px;
+	cursor:pointer;
+	position:relative;
+}
+
 .profile {
-	width:58px;
-	height:58px;
+	width: 100%;
+	height: 100%;
+	object-fit:cover;
 	border-radius:50%;
-	margin-left:20px;
 }
+
 .P-image {
-	height:70px;
+	height: 70px;
 }
 
 .right-box {
-	margin-right:30px;
-	display:flex;
-	align-items:center;
+	margin-right: 30px;
+	display: flex;
+	align-items: center;
 }
+
 .right-item {
-	color:#424242;
-	font-size:25px;
-	padding:20px;
+	color: #424242;
+	font-size: 25px;
+	padding: 20px;
 }
+
 .fa-folder {
-	margin-right:10px;
+	margin-right: 10px;
 }
+
 .message-box {
-	width:100%;
-	height:50%;
-	display:flex;
-	justify-content:center;
-	align-items:center;
-	border-bottom:1px solid #ccc;
+	width: 100%;
+	height: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-bottom: 1px solid #ccc;
 }
+
 .none {
+	display: none;
+}
+.margin-bottom {
+	margin-bottom:0px;
+}
+.top-line {
+	width:100%;
+	position:fixed;
+	background:#fff;
+	height:81px;
+	border-bottom:1px solid #d6d6d6;
+	top:0;
+}
+.login{
+	padding:10px;
+	border:1px solid #0095f6;
+	border-radius:2px;
+	color:#0095f6;
+}
+
+.dropdown-menu {
+	top:100%;
+	right:0;
+	position:absolute;
+	width:180px;
+	border:1px solid #ccc;
+	margin-top:5px;
+	box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	transition:all.5s;
 	display:none;
+	text-align:center;
+	background:white;
+}
+.dropdown-menu > li {
+	padding:15px;
+}
+.dropdown-menu > li > a{
+	transition:all.3s;
+	padding:15px;
+	
+}
+.dropdown-menu.open {
+	display:block;
 }
 </style>
 
@@ -401,117 +465,86 @@ body {
 
 		var onBeforeUnloadSetted = false;
 		var onBeforeUnload = function(e) {
-		  return '떠나시겠습니까?';
+			return '떠나시겠습니까?';
 		};
 
 		function applyOnBeforeUnload() {
-		  if ( onBeforeUnloadSetted ) return;
-		  $(window).bind('beforeunload', onBeforeUnload);
-		  onBeforeUnloadSetted = true;
+			if (onBeforeUnloadSetted)
+				return;
+			$(window).bind('beforeunload', onBeforeUnload);
+			onBeforeUnloadSetted = true;
 		}
 
 		function removeOnBeforeUnload() {
-		  $(window).unbind('beforeunload', onBeforeUnload);
-		  onBeforeUnloadSetted = false;
+			$(window).unbind('beforeunload', onBeforeUnload);
+			onBeforeUnloadSetted = false;
 		}
 
-	    
-		 window.addEventListener('load',function(event){
-		 AOS.init();
-		  });
-				
-		
+		window.addEventListener('load', function(event) {
+			AOS.init();
+		});
 	</script>
-	
-	
+
+
 	<!--  얘가 참이면 실행됨 EL 문ㅁ법 -->
-	<c:if test="${isLogined}"> 
-	<script>
-		loginedMember = {};
-		loginedMember["id"] = parseInt("${loginedMember.id}");
-		loginedMember["regDate"] = "${loginedMember.regDate}";
-		loginedMember["loginId"] = "${loginedMember.loginId}";
-		loginedMember["name"] = "${loginedMember.name}";
-		loginedMember["nickname"] = "${loginedMember.nickname}";
-		loginedMember["email"] = "${loginedMember.email}";
-	</script>
+	<c:if test="${isLogined}">
+		<script>
+			loginedMember = {};
+			loginedMember["id"] = parseInt("${loginedMember.id}");
+			loginedMember["regDate"] = "${loginedMember.regDate}";
+			loginedMember["loginId"] = "${loginedMember.loginId}";
+			loginedMember["name"] = "${loginedMember.name}";
+			loginedMember["nickname"] = "${loginedMember.nickname}";
+			loginedMember["email"] = "${loginedMember.email}";
+		</script>
 	</c:if>
-	
-	<div class="world-wrap">
-		<div class="top-bar   flex">
-			<div class="left-menu-1">
-				<a href="#" class="btn-toggle-pc-side-bar">
-					<div></div>
-					<div></div>
-					<div></div>
-				</a> 
-				<a href="/blog/s/home/main" class="logo"> <img
-					class="P-image" src="/blog/resource/css/home/logo1.png"
+	<div class="top-line"></div>
+		<div class="top-bar">
+			<div class="logo-box">
+				<a href="/blog/s/home/main" class="logo"> <img class="P-image"
+					src="/blog/resource/css/home/logo1.png"
 					alt="/blog/jsp/home/main.jsp">
 				</a>
-				<div class="left-item">
-					<ul class="content-box">
-						<div class="id-box">
-							<c:if test="${isLogined}">
-									<c:if test="${loginedMember.extra.isNeedToChangePasswordForTemp}">
-										<p class="needChange">현재 임시 비밀번호를 사용중입니다.<br>빠른 시일내에 변경해주세요.</p>
-									</c:if>
-							</c:if>
-							<c:if test="${isLogined == false}">
-								<div class="login-item">
-									<a href="${pageContext.request.contextPath}/s/member/login">로그인</a>
-								</div>
-						</div>
-						</c:if>
-						<c:if test="${isLogined}">
-							<div class="login-item">
-								<a href="${pageContext.request.contextPath}/s/member/logOut">로그아웃</a>
-							</div>
-				</div>
-				</c:if>
-				<a class="contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=">카테고리 전체 (${cateArticle})</a>
-				<c:forEach items="${cateItems}" var="cateItem">
-				<a class="contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}"><i class="fas fa-folder"></i>${cateItem.name}</a>
-				</c:forEach>
-				
-				
-
-				<div class="work-item">
-					 <a href="${pageContext.request.contextPath}/s/article/allList" class="none"><i
-						class="far fa-calendar-check"></i>활동내역</a> 
-				</div>
-				</ul>
 			</div>
-		</div>
-
-		<div class="m-search-box visible-on-sm-up">
-			<form action="${pageContext.request.contextPath}/s/article/list">
+			
+			<div class="search-box">
+			<form action="${pageContext.request.contextPath}/s/article/list" class="margin-bottom">
 				<input type="hidden" name="page" value="1" /> <input type="hidden"
 					name="cateItemId" value="${param.cateItemId}" /> <input
 					type="hidden" name="searchKeywordType" value="title" /> 
 				<input type="text" name="searchKeyword" value="${param.searchKeyword}" class="search-text" placeholder="검색" />
 				<button type="submit" class="search-btn" ><i class="fas fa-search"></i></button>
 			</form>
-		</div>
-		
-		<!--  top-bar 3번째 -->
-		<div class="right-box">
-			<a href="${pageContext.request.contextPath}/s/article/write?cateItemId=1" ><i class="fas fa-pencil-alt  right-item"></i></a>
+			</div>
+			
+			<div class="menu-box">
+			<c:forEach items="${cateItems}" var="cateItem">
+			<a class="contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">${cateItem.name}</a>
+			</c:forEach>
+			</div>
+			
+			<c:if test="${isLogined == false}">
+			<div class="user-box"></div>
+			<a href="../member/login" class="login">로그인</a>
+			</c:if>
+	
+			
 			<c:if test="${isLogined}">
-			<a href="#" onclick="window.open('/blog/s/member/info','나의정보','width=963, height=880'); return false" >
-			 <img src="${loginedMember.image}" alt="profile" class="profile" />
-			 </a>
-			 </c:if>
-			 <c:if test="${isLogined == false }">
-			 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSoy3heSU-2SeFekCWTQ2mgw-WfCzV8DJYdtg&usqp=CAU" alt="profile" class="profile" />
-			 </c:if>
-		</div>
+			<div class="user-profile">
+			<img src="${loginedMember.image}" class="profile" alt="" />
+			
+			<ul class="dropdown-menu">
+		 	<li><a href="../article/write">글쓰기</a></li>
+		 	<li><a href="#" onclick="window.open('/blog/s/member/info','나의정보','width=963, height=880'); return false">프로필</a></li>
+		 	<li><a href="../member/logOut">로그아웃</a></li>
+		 	</ul>
+			</div>
+			</c:if>
+			</div>
+			
 
-	</div>
-	</div>
-	
-	
-	<div class="top-bar2" visible-on-sm-down ></div>
-	
-	
+
+	<div class="top-bar2" visible-on-sm-down></div>
+
+
 	<a id="back-to-top" class="visible-on-md-up"></a>

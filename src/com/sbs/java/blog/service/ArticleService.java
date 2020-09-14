@@ -56,8 +56,8 @@ public class ArticleService extends Service {
 		return articleDao.doActionDoDelete(id);
 	}
 
-	public List<Article> getFortPrintViewsDESC(int cateItemId,int page,int itemsInAPage) {
-		return articleDao.getFortPrintViewsDESC(cateItemId,page,itemsInAPage);
+	public List<Article> getFortPrintIdAsc(int cateItemId,int page,int itemsInAPage) {
+		return articleDao.getFortPrintIdAsc(cateItemId,page,itemsInAPage);
 	}
 
 	public int doActionReply(int id,int memberId, String body) {
@@ -110,6 +110,10 @@ public class ArticleService extends Service {
 
 	public List<ArticleReply> getForPrintUserArticleReplys(int id) {
 		return articleDao.getForPrintUserArticleReplys(id);
+	}
+
+	public List<Article> getForPrintViewAsc(int cateItemId, int page, int itemsInAPage) {
+		return articleDao.getForPrintViewAsc(cateItemId,page,itemsInAPage);
 	}
 
 

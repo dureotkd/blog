@@ -76,7 +76,8 @@ public class ArticleDao extends Dao {
 		SecSql secSql = new SecSql();
 		
 		secSql.append("SELECT A.* ,");
-		secSql.append(" M.nickname AS extra__writer");
+		secSql.append(" M.nickname AS extra__writer,");
+		secSql.append(" M.image AS extra__image");
 		secSql.append("FROM article AS A");
 		secSql.append("INNER JOIN member AS M");
 		secSql.append("ON A. memberId = M.id ");
@@ -161,7 +162,7 @@ public class ArticleDao extends Dao {
 		return DBUtil.update(dbConn, secSql);
 	}
 
-	public List<Article> getFortPrintViewsDESC(int cateItemId,int page, int itemsInAPage) {
+	public List<Article> getFortPrintIdAsc(int cateItemId,int page, int itemsInAPage) {
 		SecSql secSql = new SecSql();
 		int limitFrom = (page - 1) * itemsInAPage;
 		secSql.append("SELECT * ");
@@ -170,7 +171,7 @@ public class ArticleDao extends Dao {
 		if (cateItemId != 0) {
 			secSql.append("AND cateItemId = ?", cateItemId);
 		}
-		secSql.append("ORDER BY hit DESC ");
+		secSql.append("ORDER BY id ASC");
 		secSql.append("LIMIT ?, ? ", limitFrom, itemsInAPage);
 			
 		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, secSql);
@@ -337,5 +338,27 @@ public class ArticleDao extends Dao {
 			articleReplys.add(new ArticleReply(row));
 		}
 		return articleReplys;
+	}
+
+	public List<Article> getForPrintViewAsc(int cateItemId, int page, int itemsInAPage) {
+		SecSql secSql = new SecSql();
+		int limitFrom = (page - 1) * itemsInAPage;
+		secSql.append("SELECT * ");
+		secSql.append("FROM article ");
+		secSql.append("WHERE displayStatus = 1 ");
+		if (cateItemId != 0) {
+			secSql.append("AND cateItemId = ?", cateItemId);
+		}
+		secSql.append("ORDER BY hit ASC");
+		secSql.append("LIMIT ?, ? ", limitFrom, itemsInAPage);
+			
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, secSql);
+		List<Article> articles = new ArrayList<>();
+
+		for (Map<String, Object> row : rows) {
+			articles.add(new Article(row));
+		}
+
+		return articles;
 	}
 }

@@ -62,6 +62,12 @@ a {
 	position: fixed;
 	height: 80px;
 	background-color: white;
+	justify-content:space-between;
+	align-items:center;
+	display:flex;
+	left:50%;
+	transform:translate(-50%,0px);
+	max-width:840px;
 }
 
 .top-bar>.menu-1 a, .top-bar:hover>.icon>a>i {

@@ -48,10 +48,10 @@
 }
 
 .head2 {
-	background-image: url(http://www.awesomecorp.kr/img_new/portbg.jpg);
-	height: 400px;
+	height: 300px;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background:linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
 }
 .image {
 	width:70px;
@@ -68,24 +68,22 @@
 
 
 .table-box {
-	margin-bottom: 400px;
+	margin-bottom: 200px;
 	margin-top: 50px;
 }
 
 .title {
-	margin-bottom: 30px;
-	text-align: center;
 	font-weight: bold;
 	font-size: 2em;
+	color:white;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	width:100%;
 }
 
 .flex {
 	display: flex;
-}
-
-.head2 {
-	background-color: silver;
-	flex-direction: column;
 }
 
 .head2>.boardName {
@@ -93,19 +91,8 @@
 	display: flex;
 	flex: 1 0 0;
 	color: white;
-	font-weight: bold;
 	justify-content: center;
-	align-items: flex-end;
-}
-
-.head2>.slogun {
-	display: flex;
-	font-size: 20px;
-	padding-top: 15px;
-	flex: 1 0 0;
-	color: #76FF7C;
-	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
 }
 
 .head1 {
@@ -131,6 +118,7 @@
 	color: black;
 	margin-top: 3px;
 	margin: 0 auto;
+	line-break:anywhere;
 }
 
 .left-btn>.hide>.left-menu {
@@ -373,10 +361,11 @@
 
 .reply-body {
 	width: 100%;
+	border:1px solid #1565c0;
+	outline:none;
 }
 
 .reply-form {
-	border-top: 1px solid #ccc;
 	margin-top: 100px;
 }
 
@@ -446,6 +435,18 @@
 	background-color: #fafafa;
 }
 
+.delete-btn , .modify-btn {
+	width:40px;
+	height:40px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	border:none;
+	background:white;
+	border-radius:50%;
+	box-shadow:0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.55);
+}
+
 /* Next & previous buttons */
 .prev, .next {
 	cursor: pointer;
@@ -480,37 +481,88 @@
 .reply-subitem {
 	display:none;
 }
+.title-wrap{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	width:100%;
+}
+.sub-box {
+	display:flex;
+	margin-top:30px;
+}
+.writer-item{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	margin-top:50px;
+}
+.writer-image {
+	width:100px;
+	height:100px;
+	box-shadow:0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+	border-radius:50%;
+}
+.writer-text {
+	color:blue;
+	margin-top:30px;
+}
+.submit {
+	display:flex;
+	border:none;
+	justify-content:center;
+	align-items:center;
+	background:#1565c0;
+	cursor:pointer;
+	width:80px;
+	padding:20px;
+	color:white;
+	margin-left:20px;
+}
+.regDate {
+	color:white;
+	margin-top:10px;
+}
+.delete-box{
+	margin-left:20px;
+}
 </style>
 
 
 
 <div class="head2 flex visible-on-sm-up">
-	<div class="boardName">${cateItemName}</div>
-	<div class="slogun"></div>
-</div>
-
-<nav class="table-box visible-on-sm-up">
-	<div class="table-1">
-		<div class="title">${article.title}</div>
-		<div class="subitem">
-			${article.regDate} writer : ${article.extra.writer}
-			&nbsp;&nbsp;&nbsp; 조회수 : ${article.hit} &nbsp;&nbsp;&nbsp;
+<div class="title-wrap">
+			<div class="title">${article.title}</div>
+			<span class="regDate">${article.regDate}</span>
+			<div class="sub-box">
 			<c:if
 				test="${loginedMemberId == article.memberId || loginedMemberId == 1  }">
+				<div class="modify-box"></div>
 				<a
 					href="${pageContext.request.contextPath}/s/article/modify?id=${article.id}"
-					class="modify-btn"><i class="fas fa-wrench"></i></a>
+					class="modify-btn"><i class="fas fa-wrench sub-work" ></i></a>
 			</c:if>
-			&nbsp;
 			<c:if
 				test="${loginedMemberId == article.memberId || loginedMemberId == 1 }">
+				<div class="delete-box">
 				<a
 					href="${pageContext.request.contextPath}/s/article/doDelete?id=${article.id}"
 					class="delete-btn"><i class="far fa-trash-alt"></i></a>
+					</div>
 			</c:if>
+			</div>
+			</div>
+</div>
 
-		</div>
-		<div class="line"></div>
+<div class="writer-item">
+	 <img src="${article.extra.image}" alt="" class="writer-image" />
+	 <p class="writer-text">${article.extra.writer}</p>
+</div>
+
+
+<nav class="table-box visible-on-sm-up">
+	<div class="table-1">
 		<div class="body-box">
 			<script type="text/x-template" id="origin1" style="display: none;">${article.bodyForXTemplate}</script>
 		</div>
@@ -564,6 +616,8 @@
 	<a class="next visible-on-sm-up"
 		href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id+1}">&#10095;</a>
 </c:if>
+
+
 
 <div class="reply-box">
 	<h2 class="Co">Comment (${totalCount})</h2>

@@ -14,10 +14,6 @@ h1 {
 	font-size: 2rem;
 }
 
-.contentbtn {
-	font-family: 'Noto Sans KR', sans-serif;
-}
-
 .top-box {
 	height: 100px;
 	background-color: white;
@@ -425,10 +421,13 @@ translateX(
 .view-item {
 	display: flex;
 	flex-direction: row;
-	padding-bottom: 30px;
-	border-bottom: 1px solid #ccc;
 	align-items: baseline;
 	justify-content: space-between;
+	transition:all.5s;
+}
+
+.view-item:hover {
+	background:#eee;
 }
 
 .fa-hotjar {
@@ -454,31 +453,40 @@ translateX(
 	}
 }
 
-@media ( min-width : 480px) {
-	* {
-		font-size: 0.8vw;
-		font-size: 1.5vmax;
-		font-size: 1.8vmin;
-	}
-}
-
 .post-name {
-	padding-bottom: 30px;
+	padding: 10px;
 	margin: 0px auto;
 	margin-top: 200px;
-	width: 60%;
-	border-bottom: 2px solid;
+	width: 100%;
+	background:#aea8ff;
+	color:white;
+	font-size:20px;
+	border-radius:2px;
+}
+
+.post-name2 {
+	padding: 10px;
+	margin: 0px auto;
+	margin-top: 200px;
+	width: 100%;
+	background:#7ce0d7;
+	color:white;
+	font-size:20px;
+	border-radius:2px;
 }
 
 .inner-wrap {
-	width: 60%;
-	margin: 30px auto;
+	width: 40%;
+}
+.inner-wrap2 {
+	width: 40%;
+	margin-left:30px;
 }
 
 .tag-title {
-	font-size: 18px;
-	font-weight: bold;
-	width: 20%;
+	font-size: 13px;
+	width: 100%;
+	padding-left:10px;
 }
 
 .tag-body {
@@ -496,9 +504,7 @@ translateX(
 	font-size: 13px;
 }
 
-.post-name {
-	font-size: 2rem;
-}
+
 
 .btn-1 {
 	margin-top: 30px;
@@ -652,8 +658,8 @@ img {
 /* The dots/bullets/indicators */
 .dot {
 	cursor: pointer;
-	height: 15px;
-	width: 15px;
+	height: 10px;
+	width: 10px;
 	margin: 0 2px;
 	background-color: #bbb;
 	border-radius: 50%;
@@ -662,7 +668,7 @@ img {
 }
 
 .active2, .dot:hover {
-	background-color: darkgreen;
+	background-color:blue;
 }
 
 /* Fading animation */
@@ -729,9 +735,7 @@ to {
 	color: red;
 }
 
-.post-name {
-	width: 100%;
-}
+
 
 .ClickMe {
 	background: black;
@@ -824,7 +828,6 @@ to {
 	top:50%;
 	left:50%;
 	transform:translate(-50%,-50%);
-	border:1px solid #ccc;
 	margin-top:50px;
 	display:flex;
 }
@@ -835,8 +838,9 @@ to {
 	transition: all ease 1s;
 }
 .image-box {
-	border-right:1px solid #ccc;
+	border:1px solid #1565c0;
 	overflow:hidden;
+	width:50%;
 }
 .article-image:hover {
 	transform:scale(1.1);
@@ -845,71 +849,136 @@ to {
 .text-box {
 	display:flex;
 	flex-direction:column;
-	width:100%;
+	width:50%;
 }
 .text-box > p {
 	font-size:2rem;
 	color:#525252;
 }
 
+.inner-con {
+	display:flex;
+	justify-content:center;
+}
+
+.center-box {
+	width:100%;
+	height:300px;
+	background:linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.center-box:hover .meet-logo {
+	color:#ff4b5c;
+}
+.meet-box {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+.article-con {
+	display:flex;
+	max-width:840px;
+	margin:0 auto;
+	flex-direction:column;
+}
+.article-txt-box{
+	display:flex;
+	flex-direction:column;
+}
+.article-sub-box {
+	display:flex;
+	align-items:center;
+}
+.article-img-box {
+	overflow:hidden;
+	width:170px;
+	height:120px;
+}
+
+.article-img {
+	width:100%;
+	height:100%;
+	object-fit:cover;
+}
+.article-item {
+	display:flex;
+	width:100%;
+	justify-content:space-between;
+	align-items:center;
+}
+.silver {
+	color:#666;
+}
+.rem5 {
+	font-size:1.5rem;
+}
+.article-sub-box > p {
+	color:#bdbdbd;
+	font-size:14px;
+	margin-right:10px;
+}
+
+
+
+
 /* 800px 이상이면 안보이게 ( pc 버전 ) */
 </style>
 <!--  * ================================= pc 화면  ================================= */-->
 
-<div class="wrap">
-	<div class="slideshow-container">
-		<c:forEach items="${articles}" var="article">
-			<div class="mySlides fade">
-				<div class="circles">
-					<div class="circle-1"></div>
-					<div class="circle-2"></div>
-				</div>
-				<c:forEach items="${cateItems}" var="cateItem">
-					<c:if test="${article.cateItemId == cateItem.id }">
-						<div class="numbertext">${cateItem.name}</div>
-					</c:if>
-				</c:forEach>
-				<img src="https://i.pinimg.com/originals/7c/cb/01/7ccb010d8fddc4bcd84587ef3c34d100.jpg"
-					style="width: 100%; height: 80%;">
-				<div class="main-slide-box">
-					<div class="image-box">
-						<img src="${article.imgTagFormat}" alt="" class="article-image" />
-					</div>
-					<div class="text-box">
-					<p>${article.title}</p>
-					</div>
-				</div>
+<a href="https://service1.n31.mihere.kr/meet/member/login" class="meet-link" target="_blank" title="SNS서비스">
+<div class="center-box">
+<div class="meet-box">
+<span class="meet-logo">Meet In here</span>
+<span class="white">SNS 사진,동영상 서비스</span>
+</div>
+</div>
+</a>
 
-			</div>
-		</c:forEach>
 
-		<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next"
-			onclick="plusSlides(1)">&#10095;</a>
-	</div>
-
-	<br>
-
-	<div style="text-align: center">
-		<span class="dot" onclick="currentSlide(1)"></span> <span class="dot"
-			onclick="currentSlide(2)"></span> <span class="dot"
-			onclick="currentSlide(3)"></span>
-	</div>
+<nav class="article-con">
+<c:forEach items="${articles2}" var="article">
+<a href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id}">
+<div class="article-item">
+<div class="article-txt-box">
+<p class="rem5">${article.title}</p>
+<p class="silver">comming soon ... 두등 등장</p>
+<div class="article-sub-box">
+<p>${article.regDateFormat2}</p>
+<p>조회수 : ${article.hit}</p>
+</div>
 </div>
 
+<div class="article-img-box">
+<c:if test="${article.imgTagFormat != null }">
+<img src=" ${article.imgTagFormat}" alt="" class="article-img" />
+</c:if>
+<c:if test="${article.imgTagFormat == null }">
+<img src="https://web.yonsei.ac.kr/_ezaid/board/_skin/albumRecent/3/no_image.gif" alt="" class="article-img" />
+</c:if>
+</div>
+</div>
+</a>
+</c:forEach>
+</nav>
 
 
+<!--   <nav class="inner-con">
 <div class="inner-wrap">
-	<p class="post-name">POPULAR POSTS</p>
+	<p class="post-name">인기게시글</p>
 	<c:forEach items="${articles2}" var="article2">
+	<a href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article2.id}">
 		<div class="view-item">
 			<p class="tag-title">${article2.title}</p>
-			<p class="tag-body">${article2.body}</p>
-			<button class="btn-1"
-				onclick="location.href='${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article2.id}'">
-				자세히 보기</button>
-		</div>
+			</div>
+			</a>
 	</c:forEach>
 </div>
+
+</nav>
+
+
 
 
 <div class="about-sub">
@@ -926,8 +995,9 @@ to {
 				95.05.18</span> <span>SBS컴퓨터 아카데미 학생</span>
 		</div>
 	</a>
-
 </div>
+
+-->
 
 <%@ include file="/jsp/part/foot.jspf"%>
 

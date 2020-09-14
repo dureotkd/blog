@@ -98,8 +98,6 @@ public class HomeController extends Controller {
 	}
 
 	private String doActionDoEmail(HttpServletRequest req, HttpServletResponse resp) {
-		
-		
 		String subject = req.getParameter("subject");
 		String content = req.getParameter("content");
 		String fromEmail = req.getParameter("fromEmail");
@@ -158,10 +156,9 @@ public class HomeController extends Controller {
 		int totalPage = (int) Math.ceil(totalCount / (double) itemsInAPage);
 		
 		
-		List<Article> articles = articleService.getForPrintListArticles(page, itemsInAPage, cateItemId,
-				searchKeywordType, searchKeyword);
-		List<Article> articles2 = articleService.getFortPrintViewsDESC(cateItemId,page,itemsInAPage);
-
+		List<Article> articles = articleService.getForPrintViewAsc(cateItemId,page,itemsInAPage);
+		List<Article> articles2 = articleService.getFortPrintIdAsc(cateItemId,page,itemsInAPage);
+		
 		
 		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("totalPage", totalPage);
