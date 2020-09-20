@@ -9,6 +9,7 @@ import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.ArticleReply;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.dto.Member;
+import com.sbs.java.blog.dto.Status;
 
 public class ArticleService extends Service {
 
@@ -114,6 +115,22 @@ public class ArticleService extends Service {
 
 	public List<Article> getForPrintViewAsc(int cateItemId, int page, int itemsInAPage) {
 		return articleDao.getForPrintViewAsc(cateItemId,page,itemsInAPage);
+	}
+
+	public int doActionWriteStatus(String body, int memberId, int importance) {
+		return articleDao.doActionWriteStatus(body,memberId,importance);
+	}
+
+	public List<Status> getForPrintStatus(int id) {
+		return articleDao.getForPrintStatus(id);
+	}
+
+	public int getStatusCount(int id) {
+		return articleDao.getStatusCount(id);
+	}
+
+	public int getArticleCount(int id) {
+		return articleDao.getArticleCount(id);
 	}
 
 

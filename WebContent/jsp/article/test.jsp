@@ -10,17 +10,33 @@
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/3b1f8c6d21.js"
 	crossorigin="anonymous"></script>
+<script>
+var writeFormSubmitted = false;
+
+function submitWriteForm(form) {
+	if (wirteFormSubmitted) {
+		alert('처리 중입니다.');
+		return;
+	}
+	if (form.body.value.length == 0) {
+		alert('내용을 입력해주세요.');
+		form.body.focus();
+		return;
+	}
+
+	form.submit();
+	writeFormSubmitted = true;
+}
+</script>
 
 	<meta charset="UTF-8" />
-	<title>THINK NOTE</title>
+	<title>Document</title>
 
 	<style>
 @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700|Source+Sans+Pro:300,400,600,700&display=swap");
 * {
   outline: none;
   box-sizing: border-box;
-  text-decoration:none;
-  color:inherit;
 }
 
 html {
@@ -211,6 +227,7 @@ body {
   background-color: #151728;
   z-index: 3;
   position: relative;
+  display:flex;
 }
 .search-bar input {
   height: 100%;
@@ -238,6 +255,90 @@ body {
   background-color: #24273b;
 }
 
+.profile {
+  position: relative;
+  height: 40vh;
+  min-height: 250px;
+  max-height: 350px;
+  z-index: 1;
+}
+.profile-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
+}
+.profile:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  background-image: url("https://images.unsplash.com/photo-1508247967583-7d982ea01526?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  filter: blur(50px);
+  opacity: 0.7;
+}
+
+.profile-menu {
+  position: absolute;
+  bottom: 0;
+  padding-left: 200px;
+  background: #151728;
+  width: 100%;
+  display: flex;
+  border-radius: 0 0 4px 4px;
+}
+
+.profile-menu-link {
+  padding: 20px 16px;
+  color: #5c5e6e;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.profile-menu-link.active, .profile-menu-link:hover {
+  color: #fff;
+  background-color: #1b1d2e;
+  border-bottom: 3px solid #1488fa;
+}
+
+.profile-avatar {
+  position: absolute;
+  align-items: center;
+  display: flex;
+  z-index: 1;
+  bottom: 16px;
+  left: 24px;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+}
+
+.profile-img {
+  height: 100%;
+  width:100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #151728;
+}
+
+.profile-name {
+  margin-left: 24px;
+  margin-bottom: 24px;
+  font-size: 22px;
+  color: #fff;
+  font-weight: 600;
+  font-family: "DM Sans", sans-serif;
+  position:absolute;
+}
 
 
 .timeline {
@@ -512,13 +613,12 @@ body {
 .album {
   padding-top: 20px;
   margin-top: 20px;
-  height:300px;
 }
 .album .status-main {
   border: none;
   display: flex;
 }
-.album .intro-menu {	
+.album .intro-menu {
   margin-bottom: auto;
   margin-top: 5px;
 }
@@ -531,12 +631,9 @@ body {
   color: #1771d6;
   cursor: pointer;
 }
-.album-title > strong {
-	font-size:14px;
-}
 
 .album-date {
-  font-size: 12px;
+  font-size: 15px;
   color: #595c6c;
   margin-top: 4px;
 }
@@ -688,31 +785,6 @@ body {
   margin-right: 16px;
 }
 
-.article-image-box {
-	width:300px;
-	height:200px;
-	overflow:hidden;
-	border-radius:10px;
-}
-.article-image-tag {
-	object-fit:cover;
-	width:100%;
-	height:100%;
-}
-
-.article-con {
-	display:flex;
-	justify-content:space-between;
-	width:100%;
-}
-.text-con {
-	display:flex;
-	flex-direction:column
-}
-.text-title {
-	font-size:2rem;
-}
-
 .overlay {
   width: 100%;
   height: 100%;
@@ -773,12 +845,46 @@ body {
 }
 
 @media screen and (max-width: 700px) {
-		.visible-none {
-		display:none;
-	}
+  .profile-avatar {
+    top: 0px;
+    left: 50%;
+    transform: translatex(-50%);
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    
+  }
+
+  .profile-img {
+    height: 100px;
+    width: 100px;
+  }
+
+  .profile-name {
+    margin: 5px 0;
+    bottom:-20%;
+  }
+
+  .profile-menu {
+    padding-left: 0;
+    width: 100%;
+    overflow: auto;
+    justify-content: center;
+  }
+
+  .profile-menu-link {
+    padding: 16px;
+    font-size: 15px;
+  }
+  
+  
+  
 }
 @media screen and (max-width: 480px) {
-
+  .profile-menu-link:nth-last-child(1),
+.profile-menu-link:nth-last-child(2) {
+    display: none;
+  }
 }
 ::-webkit-scrollbar {
   width: 10px;
@@ -811,10 +917,17 @@ body {
   <path d="M19 12H5M12 19l-7-7 7-7"/>
 </svg>
     </div>
-    <a href="../home/main?id=${loginedMemberId}"><div class="logo">THINK NOTE</div></a>
+    <div class="logo">THINK NOTE</div>
     <div class="side-wrapper">
       <div class="side-title">MENU</div>
       <div class="side-menu">
+        <a href="../home/main">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            <path d="M9 22V12h6v10" />
+          </svg>
+          Home
+        </a>
         <c:forEach items="${cateItems}" var="cateItem">
 			<a class="contentbtn" href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">
 	      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -824,12 +937,10 @@ body {
           ${cateItem.name}
         </a>
        	</c:forEach>
-       	<c:if test="${loginedMember.id == 1 }">
         <a href="../article/write">
           <i class="far fa-edit"></i>
           Write
         </a>
-        </c:if>
         <c:if test="${isLogined}">
         <a href="../member/logOut">
          <i class="far fa-user"></i>
@@ -850,7 +961,7 @@ body {
     <div class="side-wrapper">
       <div class="side-title">YOUR PRIVATE NOTE</div>
       <div class="side-menu">
-        <a href="../home/main?id=${loginedMemberId}">
+        <a href="#">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 472.11 472.11">
             <path d="M260.07 216.11a63.94 63.94 0 00-28.26-53.1 55.95 55.95 0 00-43.74-90.9c-.8 0-1.6.1-2.4.12a56 56 0 10-107.2 0c-.8 0-1.6-.12-2.4-.12a55.95 55.95 0 00-43.75 90.9 64 64 0 000 106.2 55.95 55.95 0 0043.75 90.9h112a55.95 55.95 0 0043.74-90.9 63.94 63.94 0 0028.26-53.1z" fill="#6a9923" />
             <path d="M193.8 178.51a8 8 0 00-11.32-.16l-42.41 41.03V104.1a8 8 0 00-16 0v56.7l-36.35-36.35a8 8 0 00-11.31 11.3l47.66 47.67V292.8l-34.35-34.34a8 8 0 00-11.31 11.3l45.66 45.67V464.1a8 8 0 0016 0V241.63l53.6-51.78a8 8 0 00.12-11.34z" fill="#618c20" />
@@ -874,37 +985,128 @@ body {
     </a>
   </div>
   <div class="main">
-    <div class="search-bar">
-      <input type="text" placeholder="Search" />
-    </div>
+      <div class="search-bar">
+			<form action="${pageContext.request.contextPath}/s/article/list">
+				<input type="hidden" name="page" value="1" /> <input type="hidden"
+					name="cateItemId" value="${param.cateItemId}" /> <input
+					type="hidden" name="searchKeywordType" value="title" /> 
+				<input type="text" name="searchKeyword" value="${param.searchKeyword}" class="search-text" placeholder="검색" />
+			</form>
+			</div>
     <div class="main-container">
+      <div class="profile">
+        <div class="profile-avatar">
+        <img src="${loginedMember.image}" class="profile-img" alt="" />
+
+          <div class="profile-name">${loginedMember.nickname}</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1508247967583-7d982ea01526?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="" class="profile-cover">
+        <div class="profile-menu">
+          <a class="profile-menu-link active">Timeline</a>
+          <a class="profile-menu-link">About</a>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-left">
+          <div class="intro box">
+            <div class="intro-title">
+              Introduction
+              <button class="intro-menu"></button>
+            </div>
+            <div class="info">
+              <div class="info-item">
+              <i class="far fa-check-circle"></i>
+                Status<a href="#">${statusCount}</a>
+              </div>
+              <div class="info-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 503.889 503.889" fill="currentColor">
+                  <path d="M453.727 114.266H345.151V70.515c0-20.832-16.948-37.779-37.78-37.779H196.517c-20.832 0-37.78 16.947-37.78 37.779v43.751H50.162C22.502 114.266 0 136.769 0 164.428v256.563c0 27.659 22.502 50.161 50.162 50.161h403.565c27.659 0 50.162-22.502 50.162-50.161V164.428c0-27.659-22.503-50.162-50.162-50.162zm-262.99-43.751a5.786 5.786 0 015.78-5.779h110.854a5.786 5.786 0 015.78 5.779v43.751H190.737zM32 164.428c0-10.015 8.147-18.162 18.162-18.162h403.565c10.014 0 18.162 8.147 18.162 18.162v23.681c0 22.212-14.894 42.061-36.22 48.27l-167.345 48.723a58.482 58.482 0 01-32.76 0L68.22 236.378C46.894 230.169 32 210.321 32 188.109zm421.727 274.725H50.162c-10.014 0-18.162-8.147-18.162-18.161V253.258c8.063 6.232 17.254 10.927 27.274 13.845 184.859 53.822 175.358 52.341 192.67 52.341 17.541 0 7.595 1.544 192.67-52.341 10.021-2.918 19.212-7.613 27.274-13.845v167.733c.001 10.014-8.147 18.162-18.161 18.162z" /></svg>
+                Article<a href="#">${articleCount}</a>
+              </div>
+              <div class="info-item">
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                  <path d="M437 75C388.7 26.6 324.4 0 256 0S123.3 26.6 75 75C26.6 123.3 0 187.6 0 256s26.6 132.7 75 181c48.3 48.4 112.6 75 181 75s132.7-26.6 181-75c48.4-48.3 75-112.6 75-181s-26.6-132.7-75-181zM252.4 481.9c-52-.9-103.7-19.5-145.2-55.8L256 277.2l21.7 21.8a165.9 165.9 0 00-35.7 87c-3.5 30.5 0 63.3 10.4 95.9zM299 320.3l105.7 105.8a224.8 224.8 0 01-121.3 54.1C262 419.5 268 360.3 299 320.3zm21.2-21.2c40-31 99.2-37 160-15.6A224.8 224.8 0 01426 404.8zM482 252.4a231.7 231.7 0 00-96-10.4 165.9 165.9 0 00-87 35.7L277.3 256l148.9-148.8c36.3 41.5 55 93.2 55.8 145.2zm-290.2-39.5c-40 31-99.2 37-160 15.6A224.8 224.8 0 0186 107.2zm-84.5-127a224.8 224.8 0 01121.3-54.1C250 92.5 244 151.7 213 191.7zM270 126c3.5-30.5 0-63.3-10.4-95.9 52 .9 103.7 19.5 145.2 55.8L256 234.8 234.3 213a165.9 165.9 0 0035.7-87zM30 259.6a242 242 0 0072.7 11.7c7.8 0 15.6-.5 23.2-1.3a165.9 165.9 0 0087-35.7l21.8 21.7L85.9 404.8a225.3 225.3 0 01-55.8-145.2z" /></svg>
+                Player name <a href="#">${loginedMember.nickname}</a>
+              </div>
+            </div>
+          </div>
+          <div class="event box">
+            <div class="event-wrapper">
+              <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" class="event-img" />
+              <div class="event-date">
+                <div class="event-month">Jan</div>
+                <div class="event-day">01</div>
+              </div>
+              <div class="event-title">Winter Wonderland</div>
+              <div class="event-subtitle">01st Jan, 2019 07:00AM</div>
+            </div>
+          </div>
+          <div class="pages box">
+            <div class="intro-title">
+              Your Follow
+              <button class="intro-menu"></button>
+            </div>
+            <div class="user">
+              <img src="https://images.unsplash.com/photo-1549068106-b024baf5062d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0f" alt="" class="user-img">
+              <div class="username">Chandelio</div>
+            </div>
+            <div class="user">
+              <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=d5849d81af587a09dbcf3f11f6fa122f" alt="" class="user-img">
+              <div class="username">Janet Jolie</div>
+            </div>
+            <div class="user">
+              <img src="https://images.unsplash.com/photo-1546539782-6fc531453083?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" class="user-img">
+              <div class="username">Patrick Watsons</div>
+            </div>
+          </div>
+        </div>
         <div class="timeline-right">
-          <c:forEach items="${articles}" var="article">
-          <a href="./detail?cateItemId=${param.cateItemId}&id=${article.id}">
+        <form action="../article/doWriteStatus" method="POST" onsubmit="submitWriteForm(this); return false;">
+        <input type="hidden" name="memberId" value="${loginedMemberId}" />
+        <input type="hidden" name="importance" value="1" />
+          <div class="status box">
+            <div class="status-menu">
+              <a class="status-menu-item active" href="#">Status</a>
+            </div>
+            <div class="status-main">
+            <img src="${loginedMember.image}" class="status-img" alt="" />
+          	  <textarea class="status-textarea" name="body" placeholder="현재 상황은 이렇습니다"></textarea>
+            </div>
+            <div class="status-actions">
+              <a href="#" class="status-action">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M87.084 192c-.456-5.272-.688-10.6-.688-16C86.404 78.8 162.34 0 256.004 0s169.6 78.8 169.6 176c0 5.392-.232 10.728-.688 16h.688c0 96.184-169.6 320-169.6 320s-169.6-223.288-169.6-320h.68zm168.92 32c36.392 1.024 66.744-27.608 67.84-64-1.096-36.392-31.448-65.024-67.84-64-36.392-1.024-66.744 27.608-67.84 64 1.096 36.392 31.448 65.024 67.84 64z" fill="#e21b1b" />
+                </svg>
+                Check in
+              </a>
+              <a href="#" class="status-action">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <circle cx="256" cy="256" r="256" fill="#ffca28" />
+                  <g fill="#6d4c41">
+                    <path d="M399.68 208.32c-8.832 0-16-7.168-16-16 0-17.632-14.336-32-32-32s-32 14.368-32 32c0 8.832-7.168 16-16 16s-16-7.168-16-16c0-35.296 28.704-64 64-64s64 28.704 64 64c0 8.864-7.168 16-16 16zM207.68 208.32c-8.832 0-16-7.168-16-16 0-17.632-14.368-32-32-32s-32 14.368-32 32c0 8.832-7.168 16-16 16s-16-7.168-16-16c0-35.296 28.704-64 64-64s64 28.704 64 64c0 8.864-7.168 16-16 16z" />
+                  </g>
+                  <path d="M437.696 294.688c-3.04-4-7.744-6.368-12.736-6.368H86.4c-5.024 0-9.728 2.336-12.736 6.336-3.072 4.032-4.032 9.184-2.688 14.016C94.112 390.88 170.08 448.32 255.648 448.32s161.536-57.44 184.672-139.648c1.376-4.832.416-9.984-2.624-13.984z" fill="#fafafa" />
+                </svg>
+                Mood
+              </a>
+              <input type="submit" class="status-share" value="write"></input>
+            </div>
+          </div>
+          </form>
+          <c:forEach items="${statuses}" var="status">
           <div class="album box">
             <div class="status-main">
-              <img class="status-img" src="${article.extra.writer}">
+              <img class="status-img" src="${loginedMember.image}">
               <div class="album-detail">
-                <div class="album-title"><strong>${article.extra.text}</strong></div>
-                <div class="album-date">${article.regDateFormat2}</div>
+                <div class="album-title"><strong>${loginedMember.nickname}</strong> <span> status</span></div>
+                <div class="album-date">${status.regDateFormat}</div>
               </div>
-           <div class="article-con">
-           <div class="text-con">
-           <p class="text-title">${article.title}</p>
-           <p>Comming soon 테스트 버전입니다.</p>
-           </div>
-          <div class="article-image-box visible-none">
-				<c:if test="${article.imgTagFormat != null }">
-				<img src=" ${article.imgTagFormat}" alt="" class="article-image-tag" />
-				</c:if>
-				<c:if test="${article.imgTagFormat == null }">
-				<img src="https://web.yonsei.ac.kr/_ezaid/board/_skin/albumRecent/3/no_image.gif" alt="" class="article-image-tag" />
-				</c:if>
-				</div>
+              <button class="intro-menu"></button>
             </div>
-           </div>
-             </div>
-         	</a>
+            <div class="album-content">
+            <p>${status.body}</p>
+            </div>
+          </div>
           </c:forEach>
         </div>
       </div>

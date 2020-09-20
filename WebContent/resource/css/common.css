@@ -68,6 +68,7 @@ a {
 	left:50%;
 	transform:translate(-50%,0px);
 	max-width:840px;
+	flex-wrap:wrap;
 }
 
 .top-bar>.menu-1 a, .top-bar:hover>.icon>a>i {
@@ -264,18 +265,30 @@ label {
 	color: black;
 }
 
-/*pc �깙諛� 醫낅즺*/
 @media ( max-width :799px ) {
 	.visible-on-md-up {
 		display: none !important;
 	}
+	.top-line {
+		height:131px;
+	}
+	.contentbtn {
+		padding:10px;
+		margin-left:10px;
+	}
 }
 
-/*모바일 탑바 전체 부분  */
 @media ( min-width :800px ) {
 	.visible-on-sm-down {
 		display: none !important;
 	}
+	.contentbtn {
+		margin-left:10px;
+	}
+	.top-line {
+		height:81px;	
+	}
+	
 }
 
 .M-top-bar {

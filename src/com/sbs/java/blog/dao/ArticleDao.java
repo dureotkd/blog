@@ -9,6 +9,7 @@ import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.ArticleReply;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.dto.Member;
+import com.sbs.java.blog.dto.Status;
 import com.sbs.java.blog.util.DBUtil;
 import com.sbs.java.blog.util.SecSql;
 
@@ -360,5 +361,48 @@ public class ArticleDao extends Dao {
 		}
 
 		return articles;
+	}
+
+	public int doActionWriteStatus(String body, int memberId, int importance) {
+		SecSql secSql = new SecSql();
+		secSql.append("INSERT INTO status");
+		secSql.append("SET regDate = NOW()");
+		secSql.append(", updateDate = NOW()");
+		secSql.append(", memberId = ? ",memberId);
+		secSql.append(", importance = ? ",importance);
+		secSql.append(", body = ? ",body);
+		return DBUtil.insert(dbConn, secSql);
+	}
+
+	public List<Status> getForPrintStatus(int id) {
+		SecSql secSql = new SecSql();
+		secSql.append("SELECT S.* ,");
+		secSql.append(" M.nickname AS extra__writer");
+		secSql.append("FROM status AS S");
+		secSql.append("INNER JOIN member AS M");
+		secSql.append("ON S.memberId = M.id ");
+		secSql.append("WHERE M.id = ? ",id);
+		secSql.append("ORDER BY S.id DESC ");
+		
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, secSql);
+		List<Status> statuses = new ArrayList<>();
+		for (Map<String, Object> row : rows) {
+			statuses.add(new Status(row));
+		}
+		return statuses;
+	}
+
+	public int getStatusCount(int id) {
+		SecSql secSql = new SecSql();
+		secSql.append("SELECT COUNT(*) AS cnt");
+		secSql.append("FROM status WHERE memberId = ?",id);
+		return DBUtil.selectRowIntValue(dbConn, secSql);
+	}
+
+	public int getArticleCount(int id) {
+		SecSql secSql = new SecSql();
+		secSql.append("SELECT COUNT(*) AS cnt");
+		secSql.append("FROM article WHERE memberId = ?",id);
+		return DBUtil.selectRowIntValue(dbConn, secSql);
 	}
 }

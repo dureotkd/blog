@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.dto.Member;
+import com.sbs.java.blog.dto.Status;
 import com.sbs.java.blog.service.MailService;
 import com.sbs.java.blog.util.Util;
 import java.sql.Connection;
@@ -156,15 +157,19 @@ public class HomeController extends Controller {
 		int totalPage = (int) Math.ceil(totalCount / (double) itemsInAPage);
 		
 		
-		List<Article> articles = articleService.getForPrintViewAsc(cateItemId,page,itemsInAPage);
-		List<Article> articles2 = articleService.getFortPrintIdAsc(cateItemId,page,itemsInAPage);
+		int id = Util.getInt(req, "id");
 		
+		int statusCount = articleService.getStatusCount(id);
+		int articleCount = articleService.getArticleCount(id);
 		
+		List<Status> statuses = articleService.getForPrintStatus(id);
+		
+		req.setAttribute("statuses", statuses);
+		req.setAttribute("statusCount",statusCount);
+		req.setAttribute("articleCount",articleCount);
 		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("totalPage", totalPage);
 		req.setAttribute("page", page);
-		req.setAttribute("articles", articles);
-		req.setAttribute("articles2",articles2);
 		
 		return "home/main.jsp";
 	}

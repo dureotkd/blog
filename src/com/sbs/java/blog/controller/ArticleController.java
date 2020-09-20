@@ -1,7 +1,6 @@
 package com.sbs.java.blog.controller;
 import java.sql.Connection;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +9,7 @@ import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.ArticleReply;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.dto.Member;
+import com.sbs.java.blog.dto.Status;
 import com.sbs.java.blog.util.Util;
 
 public class ArticleController extends Controller {
@@ -57,12 +57,39 @@ public class ArticleController extends Controller {
 			return doActionAllList(req,resp);
 		case "userAllList":
 			return actionUserAllList();
+		case "test":
+			return doActionTest(req,resp);
+		case "doWriteStatus":
+			return doActionDoWriteStatus(req,resp);
 			}
 		
 		return "";
 	}
 
+	private String doActionDoWriteStatus(HttpServletRequest req, HttpServletResponse resp) {
+	
+		String body = req.getParameter("body");
+		int memberId = Util.getInt(req, "memberId");
+		int importance = Util.getInt(req, "importance");
 
+		int rs = articleService.doActionWriteStatus(body,memberId,importance);
+		return "html:<script> alert('Status가 등록되었습니다.'); location.href = document.referrer\r\n; </script>";		
+	}
+
+	private String doActionTest(HttpServletRequest req, HttpServletResponse resp) {
+		
+		int id = Util.getInt(req, "id");
+		
+		int statusCount = articleService.getStatusCount(id);
+		int articleCount = articleService.getArticleCount(id);
+		
+		List<Status> statuses = articleService.getForPrintStatus(id);
+		
+		req.setAttribute("statuses", statuses);
+		req.setAttribute("statusCount",statusCount);
+		req.setAttribute("articleCount",articleCount);
+		return "article/test.jsp";
+	}
 
 	private String actionUserAllList() {
 		int id = Util.getInt(req, "id");

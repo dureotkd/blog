@@ -48,7 +48,6 @@
 }
 
 .head2 {
-	height: 300px;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background:linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
@@ -187,6 +186,13 @@
 	}
 	.reply-box {
 		width: 100%;
+		margin-left:10px;
+	}
+	.head2 {
+		height: 250px;
+	}
+	.table-1 {
+		margin-left:10px;
 	}
 }
 
@@ -199,6 +205,14 @@
 	}
 	.reply-box {
 		width: 60%;
+		margin: 0 auto;	
+	}
+	.head2 {
+		height: 300px;
+	}
+	.table-1 {
+	width: 60%;
+	margin: 0 auto;
 	}
 }
 
@@ -342,7 +356,6 @@
 }
 
 .reply-box {
-	margin: 0 auto;
 	border-top: 1px solid #ccc;
 }
 
@@ -369,10 +382,7 @@
 	margin-top: 100px;
 }
 
-.table-1 {
-	width: 60%;
-	margin: 0 auto;
-}
+
 
 .reply-boxi {
 	display: flex;
@@ -531,7 +541,7 @@
 
 
 
-<div class="head2 flex visible-on-sm-up">
+<div class="head2 flex">
 <div class="title-wrap">
 			<div class="title">${article.title}</div>
 			<span class="regDate">${article.regDate}</span>
@@ -561,7 +571,7 @@
 </div>
 
 
-<nav class="table-box visible-on-sm-up">
+<nav class="table-box">
 	<div class="table-1">
 		<div class="body-box">
 			<script type="text/x-template" id="origin1" style="display: none;">${article.bodyForXTemplate}</script>
@@ -569,55 +579,6 @@
 		<div id="viewer1"></div>
 	</div>
 </nav>
-
-
-<!--  onclick="location='list' " 리스트로 돌아가기 버튼 링크  -->
-
-<!--   ================================= pc 화면  끝 ================================= -->
-
-<!--   ================================= mobile 화면 시작 ================================= -->
-
-<div class="m-board-bar visible-on-sm-down">
-	<a class="m-board-name">${cateItemName}
-		<div class="m-icon-box">
-			<i class="m-board-change fas fa-angle-down"></i> <i
-				class="m-board-change2 fas fa-angle-up"></i>
-		</div>
-	</a>
-	<div class="m-board-menu">
-		<c:forEach items="${cateItems}" var="cateItem">
-			<a class="m-contentbtn"
-				href="${pageContext.request.contextPath}/s/article/list?cateItemId=${cateItem.id}">${cateItem.name}</a>
-		</c:forEach>
-	</div>
-</div>
-
-<nav class="m-table-box visible-on-sm-down">
-	<div class="m-table-1">
-		<div class="m-title">${article.title}</div>
-		<div class="m-subitem flex">
-			writer : ${article.extra.writer} &nbsp;&nbsp; 조회수 : ${article.hit}
-			<div class="m-
-">${article.regDate}</div>
-		</div>
-		<div class="m-line"></div>
-		<script type="text/x-template" id="m-origin1" style="display: none;">
-				  ${article.bodyForXTemplate}
-			</script>
-		<div id="m-viewer1"></div>
-	</div>
-</nav>
-
-<c:if test="${article.id > articleFirstId.id }">
-	<a class="prev visible-on-sm-up"
-		href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id-1}">&#10094;</a>
-</c:if>
-<c:if test="${article.id < articleLastId.id }">
-	<a class="next visible-on-sm-up"
-		href="${pageContext.request.contextPath}/s/article/detail?cateItemId=${param.cateItemId}&id=${article.id+1}">&#10095;</a>
-</c:if>
-
-
 
 <div class="reply-box">
 	<h2 class="Co">Comment (${totalCount})</h2>
@@ -702,39 +663,5 @@
 		});
 	</script>
 
-
-<script>
-		var editor1__initialValue = $('#m-origin1').html();
-		var editor1 = new toastui.Editor({
-			el : document.querySelector("#m-viewer1"),
-			viewer : true,
-			initialValue : editor1__initialValue,
-			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight,
-					youtubePlugin, replPlugin, codepenPlugin ]
-		});
-		function modifyBox__init() {
-			var $btnToggleModifyBox = $('.modify-item');
-
-			$btnToggleModifyBox.click(function() {
-				if ($(this).hasClass('active')) {
-					$(this).removeClass('active');
-					$('.pc-form').removeClass('active');
-
-				} else {
-					$(this).addClass('active');
-					$('.pc-form').addClass('active');
-				}
-			});
-		}
-
-		$(function() {
-			modifyBox__init();
-		});
-		
-	</script>
-
-
-
-
-
-<%@ include file="/jsp/part/foot.jspf"%>
+</body>
+</html>
